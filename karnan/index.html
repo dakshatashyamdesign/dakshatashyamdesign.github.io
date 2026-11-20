@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en" data-page="project">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Karnan Poster Alchemy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preload" as="image" href="img/poster-final.webp" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="fonts/oswald-latin-wght-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/inter-latin-wght-normal.woff2" crossorigin>
+<style>
+@font-face{font-family:"Oswald"; src:url(fonts/oswald-latin-wght-normal.woff2) format("woff2"); font-weight:200 700; font-display:swap}
+@font-face{font-family:"Inter"; src:url(fonts/inter-latin-wght-normal.woff2) format("woff2"); font-weight:100 900; font-style:normal; font-display:swap}
+@font-face{font-family:"Inter"; src:url(fonts/inter-latin-wght-italic.woff2) format("woff2"); font-weight:100 900; font-style:italic; font-display:swap}
+@font-face{font-family:"DM Sans"; src:url(fonts/dm-sans-latin-wght-normal.woff2) format("woff2"); font-weight:100 1000; font-display:swap}
+
+/* Layout concept: a carved linocut print. Black ground, grey paper sheets torn into it, one blood-red sun. Single dark look on purpose, taken from the jury deck. */
+:root{
+  --ink:#0E0C0B; --ink-2:#181514; --paper:#D6D1CA; --paper-hi:#ECE8E2;
+  --blood:#7C1A1A; --blood-hi:#B0281F; --ash:#8E8780; --ink-soft:#3A3431;
+  --display:"Oswald", "Bebas Neue", "Arial Narrow", Impact, sans-serif;
+  --body:"Inter", "Helvetica Neue", Arial, sans-serif;
+  --mark:"DM Sans", "Helvetica Neue", Arial, sans-serif;
+  --gut:max(16px, env(safe-area-inset-left, 0px));
+  --gutR:max(16px, env(safe-area-inset-right, 0px));
+  --pad:clamp(16px, 5vw, 72px);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--ink); scroll-behavior:smooth; overflow-x:clip}
+body{margin:0; background:var(--ink); color:var(--paper-hi); font-family:var(--body); font-size:clamp(15px, 1.05vw, 17px); line-height:1.6; overflow-x:clip; -webkit-font-smoothing:antialiased}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:60; background:var(--ink)}
+img{max-width:100%; display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--blood-hi); outline-offset:3px}
+h1,h2,h3{font-family:var(--display); font-weight:500; text-transform:uppercase; line-height:.95; margin:0; letter-spacing:.005em; text-wrap:balance}
+p{margin:0}
+.wrap{padding-left:max(var(--pad), env(safe-area-inset-left,0px)); padding-right:max(var(--pad), env(safe-area-inset-right,0px)); max-width:1680px; margin:0 auto}
+
+/* paper grain over everything, like the deck's scanned paper */
+.grain{position:fixed; inset:0; pointer-events:none; z-index:70; opacity:.55; background:url(img/grain.png) 0 0/160px 160px repeat; transform:translateZ(0)}
+
+/* nav: DAXX mark kept from the main site */
+.nav{position:fixed; top:0; left:0; right:0; z-index:50; display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:calc(env(safe-area-inset-top,0px) + 18px) max(clamp(16px,3vw,44px), env(safe-area-inset-right,0px)) 18px max(clamp(16px,3vw,44px), env(safe-area-inset-left,0px));
+  color:var(--paper-hi); transition:color .3s ease}
+.nav.light{color:var(--ink)}
+.nav .mark{text-decoration:none; font-family:var(--mark); font-weight:900; font-size:clamp(20px,1.75vw,28px); line-height:1; letter-spacing:-.01em}
+.nav ul{list-style:none; display:flex; gap:clamp(14px,2.2vw,32px); margin:0; padding:0; font-size:.88rem}
+.nav ul a{text-decoration:none}
+.nav ul a:hover, .nav ul a.on{text-decoration:underline; text-underline-offset:5px}
+@media (max-width:760px){ .nav ul{display:none} }
+
+/* story gauge: struggle to uprising, the arc the posters follow */
+.gauge{position:fixed; right:max(14px, env(safe-area-inset-right,0px)); top:50%; transform:translateY(-50%); z-index:40; display:flex; flex-direction:column; align-items:center; gap:10px;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.14em; font-size:.62rem; color:var(--ash)}
+.gauge span{writing-mode:vertical-rl; transform:rotate(180deg)}
+.gauge .track{width:1px; height:26vh; background:currentColor; opacity:.45; position:relative}
+.gauge .dot{position:absolute; left:50%; top:0; width:9px; height:9px; border-radius:50%; background:var(--blood-hi); transform:translate(-50%,-50%)}
+@media (max-width:900px){.gauge{display:none}}
+
+/* ------------- HERO: one full-bleed shot, the final poster ------------- */
+#hero{position:relative; height:100vh; height:100svh; min-height:560px; overflow:hidden; background:var(--ink); isolation:isolate}
+#hero .shot{position:absolute; inset:0; z-index:-2; will-change:transform}
+#hero .push{position:absolute; inset:0; transform-origin:50.7% 40%; animation:push 5.2s cubic-bezier(.55,.05,.15,1) .2s both}
+#hero .push img{width:100%; height:100%; object-fit:cover; object-position:50% 52%; transform:scale(1.2); transform-origin:50% 50%}
+@keyframes push{
+  0%{transform:scale(3.3) translateY(5%)}
+  18%{transform:scale(3.05) translateY(4%)}
+  100%{transform:scale(1.07)}}
+#hero .dim{position:absolute; inset:0; background:#000; z-index:0; pointer-events:none; animation:dim 5.2s cubic-bezier(.55,.05,.15,1) .2s both}
+@keyframes dim{0%{opacity:1} 18%{opacity:.45} 100%{opacity:0; visibility:hidden}}
+#hero canvas.embers{position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none; animation:fadein 2s ease 2.4s both}
+@keyframes fadein{from{opacity:0} to{opacity:1}}
+#hero .shade{position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    linear-gradient(to bottom, var(--ink) 0, rgba(14,12,11,.85) 11%, rgba(14,12,11,0) 30%),
+    linear-gradient(to top, var(--ink) 0, var(--ink) 20%, rgba(14,12,11,.9) 38%, rgba(14,12,11,0) 60%),
+    radial-gradient(ellipse 80% 70% at 50% 45%, rgba(14,12,11,0) 55%, rgba(14,12,11,.55) 100%)}
+#hero .bar{position:absolute; left:0; right:0; height:12svh; background:#000; z-index:4; animation:bar 1.4s cubic-bezier(.7,0,.2,1) 3.7s both}
+#hero .bar.t{top:0; transform-origin:top} #hero .bar.b{bottom:0; transform-origin:bottom}
+@keyframes bar{from{transform:scaleY(1)} to{transform:scaleY(0)}}
+.hero-foot{position:absolute; left:0; right:0; bottom:0; z-index:3; padding-bottom:max(clamp(34px,6vh,64px), env(safe-area-inset-bottom,0px)); will-change:transform}
+.hero-meta{display:flex; justify-content:space-between; align-items:end; gap:16px 40px; flex-wrap:wrap; margin-bottom:clamp(6px,1.2vh,14px)}
+.kicker{font-family:var(--display); text-transform:uppercase; letter-spacing:.22em; font-size:clamp(.72rem,.9vw,.88rem); color:var(--paper); display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+.kicker i{width:34px; height:2px; background:var(--blood-hi); display:inline-block}
+.hero-pitch{text-shadow:0 1px 12px rgba(0,0,0,.6); max-width:40ch; color:var(--paper); font-size:clamp(.92rem,1.05vw,1.08rem); line-height:1.5; text-align:right}
+.hero-word{display:grid; font-size:26vw; font-weight:700; line-height:.74; letter-spacing:.012em; white-space:nowrap; margin:0 0 0 -.03em; padding-top:.06em; width:max-content; max-width:100%}
+.hero-word span{grid-area:1/1}
+.hero-word .guide{color:transparent; -webkit-text-stroke:1px rgba(236,232,226,.4); animation:fadein .9s ease 3.9s both, guideOut 1s ease 6s both}
+@keyframes guideOut{to{opacity:0}}
+.hero-word .ink{color:var(--paper-hi); animation:carve 1.9s cubic-bezier(.6,0,.3,1) 4.3s both}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero-word .ink{background:var(--paper-hi) url(img/tex-ink.webp) center/cover; -webkit-background-clip:text; background-clip:text; color:transparent}
+}
+@keyframes carve{
+  from{clip-path:polygon(0 0,-10% 0,-14% 12%,-9% 25%,-15% 37%,-8% 50%,-13% 62%,-9% 75%,-15% 87%,-10% 100%,0 100%)}
+  to{clip-path:polygon(0 0,112% 0,107% 12%,112% 25%,106% 37%,113% 50%,108% 62%,112% 75%,106% 87%,111% 100%,0 100%)}}
+@media (min-width:761px){ .hero-word{font-size:min(15vw, 26svh)} }
+@keyframes rise{from{transform:translateY(105%)} to{transform:none}}
+.hero-meta{animation:fadeup 1.2s ease 5.2s both}
+@keyframes fadeup{from{opacity:.001; transform:translateY(14px)} to{opacity:1; transform:none}}
+.scroll-cue{position:absolute; right:max(clamp(16px,3vw,44px), env(safe-area-inset-right,0px)); top:50%; transform:translateY(-50%); font-family:var(--display); letter-spacing:.3em; font-size:.66rem; text-transform:uppercase; color:var(--paper); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:3; writing-mode:vertical-rl}
+.scroll-cue::after{content:""; width:1px; height:34px; background:linear-gradient(var(--paper), transparent); animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0); transform-origin:top}50%{transform:scaleY(1); transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0); transform-origin:bottom}}
+@media (max-width:760px){
+  #hero .push img{transform:scale(1.04); object-position:50% 50%}
+  #hero .push{transform-origin:52% 42%}
+  #hero .glow{left:52%; width:120vmin}
+  #hero .shade{background:
+    linear-gradient(to bottom, var(--ink) 0, var(--ink) 12%, rgba(14,12,11,.8) 20%, rgba(14,12,11,0) 32%),
+    linear-gradient(to top, var(--ink) 0, var(--ink) 30%, rgba(14,12,11,.85) 42%, rgba(14,12,11,0) 58%)}
+  .hero-meta{flex-direction:column; align-items:start}
+  .hero-pitch{text-align:left}
+  .scroll-cue{display:none}
+}
+@media (prefers-reduced-motion: reduce){ #hero .push, #hero .bar, .hero-word span, .hero-meta, #hero .dim, #hero canvas.embers{animation:none} #hero .dim{display:none} #hero .glow{opacity:.55} #hero .bar, .hero-word .guide, #hero canvas.embers{display:none} }
+
+
+/* landing: jump straight to the final design */
+.hero-row{display:flex; justify-content:space-between; align-items:flex-end; gap:16px 32px; flex-wrap:wrap}
+.hero-cta{display:inline-flex; align-items:center; gap:14px; text-decoration:none; font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; font-size:clamp(.78rem,.95vw,.92rem);
+  color:var(--paper-hi); border:1px solid rgba(236,232,226,.55); padding:14px 16px 14px 22px; margin-bottom:.4em; background:rgba(14,12,11,.6);
+  transition:background .3s, color .3s, border-color .3s; animation:fadeup 1.2s ease 5.6s both}
+.hero-cta i{font-style:normal; width:30px; height:30px; border-radius:50%; background:var(--blood-hi); color:var(--paper-hi); display:grid; place-items:center; letter-spacing:0; transition:transform .3s}
+.hero-cta:hover{background:var(--paper-hi); color:var(--ink); border-color:var(--paper-hi)}
+.hero-cta:hover i{transform:translateY(3px)}
+@media (max-width:760px){ .hero-row{gap:14px} .hero-cta{margin-bottom:0} }
+@media (prefers-reduced-motion: reduce){ .hero-cta{animation:none} }
+
+/* final design: sub-nav that stays pinned while you are in this section */
+.subnav{position:sticky; top:calc(env(safe-area-inset-top,0px) + 64px); z-index:45; margin-top:calc(-1 * clamp(88px, 11vw, 168px)); margin-bottom:clamp(56px,7vw,96px);
+  background:rgba(14,12,11,.97); border-block:1px solid var(--ink-soft)}
+.subnav-in{display:flex; align-items:center; gap:clamp(16px,3vw,40px); min-height:52px}
+.subnav-k{font-family:var(--display); text-transform:uppercase; letter-spacing:.2em; font-size:.74rem; color:var(--blood-hi); white-space:nowrap; display:flex; align-items:center; gap:10px}
+.subnav-k::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--blood-hi)}
+.subnav ul{list-style:none; margin:0; padding:0; display:flex; gap:clamp(4px,1vw,10px); overflow-x:auto; scrollbar-width:none; min-width:0; flex:1}
+.subnav ul::-webkit-scrollbar{display:none}
+.subnav a{display:block; white-space:nowrap; text-decoration:none; font-family:var(--display); text-transform:uppercase; letter-spacing:.12em; font-size:.8rem; color:var(--ash); padding:8px 12px; border-radius:999px; transition:color .25s, background .25s}
+.subnav a:hover{color:var(--paper-hi)}
+.subnav a.on{color:var(--ink); background:var(--paper-hi)}
+#outcome{padding-top:clamp(88px, 11vw, 168px)}
+#outcome [id^="fd-"]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 140px)}
+#outcome{scroll-margin-top:0}
+@media (max-width:760px){ .subnav{top:calc(env(safe-area-inset-top,0px) + 58px)} .subnav-k{display:none} }
+
+
+/* small floating jump to the final design, shown between the landing screen and the Final Design section */
+.jump{position:fixed; z-index:55; right:max(20px, calc(env(safe-area-inset-right,0px) + 20px)); bottom:max(20px, calc(env(safe-area-inset-bottom,0px) + 20px));
+  display:inline-flex; align-items:center; gap:10px; padding:8px 8px 8px 16px; border-radius:999px; text-decoration:none;
+  font-family:var(--display); text-transform:uppercase; letter-spacing:.16em; font-size:.74rem; color:var(--paper-hi);
+  background:rgba(14,12,11,.92); border:1px solid rgba(236,232,226,.3); box-shadow:0 10px 24px -10px rgba(0,0,0,.6);
+  opacity:0; visibility:hidden; transform:translateY(14px); transition:opacity .35s ease, transform .35s ease, visibility 0s linear .35s, background .25s, color .25s}
+.jump.is-on{opacity:1; visibility:visible; transform:none; transition:opacity .35s ease, transform .35s ease, visibility 0s, background .25s, color .25s}
+.jump i{font-style:normal; width:26px; height:26px; border-radius:50%; background:var(--blood-hi); display:grid; place-items:center; letter-spacing:0; transition:transform .25s}
+.jump:hover{background:var(--paper-hi); color:var(--ink)}
+.jump:hover i{transform:translateY(2px); color:var(--paper-hi)}
+@media (max-width:760px){ .jump{font-size:.68rem; padding:6px 6px 6px 13px} .jump i{width:24px; height:24px} }
+@media (prefers-reduced-motion: reduce){ .jump, .jump.is-on{transition:none} }
+
+/* torn paper band sitting across section seams */
+.tear{position:relative; height:0; z-index:5; pointer-events:none; overflow-x:clip; overflow-y:visible}
+.tear img{position:absolute; left:-4%; width:108%; max-width:none; height:clamp(46px, 7vw, 120px); top:0; transform:translateY(-50%); object-fit:fill; will-change:transform}
+.tear.flip img{transform:translateY(-50%) scaleX(-1)}
+
+/* ------------- SECTIONS ------------- */
+section{position:relative}
+.sheet{background:var(--paper); color:var(--ink)}
+.sheet .muted{color:#5B534E}
+.bloodfield{background:var(--blood); color:var(--paper-hi)}
+.blk{padding-block:clamp(88px, 11vw, 168px)}
+.sec-head{display:grid; grid-template-columns:auto 1fr; gap:clamp(16px,3vw,40px); align-items:end; margin-bottom:clamp(40px,6vw,88px)}
+.sec-head .idx{font-family:var(--display); font-weight:300; font-size:clamp(3rem,7vw,7rem); line-height:.8; color:var(--blood-hi)}
+.sheet .sec-head .idx{color:var(--blood)}
+.sec-head h2{font-size:clamp(3rem, 8.5vw, 8.4rem); font-weight:500}
+.sec-head .sub{grid-column:2; font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; font-size:clamp(.78rem,1vw,.95rem); opacity:.75; margin-top:-6px}
+.label{font-family:var(--display); text-transform:uppercase; letter-spacing:.16em; font-size:.8rem; font-weight:500; display:flex; align-items:center; gap:10px}
+.label::before{content:""; width:12px; height:12px; border-radius:0 50% 50% 0; background:var(--blood-hi)}
+.sheet .label::before{background:var(--blood)}
+.bloodfield .label::before{background:var(--paper-hi)}
+.prose{display:grid; gap:1em; max-width:62ch}
+.lede{font-size:clamp(1.25rem, 2.1vw, 2rem); line-height:1.32; font-weight:400; letter-spacing:-.01em; max-width:34ch; text-wrap:pretty}
+.cap{font-size:.78rem; letter-spacing:.06em; color:var(--ash); margin-top:10px}
+.sheet .cap{color:#6A625C}
+figure{margin:0}
+.frame{overflow:hidden; border-radius:4px; background:var(--ink-2)}
+.frame img{width:100%; height:100%; object-fit:cover}
+.frame img[data-speed]{will-change:transform}
+
+/* ------------- BRIEF ------------- */
+.brief-grid{display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); gap:clamp(32px,6vw,110px); align-items:start}
+.facts{display:grid; gap:0; border-top:1px solid rgba(14,12,11,.25)}
+.facts div{display:grid; grid-template-columns:9.5em 1fr; gap:16px; padding:16px 0; border-bottom:1px solid rgba(14,12,11,.25)}
+.facts dt{font-family:var(--display); text-transform:uppercase; letter-spacing:.14em; font-size:.78rem; color:#6A625C; padding-top:2px}
+.facts dd{margin:0; font-weight:500}
+.swatches{display:flex; gap:8px; align-items:center}
+.swatches i{width:22px; height:22px; border-radius:50%; border:1px solid rgba(14,12,11,.35)}
+.brief-pair{margin-top:clamp(56px,8vw,110px); display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(12px,2vw,28px); align-items:end}
+.brief-pair figure:nth-child(2){transform:translateY(-12%)}
+.brief-pair .frame{aspect-ratio:4/5}
+.brief-pair .x{font-family:var(--display); font-size:clamp(2.6rem,6vw,6rem); font-weight:200; text-align:center; align-self:center}
+@media (max-width:860px){ .brief-grid{grid-template-columns:1fr} .facts div{grid-template-columns:8em 1fr} }
+
+/* ------------- PROCESS ------------- */
+.method{list-style:none; margin:0 0 clamp(72px,9vw,140px); padding:0; display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); border-top:1px solid var(--ink-soft)}
+.method li{padding:22px clamp(10px,1.4vw,22px) 0 0; display:grid; gap:10px; align-content:start; position:relative}
+.method li::before{content:""; position:absolute; top:-5px; left:0; width:9px; height:9px; border-radius:50%; background:var(--ink); border:1px solid var(--ash)}
+.method li.hot::before{background:var(--blood-hi); border-color:var(--blood-hi)}
+.method .n{font-family:var(--display); font-size:.8rem; color:var(--ash); letter-spacing:.14em}
+.method b{font-family:var(--display); font-weight:500; text-transform:uppercase; font-size:clamp(1.05rem,1.4vw,1.35rem); line-height:1.05}
+.method span{font-size:.86rem; color:var(--ash); line-height:1.45}
+@media (max-width:980px){ .method{grid-template-columns:repeat(3, minmax(0,1fr)); row-gap:34px} }
+@media (max-width:520px){ .method{grid-template-columns:repeat(2, minmax(0,1fr))} }
+
+.sub-h{display:flex; align-items:baseline; gap:18px; flex-wrap:wrap; margin-bottom:clamp(28px,4vw,48px)}
+.sub-h h3{font-size:clamp(2.2rem,5vw,4.6rem)}
+.sub-h p{font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; color:var(--ash); font-size:.85rem}
+
+.title-sk{display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.6fr); gap:clamp(28px,5vw,80px); align-items:start; margin-bottom:clamp(96px,11vw,170px)}
+.sk-board{display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); grid-auto-rows:clamp(54px,6.2vw,96px); gap:clamp(8px,1vw,14px)}
+.sk-board .a{grid-column:1/5; grid-row:1/4}
+.sk-board .b{grid-column:5/7; grid-row:1/4}
+.sk-board .c{grid-column:1/4; grid-row:4/6}
+.sk-board .d{grid-column:4/7; grid-row:4/6}
+.sk-board .frame{background:#cfcac3}
+.annot{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:clamp(12px,2vw,24px); margin-top:clamp(12px,1.5vw,20px)}
+.annot figure{display:grid; grid-template-columns:clamp(72px,8vw,120px) 1fr; gap:14px; align-items:center; background:var(--ink-2); border-radius:4px; padding:10px; min-width:0}
+.annot .frame{aspect-ratio:1; background:var(--paper)}
+.annot b{font-family:var(--display); text-transform:uppercase; font-weight:500; letter-spacing:.08em; display:block; margin-bottom:4px}
+.annot p{font-size:.86rem; color:var(--ash); line-height:1.45}
+@media (max-width:860px){ .title-sk{grid-template-columns:1fr} .annot{grid-template-columns:1fr} }
+
+.elements{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(28px,5vw,80px); align-items:end; margin-bottom:clamp(56px,7vw,100px)}
+.elements .redmeans{margin-bottom:0}
+.elements .frame{aspect-ratio:737/1100; max-height:80svh; justify-self:center; width:100%; max-width:520px}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 26px}
+.chips span{border:1px solid var(--ink-soft); border-radius:999px; padding:6px 14px; font-size:.82rem; letter-spacing:.04em}
+.redmeans{display:flex; gap:18px; align-items:center; padding:18px; background:var(--ink-2); border-radius:4px}
+.redmeans i{flex:none; width:58px; height:58px; border-radius:50%; background:var(--blood-hi)}
+.redmeans p{font-size:.9rem; color:var(--paper)}
+@media (max-width:860px){ .elements{grid-template-columns:1fr} }
+
+.sketch-row{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:clamp(12px,1.6vw,22px)}
+.sketch-row figure{display:grid; gap:12px}
+.sketch-row .frame{aspect-ratio:3/4.3; background:#cfcac3}
+.sketch-row figure:nth-child(even){margin-top:clamp(24px,5vw,80px)}
+.sketch-row figcaption{display:flex; justify-content:space-between; gap:8px; font-family:var(--display); text-transform:uppercase; letter-spacing:.12em; font-size:.8rem}
+.sketch-row figcaption span{color:var(--ash)}
+@media (max-width:760px){ .sketch-row{grid-template-columns:repeat(2, minmax(0,1fr))} }
+
+/* ------------- RESEARCH ------------- */
+.r-block{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); gap:clamp(32px,6vw,100px); align-items:start}
+.r-block + .r-block{margin-top:clamp(88px,10vw,150px)}
+.r-name{font-size:clamp(2.6rem,6vw,5.8rem); margin:10px 0 6px}
+.r-role{font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; font-size:.86rem; opacity:.7}
+.r-photo{position:relative; margin-top:clamp(26px,3vw,40px)}
+.r-photo .frame{aspect-ratio:1400/930}
+.r-photo .disc{position:absolute; width:28%; aspect-ratio:1; border-radius:50%; background:var(--blood); right:-6%; bottom:-10%; z-index:-1; will-change:transform}
+.r-cols{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:28px clamp(20px,3vw,44px); padding-top:clamp(0px,3vw,40px)}
+.r-cols .full{grid-column:1/-1}
+.r-cols h4{font-family:var(--display); text-transform:uppercase; letter-spacing:.14em; font-size:.82rem; font-weight:500; margin:0 0 8px; color:var(--blood)}
+.bloodfield .r-cols h4{color:#F1B9A8}
+.r-cols p, .r-cols li{font-size:.95rem; line-height:1.6}
+.r-cols ul{margin:0; padding-left:1.1em; display:grid; gap:6px}
+.r-note{grid-column:1/-1; border-top:1px solid rgba(14,12,11,.25); padding-top:22px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:20px}
+.bloodfield .r-note{border-color:rgba(236,232,226,.3)}
+@media (max-width:860px){ .r-block{grid-template-columns:1fr} .r-cols{grid-template-columns:1fr} .r-note{grid-template-columns:1fr} }
+
+.artist-photo{max-width:420px}
+.artist-photo .frame{aspect-ratio:1}
+/* columns sized by each print's aspect ratio, so all three share one height */
+.linos{display:grid; grid-template-columns:minmax(0,.788fr) minmax(0,1.843fr) minmax(0,.74fr); gap:clamp(10px,1.4vw,20px); margin-top:clamp(56px,7vw,100px); align-items:start}
+.linos .frame{background:#efe6d2}
+.linos .l1 .frame{aspect-ratio:709/900}
+.linos .l2 .frame{aspect-ratio:1080/586}
+.linos .l3 .frame{aspect-ratio:666/900}
+.pair{margin-top:clamp(72px,8vw,120px); display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:clamp(24px,5vw,80px); align-items:start}
+.pair blockquote{margin:0; font-family:var(--display); text-transform:uppercase; font-size:clamp(1.8rem,3.6vw,3.4rem); line-height:1.02; font-weight:400; text-wrap:balance}
+@media (max-width:860px){ .linos{grid-template-columns:minmax(0,.788fr) minmax(0,.74fr)} .linos .l2{grid-column:1/-1; order:-1} .pair{grid-template-columns:1fr} }
+
+.film-strip{overflow:hidden; margin-top:clamp(48px,6vw,80px); padding-block:6px}
+.film-track{display:flex; gap:clamp(10px,1.2vw,18px); width:max-content; will-change:transform}
+.film-track figure{width:clamp(180px,19vw,300px); flex:none}
+.film-track .frame{aspect-ratio:450/700; box-shadow:0 18px 30px -16px rgba(0,0,0,.6)}
+.palette{display:grid; gap:10px; margin-top:6px}
+.palette div{display:grid; grid-template-columns:18px 1fr; gap:12px; align-items:start; font-size:.92rem}
+.palette i{width:18px; height:18px; border-radius:50%; margin-top:3px}
+
+.story{display:grid; grid-template-columns:repeat(12, minmax(0,1fr)); gap:clamp(10px,1.2vw,18px); margin-bottom:clamp(40px,5vw,70px)}
+.story .s1{grid-column:1/8; aspect-ratio:1400/641}
+.story .s2{grid-column:8/13; aspect-ratio:1400/641; align-self:end}
+.story .s3{grid-column:3/8; aspect-ratio:1400/614}
+.story .s4{grid-column:8/12; aspect-ratio:1400/581}
+.two-col{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:clamp(24px,4vw,64px)}
+@media (max-width:760px){ .story .s1,.story .s2,.story .s3,.story .s4{grid-column:1/-1} .two-col{grid-template-columns:1fr} }
+
+.fusion{display:grid; grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr); gap:clamp(28px,5vw,80px); align-items:center; margin-top:clamp(96px,11vw,170px)}
+.fusion .frame{aspect-ratio:2000/1126}
+.fusion .x{font-family:var(--display); text-transform:uppercase; letter-spacing:.14em; font-size:.9rem; color:var(--ash); margin:12px 0 22px}
+.dots{display:flex; gap:10px; margin:0 0 20px}
+.dots i{width:30px; height:30px; border-radius:50%; border:1px solid rgba(236,232,226,.4)}
+@media (max-width:860px){ .fusion{grid-template-columns:1fr} }
+
+/* ------------- QUOTE ------------- */
+#quote{background:var(--blood); overflow:hidden; padding-block:clamp(120px,16vw,240px)}
+#quote .qbg{position:absolute; inset:-20% -5%; background:url(img/quote-bg.webp) center/cover; will-change:transform}
+#quote blockquote{position:relative; margin:0 auto; max-width:24ch; font-family:var(--body); font-style:italic; font-weight:500; font-size:clamp(1.7rem, 4.2vw, 3.8rem); line-height:1.15; letter-spacing:-.02em; text-align:center; text-wrap:balance; color:var(--paper-hi)}
+
+/* ------------- OUTCOME ------------- */
+.out-intro{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr); gap:clamp(28px,5vw,80px); align-items:end; margin-bottom:clamp(64px,8vw,120px)}
+.series-list{list-style:none; margin:0; padding:0; display:grid; border-top:1px solid var(--ink-soft)}
+.series-list li{display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--ink-soft); font-family:var(--display); text-transform:uppercase; letter-spacing:.12em}
+.series-list li span{color:var(--ash)}
+@media (max-width:860px){ .out-intro{grid-template-columns:1fr} }
+
+.title-final{display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,.7fr); gap:clamp(24px,4vw,64px); align-items:center; margin-bottom:clamp(110px,12vw,190px)}
+.title-final .frame{aspect-ratio:2400/1072; background:#fff}
+@media (max-width:860px){ .title-final{grid-template-columns:1fr} }
+
+.show{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,6vw,110px); align-items:center}
+.show + .show{margin-top:clamp(110px,13vw,200px)}
+.show .art{position:relative; justify-self:center; width:100%; max-width:560px}
+.show .art .frame{aspect-ratio:1350/2000; border-radius:2px; box-shadow:0 50px 90px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.06)}
+.show .art .loupe{width:clamp(110px,14vw,210px)}
+.show.rev .art{order:2}
+.show .txt{display:grid; gap:18px; min-width:0}
+.show .no{font-family:var(--display); font-weight:300; font-size:clamp(4rem,9vw,9rem); line-height:.8; color:transparent; -webkit-text-stroke:1px var(--ash)}
+.show h3{font-size:clamp(2.2rem,4.6vw,4.4rem)}
+.show .stage{font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; color:var(--blood-hi); font-size:.85rem}
+.show p.body{color:var(--paper); max-width:52ch}
+.show.wide{grid-template-columns:1fr}
+.show.wide .art{max-width:none}
+.show.wide .art .frame{aspect-ratio:2400/1620}
+.show.wide .txt{grid-template-columns:auto minmax(0,1fr) minmax(0,1.3fr); gap:clamp(18px,3vw,48px); align-items:end}
+@media (max-width:860px){ .show .art .loupe{left:auto !important; right:-4px !important} .show{grid-template-columns:1fr} .show.rev .art{order:0} .show.wide .txt{grid-template-columns:1fr} .show .art{max-width:440px} }
+
+.lineup{margin-top:clamp(120px,14vw,220px)}
+.lineup-row{display:grid; grid-template-columns:minmax(0,.675fr) minmax(0,.675fr) minmax(0,.666fr) minmax(0,1.48fr); gap:clamp(8px,1.2vw,18px); align-items:end}
+.lineup-row .frame{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.lineup-row figure:hover .frame{transform:translateY(-10px)}
+.lineup-row .p1{aspect-ratio:1350/2000}.lineup-row .p2{aspect-ratio:1350/2000}.lineup-row .p3{aspect-ratio:1333/2000}.lineup-row .p4{aspect-ratio:2400/1620}
+.lineup-foot{display:grid; grid-template-columns:auto minmax(0,1fr); gap:clamp(20px,4vw,64px); margin-top:clamp(28px,3vw,44px); align-items:start}
+.lineup-foot h3{font-size:clamp(2.6rem,6vw,5.6rem)}
+@media (max-width:760px){ .lineup-row{grid-template-columns:1fr 1fr} .lineup-row figure:last-child{grid-column:1/-1} .lineup-foot{grid-template-columns:1fr} }
+
+/* ------------- LEARNINGS ------------- */
+.learn{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); border-top:1px solid rgba(14,12,11,.3)}
+.learn article{padding:clamp(24px,3vw,44px) clamp(0px,3vw,44px) clamp(24px,3vw,44px) 0; border-bottom:1px solid rgba(14,12,11,.3); display:grid; gap:14px; align-content:start}
+.learn article:nth-child(odd){border-right:1px solid rgba(14,12,11,.3)}
+.learn article:nth-child(even){padding-left:clamp(20px,3vw,44px)}
+.learn h3{font-size:clamp(1.6rem,2.8vw,2.6rem)}
+.learn .glyph{width:44px; height:44px}
+.learn p{max-width:48ch}
+@media (max-width:760px){ .learn{grid-template-columns:1fr} .learn article:nth-child(odd){border-right:0} .learn article:nth-child(even){padding-left:0} }
+
+/* ------------- FOOTER ------------- */
+footer{background:var(--ink); padding-block:clamp(96px,11vw,170px) max(32px, env(safe-area-inset-bottom,0px)); overflow:hidden; position:relative}
+.f-top{display:grid; gap:20px}
+.f-top .k{font-family:var(--display); text-transform:uppercase; letter-spacing:.2em; color:var(--ash); font-size:.85rem}
+.f-top h2{font-size:clamp(2.8rem,8vw,8rem); max-width:12ch}
+.f-mail{font-size:clamp(1.05rem,1.8vw,1.6rem); font-weight:500; user-select:all; text-decoration:none; border-bottom:1px solid var(--blood-hi); width:fit-content; max-width:100%; overflow-wrap:anywhere}
+.f-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-top:clamp(64px,8vw,120px); padding-top:22px; border-top:1px solid var(--ink-soft); font-size:.85rem; color:var(--ash)}
+.f-row a{text-decoration:none}
+.f-row a:hover{color:var(--paper-hi)}
+footer .bigsun{position:absolute; width:min(46vw,620px); aspect-ratio:1; border-radius:50%; background:var(--blood); right:-12vw; top:-10%; opacity:.9; z-index:0; will-change:transform}
+footer .wrap{position:relative; z-index:1}
+/* closing calls: back to the portfolio's work grid, or its contact footer */
+.f-cta{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:clamp(10px,1.2vw,16px); margin-top:clamp(48px,6vw,88px)}
+.f-card{position:relative; display:grid; gap:10px; align-content:end; min-height:clamp(150px,16vw,230px); padding:clamp(20px,2.6vw,36px); padding-right:clamp(84px,8vw,120px);
+  text-decoration:none; color:var(--paper-hi); background:rgba(14,12,11,.55); border:1px solid rgba(236,232,226,.22); border-radius:4px; overflow:hidden;
+  transition:background .35s ease, color .35s ease, border-color .35s ease}
+.f-card.alt{background:var(--blood); border-color:var(--blood)}
+.f-k{font-family:var(--display); text-transform:uppercase; letter-spacing:.2em; font-size:.78rem; opacity:.7}
+.f-t{font-family:var(--display); text-transform:uppercase; font-weight:500; font-size:clamp(2rem,4.2vw,3.8rem); line-height:.95}
+.f-a{position:absolute; right:clamp(20px,2.6vw,36px); bottom:clamp(20px,2.6vw,36px); width:clamp(46px,4.4vw,60px); aspect-ratio:1; border-radius:50%; display:grid; place-items:center;
+  font-size:1.3rem; background:var(--blood-hi); color:var(--paper-hi); transition:transform .35s cubic-bezier(.2,.8,.2,1), background .35s}
+.f-card.alt .f-a{background:var(--ink)}
+.f-card:hover, .f-card:focus-visible{background:var(--paper-hi); color:var(--ink); border-color:var(--paper-hi)}
+.f-card:hover .f-a, .f-card:focus-visible .f-a{transform:translateX(6px)}
+@media (max-width:640px){ .f-cta{grid-template-columns:1fr} }
+
+/* reveal: content is visible at rest; it only lifts into place */
+.rv{transition:transform 1.1s cubic-bezier(.16,.84,.24,1)}
+.js .rv:not(.in){transform:translateY(46px)}
+@media (prefers-reduced-motion: reduce){
+  .rv, .js .rv:not(.in){transition:none; transform:none}
+  [data-speed], [data-drift]{transform:none !important}
+  .scroll-cue::after{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="../" class="mark" aria-label="DAXX, back to the homepage">DAXX</a>
+  <ul>
+    <li><a href="#brief">Brief</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#outcome">Outcome</a></li>
+    <li><a href="#learnings">Learnings</a></li>
+  </ul>
+</nav>
+
+<a class="jump" id="jump" href="#outcome" aria-label="Jump to the final design"><span>Final design</span><i aria-hidden="true">↓</i></a>
+
+<div class="gauge" aria-hidden="true"><span>Struggle</span><div class="track"><div class="dot" id="gaugeDot"></div></div><span>Uprising</span></div>
+
+<!-- HERO -->
+<section id="hero" aria-label="Karnan, Poster Alchemy">
+  <div class="shot" id="heroShot"><div class="push"><img fetchpriority="high" decoding="async" src="img/poster-final.webp" alt="The final Karnan poster: the hero stands with a sword on a blade-shaped road, armed villagers lined up on both sides beneath a red sun" width="2400" height="1620"></div><div class="dim" aria-hidden="true"></div></div>
+  <div class="shade" aria-hidden="true"></div>
+  <canvas class="embers" id="embers" aria-hidden="true"></canvas>
+  <div class="bar t" aria-hidden="true"></div><div class="bar b" aria-hidden="true"></div>
+  <div class="hero-foot" id="heroFoot">
+    <div class="wrap">
+      <div class="hero-meta">
+        <p class="kicker"><span>Poster Alchemy</span><i></i><span>S. Dakshata</span></p>
+        <p class="hero-pitch">A new poster campaign for Mari Selvaraj’s <em>Karnan</em> (2021), carved in the linocut language of Chittaprosad Bhattacharya.</p>
+      </div>
+      <div class="hero-row">
+        <h1 class="hero-word" aria-label="Karnan"><span class="guide" aria-hidden="true">KARNAN</span><span class="ink" aria-hidden="true">KARNAN</span></h1>
+        <a class="hero-cta" href="#outcome"><span>View final design</span><i aria-hidden="true">↓</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear" aria-hidden="true"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="-40"></div>
+
+<!-- BRIEF -->
+<section id="brief" class="sheet blk" aria-labelledby="brief-h">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">01</span><h2 id="brief-h">Project Brief</h2></div>
+    <div class="brief-grid">
+      <div class="prose rv">
+        <p class="lede">Pair a filmmaker with an artist who sees the world the way they do, then rebuild one film’s posters in that artist’s hand.</p>
+        <p class="muted">I paired Mari Selvaraj’s <em>Karnan</em> with the linocuts of Chittaprosad Bhattacharya. Both refuse glamour and polish, and both put the oppressed at the centre of the frame instead of the background.</p>
+        <p class="muted">The work became a new storyline for the campaign, a hand-carved title and a series of four posters. The series moves from a pre-title teaser to the final release and reveals the hero slowly, letting symbols build the tension before he appears.</p>
+      </div>
+      <dl class="facts rv">
+        <div><dt>Course</dt><dd>Design Studio, BVA Graphic Design, Semester 5</dd></div>
+        <div><dt>Film</dt><dd>Karnan (2021), dir. Mari Selvaraj</dd></div>
+        <div><dt>Artist</dt><dd>Chittaprosad Bhattacharya (1915–1978)</dd></div>
+        <div><dt>Deliverables</dt><dd>Title design and a four-poster series</dd></div>
+        <div><dt>Palette</dt><dd class="swatches"><i style="background:#0E0C0B"></i><i style="background:#ECE8E2"></i><i style="background:#7C1A1A"></i><span>Black, white, blood red</span></dd></div>
+      </dl>
+    </div>
+    <div class="brief-pair">
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/director.webp" alt="Director Mari Selvaraj, seated" style="object-position:38% 50%" data-speed="-0.06"></div><figcaption class="cap">Mari Selvaraj, director</figcaption></figure>
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/lino-2.webp" alt="Chittaprosad linocut of men walking with sticks" data-speed="-0.06"></div><figcaption class="cap">Chittaprosad, linocut</figcaption></figure>
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/poster-firstlook.webp" alt="The new Karnan first-look poster" data-speed="-0.06"></div><figcaption class="cap">The fusion, first-look poster</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="tear flip" aria-hidden="true"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="40"></div>
+
+<!-- PROCESS -->
+<section id="process" class="blk" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">02</span><h2 id="process-h">Process</h2></div>
+
+    <ol class="method rv" aria-label="How the project ran, in order">
+      <li><span class="n">STEP 1</span><b>Study the director</b><span>Selvaraj’s storytelling, ideology and visual tone</span></li>
+      <li><span class="n">STEP 2</span><b>Pair an artist</b><span>Chittaprosad, for his raw, people-first linocuts</span></li>
+      <li><span class="n">STEP 3</span><b>Rewrite the story</b><span>A slow reveal through animal metaphor and symbol</span></li>
+      <li><span class="n">STEP 4</span><b>Fuse the boards</b><span>Black, white and red with carved textures</span></li>
+      <li class="hot"><span class="n">STEP 5</span><b>Carve the title</b><span>Sword terminals, an R drawn from village gods</span></li>
+      <li class="hot"><span class="n">STEP 6</span><b>Sketch four posters</b><span>Pre-title, title, first look, final</span></li>
+    </ol>
+
+    <div class="sub-h rv"><h3>Title Design</h3><p>Sketches</p></div>
+    <div class="title-sk">
+      <div class="prose rv">
+        <p style="color:var(--paper)">The title takes its cue from Chittaprosad Bhattacharya, whose bold, raw and unpolished prints spoke for the struggles of ordinary people. Like his woodcuts and linocuts, the lettering is lino-cut inspired, with rough, uneven textures that look carved by hand and give it a direct, forceful presence.</p>
+        <p style="color:var(--ash)">An embossed, stone-like finish makes it feel monumental, suggesting permanence and resilience. Minimal but powerful, it carries the essence of Karnan.</p>
+      </div>
+      <div>
+        <div class="sk-board rv">
+          <div class="frame a"><img loading="lazy" decoding="async" src="img/title-sk-2.webp" alt="Pencil sketches of the word KARNAN in carved serif letters, with Tamil lettering below"></div>
+          <div class="frame b"><img loading="lazy" decoding="async" src="img/title-sk-3.webp" alt="Notebook sketch of two KARNAN letter styles"></div>
+          <div class="frame c"><img loading="lazy" decoding="async" src="img/title-sk-1.webp" alt="Notebook page exploring the letters K and R" style="object-position:50% 40%"></div>
+          <div class="frame d"><img loading="lazy" decoding="async" src="img/sk-title.webp" alt="Thumbnail layouts for the title poster"></div>
+        </div>
+        <div class="annot">
+          <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/ref-sword.webp" alt="A curved sword and its scabbard" style="object-position:30% 50%"></div><figcaption><b>Terminals</b><p>Each letter ends in a sword’s edge, the symbol of strength and resilience.</p></figcaption></figure>
+          <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/ref-deity.webp" alt="Statue of a seated rural guardian deity" style="object-position:50% 25%"></div><figcaption><b>The letter R</b><p>Shaped after the rural gods and goddesses of the village.</p></figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-h rv"><h3>Poster Sketches</h3><p>Initial explorations</p></div>
+    <div class="elements">
+      <figure class="frame rv"><img loading="lazy" decoding="async" src="img/sk-elements.webp" alt="Sketch page listing the elements used, a drawing of the forest deity mask, a red circle and black, white and red swatches"></figure>
+      <div class="rv">
+        <p class="label">Elements used</p>
+        <div class="chips"><span>Sun</span><span>Sword</span><span>Horse</span><span>Mask</span><span>Spear</span><span>Fire</span><span>Smoke</span><span>Rain clouds</span><span>Eagle</span><span>Uneven land</span><span>Donkey</span><span>Elephant</span></div>
+        <div class="redmeans"><i aria-hidden="true"></i><p>One red circle does the work of many symbols: sun, fire and bindi, but also alert, emergency, stop and end. It became the single accent across the series.</p></div>
+      </div>
+    </div>
+    <div class="sketch-row">
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/sk-pretitle.webp" alt="Pencil sketches for the pre-title poster built around a blade"></div><figcaption>Pre-title <span>Sketch</span></figcaption></figure>
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/sk-thumbs-1.webp" alt="Pencil thumbnails for the title poster"></div><figcaption>Title <span>Sketch</span></figcaption></figure>
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/sk-firstlook.webp" alt="Annotated thumbnails for the first-look poster: sun, protagonist, people, deity, perspective title"></div><figcaption>First look <span>Sketch</span></figcaption></figure>
+      <figure class="rv"><div class="frame"><img loading="lazy" decoding="async" src="img/sk-final.webp" alt="Annotated thumbnails for the final poster: zoomed eye, protagonist, people, road shaped like a sword"></div><figcaption>Final <span>Sketch</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="tear" aria-hidden="true"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="-40"></div>
+
+<!-- RESEARCH -->
+<section id="research" aria-labelledby="research-h">
+  <div class="sheet blk">
+    <div class="wrap">
+      <div class="sec-head rv"><span class="idx">03</span><h2 id="research-h">Research</h2><p class="sub">Director · Artist · Film · Storyline · Fusion</p></div>
+
+      <div class="r-block">
+        <div class="rv">
+          <p class="label">The director</p>
+          <h3 class="r-name">Mari Selvaraj</h3>
+          <p class="r-role">Tamil filmmaker and writer</p>
+          <div class="r-photo"><div class="frame"><img loading="lazy" decoding="async" src="img/director.webp" alt="Mari Selvaraj seated in a dim room" data-speed="-0.05"></div><div class="disc" data-speed="0.12" aria-hidden="true"></div></div>
+        </div>
+        <div class="r-cols rv">
+          <div class="full"><p class="lede" style="font-size:clamp(1.15rem,1.7vw,1.6rem)">A critically acclaimed filmmaker whose socially charged films, rooted in personal and rural experience, confront caste, marginalisation and resilience with raw emotional depth.</p></div>
+          <div><h4>Storytelling</h4><p>A clear split between everyday life and outcry, with tension that builds slowly. Characters begin passive and grow active. Animal metaphors and cultural rituals run through the films.</p></div>
+          <div><h4>Ideology</h4><p>Caste discrimination is shown in systemic, psychological terms. His protagonists often come from Dalit or lower-caste communities who rise against injustice.</p></div>
+          <div><h4>Visual tone</h4><p>Naturalistic, high-contrast imagery; wide-angle and handheld shots; minimal colour grading and a sun-bleached palette.</p></div>
+          <div><h4>Vision</h4><p>Dalit, rural and working-class people appear as full protagonists with agency and dignity, never as side characters. Defiance is shown as a personal and collective need for dignity. Music, folk art, landscape and dialect record village culture without romanticising poverty.</p></div>
+          <div class="r-note"><h4>Publicity designer · Kabilan Chelliah</h4><p>His posters are raw and real: cracked walls, dusty land, sunburnt skies, minimal text and maximum image. Typography stays restrained and functional, and his earthy ochre, rust, blood red, ash grey and muted green come from the soil and struggles of the land.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bloodfield blk">
+    <div class="wrap">
+      <div class="r-block">
+        <div class="rv">
+          <p class="label">The artist</p>
+          <h3 class="r-name">Chittaprosad Bhattacharya</h3>
+          <p class="r-role">1915–1978 · Linocut, woodcut, ink</p>
+          <div class="artist-photo" style="margin-top:clamp(26px,3vw,40px)"><div class="frame"><img loading="lazy" decoding="async" src="img/artist.webp" alt="Black and white portrait of Chittaprosad Bhattacharya in round glasses" data-speed="-0.05"></div></div>
+        </div>
+        <div class="r-cols rv">
+          <div class="full"><p class="lede" style="font-size:clamp(1.15rem,1.7vw,1.6rem)">A revolutionary Indian artist who rejected elite traditions for accessible mediums, linocuts, woodcuts and sketches, to document famine, poverty and exploitation under colonial and feudal rule.</p></div>
+          <div><h4>Storytelling</h4><p>His work reads like a report or a fable. Linocuts often carry captions; pages of <em>Hungry Bengal</em> had handwritten notes beside each drawing. In his famine notebooks he named each peasant and recorded their circumstances. Elsewhere he used allegory, visual metaphor and cultural symbols.</p></div>
+          <div><h4>Ideology</h4><p>Part of India’s progressive political art: socialist realism with expressionist and folk-inspired roots.</p></div>
+          <div class="full"><h4>Visual tone</h4><p>Pen-and-ink drawings and black-and-white prints with bold contours and high contrast. His empathy shows famine victims, peasants and workers as people crushed by systemic violence, never faceless statistics.</p></div>
+        </div>
+      </div>
+
+      <div class="linos">
+        <figure class="l1 rv"><div class="frame"><img loading="lazy" decoding="async" src="img/lino-2.webp" alt="Linocut of men with sticks walking through a market" data-speed="-0.04"></div></figure>
+        <figure class="l2 rv"><div class="frame"><img loading="lazy" decoding="async" src="img/lino-1.webp" alt="Linocut of a village scene with huts, cattle and women gathered" data-speed="-0.04"></div><figcaption class="cap" style="color:#F1B9A8">Chittaprosad Bhattacharya, linocuts</figcaption></figure>
+        <figure class="l3 rv"><div class="frame"><img loading="lazy" decoding="async" src="img/lino-3.webp" alt="Linocut of tigers climbing a tree" data-speed="-0.04"></div></figure>
+      </div>
+
+      <div class="pair">
+        <div class="rv"><p class="label">Why this pair</p></div>
+        <div class="rv" style="display:grid; gap:22px">
+          <blockquote>Each character stands for a people, not just one person.</blockquote>
+          <p style="max-width:60ch">Both reject glamour and polish and insist the oppressed are the protagonists. Their images are scarred, raw, folk, mythic and earthy, made to show pain and dignity together. Their art is resistance that listens to silenced voices, compressing collective suffering and defiance into symbols.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sheet blk">
+    <div class="wrap">
+      <div class="r-block">
+        <div class="rv">
+          <p class="label">Film study</p>
+          <h3 class="r-name">Karnan, 2021</h3>
+          <p class="r-role">Socio-political drama · Tamil</p>
+          <p style="margin-top:24px; max-width:46ch">Set in a Tamil Nadu village crushed by caste discrimination, <em>Karnan</em> follows a brave young man from a marginalised community who rises against the injustice and humiliation his people face, down to being denied something as basic as a bus stop.</p>
+        </div>
+        <div class="r-cols rv">
+          <div><h4>Design language</h4><p>Raw and earthy, rooted in rural Tamil Nadu. No glossy visuals: dust, mud, cracked walls and worn fabric make it authentic, and the production design reflects the harsh land and the community’s reality.</p></div>
+          <div><h4>Colour palette</h4>
+            <div class="palette">
+              <div><i style="background:#B98A45"></i><span>Ochre and sandy brown: heat, drought, hardship</span></div>
+              <div><i style="background:#7C1A1A"></i><span>Deep red and maroon: resistance, blood, rebellion</span></div>
+              <div><i style="background:linear-gradient(90deg,#6E7A5C 50%,#6F8291 50%)"></i><span>Dusty green and faded blue: keep it grounded and real</span></div>
+            </div>
+          </div>
+          <div><h4>Symbolism</h4><ul><li>Tied donkey: helplessness, a voice suppressed</li><li>Broken statues and idols: shattered identity, cultural erasure</li><li>The sword: justice and uprising</li><li>Fish: the village’s livelihood and roots</li></ul></div>
+          <div><h4>Cinematography</h4><p>Wide landscapes show the village’s isolation; handheld shots add raw, documentary tension. Long takes, slow transitions and backlit silhouettes give a poetic rhythm that lifts Karnan’s quiet heroism without turning it into spectacle.</p></div>
+          <div class="r-note"><h4>The original campaign</h4><p>The official posters tell a journey from oppression to uprising: many hands raising a sword for a community ready to fight, then a bruised and handcuffed Karnan whose defiant face shows resilience, then Dhanush on horseback as suffering turns into action.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="film-strip" aria-label="The official Karnan posters">
+      <div class="film-track" data-drift="-260">
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-1.webp" alt="Official poster: hands raising a sword"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-5.webp" alt="Official poster: a rider in hazy light"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-6.webp" alt="Official poster: a hand holding a sword at dusk"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-2.webp" alt="Official poster: a figure on a rock"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-3.webp" alt="Official poster: a tied donkey's head"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-4.webp" alt="Official poster: Karnan handcuffed and bruised"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-9.webp" alt="Official poster: Karnan among masked figures"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-10.webp" alt="Official poster: Karnan with a sword in front of fire"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-7.webp" alt="Official teaser poster"></div></figure>
+        <figure><div class="frame"><img loading="lazy" decoding="async" src="img/film-8.webp" alt="Official poster: Karnan beside a deity mask"></div></figure>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="r-note rv" style="margin-top:clamp(40px,5vw,70px); border-top:1px solid rgba(14,12,11,.25); padding-top:22px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:20px">
+        <p class="label">Insight</p>
+        <p style="max-width:62ch">Symbolism and a consistent visual tone can tell a story before the film begins. Moving from struggle to oppression to uprising gives the series an emotional arc that feels authentic and powerful.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="blk">
+    <div class="wrap">
+      <div class="sub-h rv"><h3>New Storyline</h3><p>Karnan, re-told</p></div>
+      <div class="story">
+        <div class="frame s1 rv"><img loading="lazy" decoding="async" src="img/still-1.webp" alt="Film still: masked village deity figures in the dark" data-speed="-0.05"></div>
+        <div class="frame s2 rv"><img loading="lazy" decoding="async" src="img/still-3.webp" alt="Film still: a rider silhouetted at sunset" data-speed="-0.05"></div>
+        <div class="frame s3 rv"><img loading="lazy" decoding="async" src="img/still-2.webp" alt="Film still: raised hands around a sword against the sun" data-speed="-0.05"></div>
+        <div class="frame s4 rv"><img loading="lazy" decoding="async" src="img/still-4.webp" alt="Film still: a painted deity statue among trees" data-speed="-0.05"></div>
+      </div>
+      <div class="two-col">
+        <div class="prose rv"><p class="label">The posters</p><p style="color:var(--paper)">The new storyline leans on animal metaphor and symbol and reveals the themes slowly. It opens by hinting at violence through the sword and human–animal imagery, keeping an air of mystery. The title reveal introduces the rural world without giving much away. A third poster shows the protagonist with his first expression from the film, and the last places the community behind him. Layered symbolism replaces an instant hero shot.</p></div>
+        <div class="prose rv"><p class="label">The film</p><p style="color:var(--paper)">The cinematic direction would rely on slow-burn symbolic visuals. It would open on animal metaphors, natural textures and the sword to hint at violence while holding mystery. Wide, atmospheric shots would introduce the village, with the hero seen only in partial glimpses before he comes into focus. Then the frame widens to the community uniting behind him, echoing the poster series.</p></div>
+      </div>
+
+      <div class="fusion">
+        <div class="rv">
+          <p class="label">Fusion board</p>
+          <h3 style="font-size:clamp(2.2rem,4.6vw,4.4rem); margin-top:12px">Karnan × Chittaprosad</h3>
+          <p class="x">Moodboard</p>
+          <div class="dots" aria-label="Palette: black, white, red"><i style="background:#0E0C0B"></i><i style="background:#ECE8E2"></i><i style="background:#7C1A1A"></i></div>
+          <p style="color:var(--paper); max-width:46ch">Bold black-and-white line with striking red accents to set up mystery. Symbolism and gradual tension let clues unfold instead of revealing everything at once, and linocut textures and carved detail give the posters a handmade intensity that suits the film’s atmospheric, metaphor-driven style.</p>
+        </div>
+        <figure class="frame rv"><img loading="lazy" decoding="async" src="img/fusion.webp" alt="Fusion moodboard: woodcut-style book covers, a protest photograph, Karnan posters, blackletter type and a carved alphabet" data-speed="-0.05"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote" aria-label="Quote">
+  <div class="qbg" data-speed="0.25" aria-hidden="true"></div>
+  <div class="tear" aria-hidden="true" style="position:absolute; top:0; left:0; right:0"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="-50"></div>
+  <div class="wrap"><blockquote class="rv">“Some battles are not fought for victory; they’re fought so the next child can walk without fear.”</blockquote></div>
+  <div class="tear flip" aria-hidden="true" style="position:absolute; bottom:0; left:0; right:0"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="50"></div>
+</section>
+
+<!-- OUTCOME -->
+<section id="outcome" class="blk" aria-labelledby="outcome-h">
+  <nav class="subnav" id="subnav" aria-label="Final design sections">
+    <div class="wrap subnav-in">
+      <span class="subnav-k">Final design</span>
+      <ul>
+        <li><a href="#fd-overview">Overview</a></li>
+        <li><a href="#fd-title">Title</a></li>
+        <li><a href="#fd-pretitle">Pre-title</a></li>
+        <li><a href="#fd-titleposter">Title poster</a></li>
+        <li><a href="#fd-firstlook">First look</a></li>
+        <li><a href="#fd-final">Final poster</a></li>
+        <li><a href="#fd-series">The series</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">04</span><h2 id="outcome-h">Final Design</h2><p class="sub">Title + four-poster series</p></div>
+    <div class="out-intro" id="fd-overview">
+      <p class="lede rv" style="color:var(--paper)">Bold black-and-white line with striking red accents builds mystery. The series leans on symbolism and gradual tension, so clues unfold instead of the story arriving at once, while carved linocut texture gives each poster a raw, handmade intensity that matches the film.</p>
+      <ol class="series-list rv" aria-label="Release order">
+        <li>Pre-title <span>Tension</span></li>
+        <li>Title <span>Mystery</span></li>
+        <li>First look <span>Vulnerability</span></li>
+        <li>Final <span>Uprising</span></li>
+      </ol>
+    </div>
+
+    <div class="title-final" id="fd-title">
+      <figure class="frame rv"><img loading="lazy" decoding="async" src="img/title-final.webp" alt="Final KARNAN title lettering, linocut-carved black letters with sword-edge terminals in an arched frame"></figure>
+      <div class="prose rv">
+        <p class="stage" style="font-family:var(--display); text-transform:uppercase; letter-spacing:.18em; color:var(--blood-hi); font-size:.85rem">Title design</p>
+        <h3 style="font-size:clamp(2rem,3.6vw,3.4rem)">The carved title</h3>
+        <p style="color:var(--paper)">The curve across the top stands for the sword, a symbol of strength and resilience. Built in a linocut style with thick strokes and sharp-edged letters, the title feels raw, powerful and handmade.</p>
+      </div>
+    </div>
+
+    <article id="fd-pretitle" class="show">
+      <div class="art rv">
+        <figure class="frame"><img loading="lazy" decoding="async" src="img/poster-pretitle.webp" alt="Pre-title poster: a knife splits the frame, animals climb one side while human figures descend the other, red and black rays behind"></figure>
+        <div class="loupe" data-bg="img/poster-pretitle.webp" data-speed="-0.18" style="right:-8%; top:12%; background-size:360%; background-position:32% 20%" aria-hidden="true"></div>
+      </div>
+      <div class="txt rv">
+        <span class="no" aria-hidden="true">01</span>
+        <p class="stage">Pre-title poster</p>
+        <h3>The Divide</h3>
+        <p class="body">A knife splits the frame, ringed by the animal metaphors from the film. On one side the animals climb, the suppressed village reaching for growth and dignity. On the other the humans descend, the oppressive village that drags them down. The blade makes the split stark and shows the tension and violence the division creates.</p>
+      </div>
+    </article>
+
+    <article id="fd-titleposter" class="show rev">
+      <div class="art rv">
+        <figure class="frame"><img loading="lazy" decoding="async" src="img/poster-title.webp" alt="Title poster: the KARNAN title above a linocut sunburst, the forest deity mask half-hidden below with the hero riding across it"></figure>
+        <div class="loupe" data-bg="img/poster-title.webp" data-speed="-0.18" style="left:-8%; top:46%; background-size:420%; background-position:53% 62%" aria-hidden="true"></div>
+      </div>
+      <div class="txt rv">
+        <span class="no" aria-hidden="true">02</span>
+        <p class="stage">Title poster</p>
+        <h3>The Hidden Deity</h3>
+        <p class="body">The forest deity’s mask is half-hidden to keep its mystery and spiritual weight. Across the top of the deity’s crown rides the silhouette of the hero on horseback, sword in hand, introducing him and how he moves without giving too much away. The background draws the eye inward to the centre and deepens the poster’s symbolic, enigmatic tone.</p>
+      </div>
+    </article>
+
+    <article id="fd-firstlook" class="show">
+      <div class="art rv">
+        <figure class="frame"><img loading="lazy" decoding="async" src="img/poster-firstlook.webp" alt="First-look poster: a linocut portrait of the hero before a red sun, a black funnel form behind him and a small rider at his chest above the title"></figure>
+        <div class="loupe" data-bg="img/poster-firstlook.webp" data-speed="-0.18" style="right:-8%; bottom:10%; background-size:420%; background-position:47% 79%" aria-hidden="true"></div>
+      </div>
+      <div class="txt rv">
+        <span class="no" aria-hidden="true">03</span>
+        <p class="stage">First-look poster</p>
+        <h3>The Reluctant Hero</h3>
+        <p class="body">The hero appears with a frightened face that shows his vulnerability, while a small rider at his chest stands for the courage he is trying to find for himself and his people. The black funnel behind him, a fragment of the deity’s mask, ties his journey to the film’s spiritual symbolism. It also marks the divide between the two villages, and an open door to victory and justice.</p>
+        <p class="body" style="color:var(--ash)">Sun, sword and horse recall the myth of Karnan, son of the sun god, and reinforce his destiny. The war scene behind him reflects the villagers’ oppression and the battles they must fight before they reach light and justice.</p>
+      </div>
+    </article>
+
+    <article id="fd-final" class="show wide">
+      <div class="art rv">
+        <figure class="frame"><img loading="lazy" decoding="async" src="img/poster-final.webp" alt="Final poster: the hero stands with a sword on a road shaped like a blade, armed villagers lined up on both sides beneath a red sun"></figure>
+        <div class="loupe" data-bg="img/poster-final.webp" data-speed="-0.14" style="right:4%; top:-8%; width:clamp(120px,15vw,230px); background-size:620%; background-position:50% 47%" aria-hidden="true"></div>
+      </div>
+      <div class="txt rv">
+        <span class="no" aria-hidden="true">04</span>
+        <div style="display:grid; gap:14px"><p class="stage">Final poster</p><h3>The Protector</h3></div>
+        <p class="body">The hero stands firm and fearless for his village. The uneven road around him carries the long history of inequality he and his community have faced, and the black funnel returns as a fragment of the deity’s mask. Armed villagers line up behind him in solidarity. The clear road, shaped like a sword, is the path of justice he has carved for his people as protector and leader.</p>
+      </div>
+    </article>
+
+    <div class="lineup" id="fd-series">
+      <div class="lineup-row">
+        <figure class="rv"><div class="frame p1"><img loading="lazy" decoding="async" src="img/poster-pretitle.webp" alt="Pre-title poster"></div></figure>
+        <figure class="rv"><div class="frame p2"><img loading="lazy" decoding="async" src="img/poster-title.webp" alt="Title poster"></div></figure>
+        <figure class="rv"><div class="frame p3"><img loading="lazy" decoding="async" src="img/poster-firstlook.webp" alt="First-look poster"></div></figure>
+        <figure class="rv"><div class="frame p4"><img loading="lazy" decoding="async" src="img/poster-final.webp" alt="Final poster"></div></figure>
+      </div>
+      <div class="lineup-foot rv">
+        <h3>The Series</h3>
+        <p style="color:var(--ash); max-width:60ch; padding-top:.6em">Pre-title, title, first look and final, read left to right: a blade, a hidden god, a frightened man and finally a protector with his people behind him.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tear" aria-hidden="true"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="-40"></div>
+
+<!-- LEARNINGS -->
+<section id="learnings" class="sheet blk" aria-labelledby="learn-h">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="idx">05</span><h2 id="learn-h">Learnings</h2></div>
+    <div class="learn">
+      <article class="rv">
+        <svg class="glyph" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="#7C1A1A"/></svg>
+        <h3>Symbols tell the story first</h3>
+        <p>A consistent visual tone and a clear arc, from struggle to oppression to uprising, carried the emotion across four posters before a single frame of the film.</p>
+      </article>
+      <article class="rv">
+        <svg class="glyph" viewBox="0 0 44 44" aria-hidden="true"><path d="M4 40 L40 4" stroke="#0E0C0B" stroke-width="4" fill="none"/><path d="M32 4 H40 V12" stroke="#0E0C0B" stroke-width="4" fill="none"/></svg>
+        <h3>Mystery outlasts spectacle</h3>
+        <p>Revealing the hero slowly, in partial glimpses, gave each poster a reason to wait for the next one.</p>
+      </article>
+      <article class="rv">
+        <svg class="glyph" viewBox="0 0 44 44" aria-hidden="true"><rect x="4" y="4" width="36" height="36" fill="none" stroke="#0E0C0B" stroke-width="3"/><path d="M10 34 L18 12 L22 26 L28 16 L34 34" fill="none" stroke="#0E0C0B" stroke-width="3"/></svg>
+        <h3>A style is a point of view</h3>
+        <p>Working in Chittaprosad’s linocut language meant taking on his empathy and resistance, not just his texture. The raw, grounded look is what gave the narrative its weight.</p>
+      </article>
+      <article class="rv">
+        <svg class="glyph" viewBox="0 0 44 44" aria-hidden="true"><circle cx="10" cy="22" r="7" fill="#0E0C0B"/><circle cx="22" cy="22" r="7" fill="none" stroke="#0E0C0B" stroke-width="2"/><circle cx="34" cy="22" r="7" fill="#7C1A1A"/></svg>
+        <h3>Restraint holds a series together</h3>
+        <p>Black, white and a single red were enough to link four very different compositions, and they left room for the symbols to do the talking.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="tear flip" aria-hidden="true"><img loading="lazy" decoding="async" src="img/torn.webp" alt="" data-drift="40"></div>
+
+<!-- FOOTER -->
+<footer id="foot" aria-label="Contact">
+  <div class="bigsun" data-speed="0.2" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="f-top">
+      <p class="k">Got a story that needs telling?</p>
+      <h2>Let’s carve something together</h2>
+      <a class="f-mail" href="mailto:dakshatashyam.design@gmail.com">dakshatashyam.design@gmail.com ↗</a>
+    </div>
+    <div class="f-cta">
+      <a class="f-card" href="../#work" data-site="work"><span class="f-k">More projects</span><span class="f-t">View all work</span><span class="f-a" aria-hidden="true">→</span></a>
+      <a class="f-card alt" href="../#foot" data-site="foot"><span class="f-k">Say hello</span><span class="f-t">Get in touch</span><span class="f-a" aria-hidden="true">→</span></a>
+    </div>
+    <div class="f-row">
+      <span>Karnan, Poster Alchemy · S. Dakshata</span>
+      <a href="#hero">Back to the top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var doc=document.documentElement; doc.classList.add('js');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // lift-in reveals (content is visible at rest; it only settles into place)
+  var rv=[].slice.call(document.querySelectorAll('.rv'));
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);} });},{rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){el.classList.add('in')}); }
+
+  // layout is measured once (and again on resize), never inside the scroll frame
+  function absTop(el){ var y=0; while(el){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+  var nav=document.getElementById('nav');
+  var links=[].slice.call(document.querySelectorAll('.nav ul a'));
+  var sub=[].slice.call(document.querySelectorAll('.subnav a'));
+  var subList=document.querySelector('.subnav ul');
+  var dot=document.getElementById('gaugeDot');
+  var hs=document.getElementById('heroShot'), hf=document.getElementById('heroFoot');
+  var items=[].slice.call(document.querySelectorAll('[data-speed]')).map(function(el){
+    return {el:el, kind:'speed', host:el.parentElement, s:parseFloat(el.dataset.speed), base:(el.tagName==='IMG'?' scale(1.12)':'')+(el.classList.contains('poster')?' rotate(-1.6deg)':''), last:null};
+  }).concat([].slice.call(document.querySelectorAll('[data-drift]')).map(function(el){
+    var track=el.classList.contains('film-track');
+    return {el:el, kind:track?'track':'drift', host:el.parentElement, d:parseFloat(el.dataset.drift), flip:el.parentElement.classList.contains('flip')?' scaleX(-1)':'', last:null};
+  }));
+  var secT=[], subT=[], lights=[], vh=innerHeight, maxS=1, curNav=-2, curSub=-2, isLight=null;
+  var jump=document.getElementById('jump'), outEl=document.getElementById('outcome'), heroEl=document.getElementById('hero'), outTop=Infinity, heroEnd=0, jumpOn=null;
+
+  function measure(){
+    vh=innerHeight; maxS=Math.max(1, doc.scrollHeight-vh);
+    secT=links.map(function(a){ var t=document.querySelector(a.getAttribute('href')); return t?absTop(t):Infinity; });
+    subT=sub.map(function(a){ var t=document.querySelector(a.getAttribute('href')); return t?absTop(t):Infinity; });
+    outTop=outEl?absTop(outEl):Infinity; heroEnd=heroEl?heroEl.offsetHeight*.6:0;
+    lights=[].slice.call(document.querySelectorAll('.sheet')).map(function(el){ var t=absTop(el); return [t, t+el.offsetHeight]; });
+    items.forEach(function(it){ it.top=absTop(it.host); it.h=it.host.offsetHeight; if(it.kind==='track') it.span=Math.max(0, it.el.scrollWidth-it.host.clientWidth); });
+    queue();
+  }
+
+  function frame(){
+    ticking=false;
+    var y=window.scrollY;
+    if(dot) dot.style.transform='translate(-50%,-50%) translateY('+((y/maxS)*26*vh/100).toFixed(1)+'px)';
+    // nav colour over light paper sections
+    var probe=y+32, light=false;
+    for(var i=0;i<lights.length;i++){ if(probe>=lights[i][0] && probe<lights[i][1]){ light=true; break; } }
+    if(light!==isLight){ isLight=light; nav.classList.toggle('light', light); }
+    var jo=y>heroEnd && y+vh*.6<outTop;
+    if(jump && jo!==jumpOn){ jumpOn=jo; jump.classList.toggle('is-on', jo); jump.tabIndex=jo?0:-1; }
+    // nav + sub-nav highlight
+    var c=-1; for(var k=0;k<secT.length;k++){ if(secT[k]<y+vh*.4) c=k; }
+    if(c!==curNav){ curNav=c; links.forEach(function(a,i){a.classList.toggle('on', i===c)}); }
+    var f=-1; for(var m=0;m<subT.length;m++){ if(subT[m]<y+vh*.45) f=m; }
+    if(f!==curSub){ curSub=f; sub.forEach(function(a,i){a.classList.toggle('on', i===f)}); if(f>=0 && subList) subList.scrollTo({left:sub[f].parentNode.offsetLeft-24, behavior:'smooth'}); }
+    if(reduce) return;
+    // hero camera drift
+    if(y<vh*1.3){ var q=Math.min(1,y/vh); hs.style.transform='translate3d(0,'+(q*vh*.35).toFixed(1)+'px,0) scale('+(1+q*.08).toFixed(3)+')'; hf.style.transform='translate3d(0,'+(-q*vh*.12).toFixed(1)+'px,0)'; hf.style.opacity=(1-q*1.1).toFixed(3); }
+    // parallax: arithmetic only, writes only for on-screen items that moved
+    for(var n=0;n<items.length;n++){
+      var it=items[n], top=it.top-y, bot=top+it.h;
+      if(bot<-300 || top>vh+300) continue;
+      var v, tr;
+      if(it.kind==='speed'){ v=Math.round(((top+it.h/2)-vh/2)*it.s); tr='translate3d(0,'+v+'px,0)'+it.base; }
+      else if(it.kind==='track'){ var prog=Math.min(1,Math.max(0,(vh-top)/(vh+it.h))); v=Math.round(-prog*it.span); tr='translate3d('+v+'px,0,0)'; }
+      else { v=Math.round(((top+it.h/2)-vh/2)/vh*it.d); tr='translate3d('+v+'px,-50%,0)'+it.flip; }
+      if(v!==it.last){ it.last=v; it.el.style.transform=tr; }
+    }
+  }
+  var ticking=false;
+  function queue(){ if(!ticking){ticking=true; requestAnimationFrame(frame);} }
+  addEventListener('scroll',queue,{passive:true});
+  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(measure,120); });
+  addEventListener('load',measure);
+  if('ResizeObserver' in window){ var ro=new ResizeObserver(function(){ clearTimeout(rt); rt=setTimeout(measure,120); }); ro.observe(document.body); }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+})();
+
+// dust and embers rising through the hero: pre-rendered sprites, no live blur
+(function(){
+  var c=document.getElementById('embers'); if(!c || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var x=c.getContext('2d'), W=0,H=0,dpr=1, P=[], running=true, last=0;
+  function sprite(hue){
+    var s=document.createElement('canvas'); s.width=s.height=32; var g=s.getContext('2d');
+    var r=g.createRadialGradient(16,16,0,16,16,16);
+    r.addColorStop(0,'hsla('+hue+',100%,72%,1)'); r.addColorStop(.18,'hsla('+hue+',95%,58%,.95)'); r.addColorStop(.45,'hsla('+hue+',95%,50%,.25)'); r.addColorStop(1,'hsla('+hue+',95%,50%,0)');
+    g.fillStyle=r; g.fillRect(0,0,32,32); return s;
+  }
+  var EM=[sprite(6),sprite(16),sprite(26)];
+  function size(){ dpr=Math.min(1.5,window.devicePixelRatio||1); W=c.clientWidth; H=c.clientHeight; c.width=Math.round(W*dpr); c.height=Math.round(H*dpr); x.setTransform(dpr,0,0,dpr,0,0); }
+  function make(ember, anyY){
+    var r=Math.random;
+    return {e:ember, x:ember? W*(.5+(r()-.5)*.9*(r()<.6?.45:1)) : r()*W, y:anyY? r()*H : H*(.75+r()*.3),
+      s:ember? 1+r()*1.8 : .5+r()*1.3, vy:ember? -(.35+r()*.9) : -(.08+r()*.32), sw:r()*6.283, sp:.004+r()*.012,
+      a:ember? .5+r()*.5 : .08+r()*.32, life:0, max:ember? 260+r()*320 : 900+r()*900, k:(r()*3)|0};
+  }
+  function seed(){ P=[]; var n=Math.min(120, Math.round(W*H/11000)); for(var i=0;i<n;i++) P.push(make(false,true)); for(var j=0;j<Math.round(n*.22);j++) P.push(make(true,true)); }
+  size(); seed();
+  var rt; addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){size(); seed();},150); });
+  // stop entirely when the hero is off screen or the tab is hidden
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){ running=es[0].isIntersecting; if(running){ last=0; requestAnimationFrame(tick);} }).observe(c); }
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden && running){ last=0; requestAnimationFrame(tick);} });
+  function tick(t){
+    if(!running || document.hidden) return;
+    var dt=last? Math.min(3,(t-last)/16.67) : 1; last=t;
+    x.clearRect(0,0,W,H);
+    x.fillStyle='#ECE8E2';
+    for(var i=0;i<P.length;i++){
+      var p=P[i]; p.life+=dt; p.sw+=p.sp*dt; p.y+=p.vy*dt; p.x+=Math.sin(p.sw)*(p.e?.55:.25)*dt;
+      if(p.y<-10 || p.life>p.max){ P[i]=make(p.e,false); continue; }
+      var f=Math.min(1,p.life/60)*Math.max(0,1-p.life/p.max);
+      if(p.e){ var fl=.75+Math.sin(p.life*.3+p.sw)*.25, d=p.s*7; x.globalAlpha=p.a*f*fl; x.drawImage(EM[p.k],p.x-d/2,p.y-d/2,d,d); }
+      else { x.globalAlpha=p.a*f; x.fillRect(p.x,p.y,p.s,p.s); }
+    }
+    x.globalAlpha=1;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+<script>(function(){var els=[].slice.call(document.querySelectorAll('[data-bg]'));function go(el){el.style.backgroundImage='url('+el.dataset.bg+')';}
+if(!('IntersectionObserver' in window)){els.forEach(go);return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){go(e.target);io.unobserve(e.target);}})},{rootMargin:'800px 0px'});els.forEach(function(el){io.observe(el)});})();</script>
+
+<script src="../assets/js/site-nav.v1.js"></script>
+</body>
+</html>

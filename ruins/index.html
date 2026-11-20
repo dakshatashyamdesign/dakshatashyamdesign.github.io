@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beautiful Ruins, DAXX</title>
+<meta name="description" content="Beautiful Ruins: an exhibition identity about resilience, renewal and finding light in what remains. A case study by Dakshata Shyam.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Beautiful Ruins · Exhibition Identity by DAXX">
+<meta property="og:description" content="An exhibition identity about resilience and renewal: every crack lets the light in.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beautiful Ruins · Exhibition Identity by DAXX">
+<meta name="twitter:description" content="An exhibition identity about resilience and renewal: every crack lets the light in.">
+<meta property="og:image" content="assets/share.jpg">
+<meta name="twitter:image" content="assets/share.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-200%20-200%202302%202330%22%3E%3Crect%20x%3D%22-200%22%20y%3D%22-200%22%20width%3D%222302%22%20height%3D%222330%22%20rx%3D%22420%22%20fill%3D%22%23000%22/%3E%3Cpath%20fill%3D%22%23f6f0e6%22%20fill-rule%3D%22evenodd%22%20d%3D%22M575%202086C575%202046%20574%202041%20569%202031C562%202017%20551%202007%20535%202002C530%202001%20520%202000%20288%202000C55%202000%2045%202001%2040%202002C25%202007%2013%202016%207%202029C0%202041%200%202044%200%202086L0%202123L288%202123L575%202123L575%202086ZM1902%202086C1902%202059%201902%202048%201901%202043C1897%202024%201882%202008%201864%202003L1856%202000L1614%202000L1372%202000L1365%202003C1347%202009%201332%202026%201328%202044C1327%202048%201327%202065%201327%202087L1327%202123L1614%202123L1902%202123L1902%202086ZM518%201919C517%201902%20515%201894%20510%201884C503%201868%20491%201856%20476%201849C460%201841%20476%201842%20282%201842C87%201842%20103%201841%2086%201849C71%201856%2059%201869%2052%201884C48%201894%2046%201902%2045%201919L45%201934L282%201934L518%201934L518%201919ZM1845%201919C1844%201903%201843%201896%201839%201886C1832%201870%201816%201854%201800%201847C1784%201841%201799%201842%201608%201842L1436%201842L1428%201844C1411%201849%201399%201857%201388%201869C1378%201883%201373%201896%201372%201919L1372%201934L1608%201934L1845%201934L1845%201919ZM1764%201772C1770%201769%201775%201764%201778%201758L1781%201752L1781%201534L1781%201316L1773%201316C1763%201315%201757%201312%201746%201302C1732%201290%201725%201288%201715%201293C1711%201295%201703%201302%201681%201324C1631%201373%201631%201373%201562%201395C1539%201403%201526%201409%201511%201420C1482%201442%201460%201465%201449%201488C1446%201493%201442%201499%201440%201501L1436%201505L1436%201627C1436%201707%201436%201751%201437%201753C1439%201762%201449%201771%201457%201774C1459%201774%201522%201775%201610%201775L1760%201774L1764%201772ZM442%201766C445%201765%20449%201763%20450%201761C456%201756%20456%201759%20456%201656L456%201562L453%201557C451%201554%20448%201550%20447%201548C443%201544%20442%201543%20426%201537C404%201529%20385%201515%20372%201498C366%201490%20364%201487%20354%201470C348%201460%20341%201452%20329%201442C301%201419%20289%201394%20289%201362C289%201351%20289%201349%20295%201323C296%201315%20296%201303%20295%201294C293%201283%20290%201274%20283%201263C270%201241%20264%201226%20259%201203C258%201196%20258%201183%20257%201130L256%201064L254%201061C253%201059%20250%201056%20248%201055L245%201052L183%201052L121%201052L117%201055C115%201057%20112%201060%20111%201062L109%201067L109%201379C109%201550%20109%201704%20110%201720C111%201747%20111%201751%20113%201755C115%201761%20119%201764%20124%201766C131%201768%20436%201768%20442%201766ZM454%201274C454%201073%20454%201068%20452%201064C450%201060%20446%201057%20442%201055C439%201053%20431%201053%20387%201053C339%201053%20335%201053%20332%201055C327%201057%20323%201061%20321%201066C319%201070%20319%201136%20320%201168C321%201203%20323%201210%20336%201227C363%201263%20369%201298%20357%201340C354%201350%20354%201353%20354%201362C353%201376%20355%201380%20362%201390C376%201409%20420%201460%20429%201467C432%201470%20451%201481%20453%201481C454%201481%20454%201388%20454%201274ZM1458%201365C1484%201344%201494%201339%201536%201325C1569%201314%201584%201308%201596%201299C1599%201296%201614%201282%201628%201268C1657%201239%201668%201230%201685%201222C1699%201215%201706%201213%201720%201212C1739%201211%201755%201216%201772%201226C1777%201229%201780%201231%201781%201231C1781%201231%201781%201197%201781%201155C1781%201071%201781%201076%201775%201068C1767%201060%201781%201060%201608%201060C1463%201060%201455%201061%201451%201062C1445%201064%201438%201072%201437%201077C1436%201079%201436%201133%201436%201232L1436%201383L1440%201379C1443%201377%201450%201371%201458%201365ZM458%20993C461%20992%20469%20989%20474%20986C482%20982%20485%20980%20492%20973C497%20968%20503%20961%20505%20958C512%20946%20515%20932%20515%20912L515%20901L279%20901L43%20901L43%20916C43%20935%2045%20943%2051%20955C57%20967%2070%20980%2082%20986C99%20994%2083%20994%20278%20994C426%20994%20452%20994%20458%20993ZM1786%20992C1806%20987%201825%20972%201834%20954C1840%20942%201841%20936%201842%20917L1842%20901L1606%20901L1370%20901L1370%20918C1371%20934%201371%20936%201373%20944C1382%20968%201402%20987%201428%20993C1432%20994%201467%20994%201606%20994C1774%20994%201778%20994%201786%20992ZM436%20821C439%20752%20455%20686%20487%20622C556%20481%20688%20380%20843%20350C902%20339%20959%20338%201020%20348C1032%20350%201040%20351%201043%20351C1047%20350%201053%20345%201054%20340C1055%20334%201057%20316%201057%20304C1057%20280%201060%20261%201065%20243C1069%20230%201069%20224%201062%20219C1059%20216%201054%20215%201032%20212C928%20196%20822%20206%20723%20241C652%20267%20587%20304%20526%20355C507%20370%20464%20414%20449%20432C404%20485%20369%20544%20344%20606C317%20674%20302%20744%20299%20821L299%20840L367%20840L436%20840L436%20821ZM1576%20818C1574%20763%201564%20704%201548%20653C1544%20640%201542%20637%201537%20636C1532%20635%201529%20636%201521%20645C1502%20663%201487%20670%201440%20682C1422%20686%201419%20688%201419%20694C1419%20696%201421%20707%201424%20719C1433%20754%201437%20780%201439%20816C1440%20825%201440%20835%201440%20837L1440%20840L1508%20840L1576%20840L1576%20818ZM234%20824C234%20798%20238%20757%20243%20725C290%20440%20512%20210%20796%20152C891%20132%20993%20133%201085%20152C1099%20155%201104%20156%201110%20153C1116%20150%201118%20147%201128%20128C1139%20107%201153%2085%201162%2069C1172%2054%201173%2048%201167%2038C1164%2032%201159%2030%201142%2025C1044%201%20935%20-6%20833%207C589%2037%20370%20174%20233%20382C148%20511%20102%20658%2097%20815L97%20838L165%20838L234%20838L234%20824ZM1780%20813C1778%20753%201770%20692%201755%20632C1748%20607%201739%20577%201737%20573C1733%20568%201725%20566%201718%20568C1717%20569%201713%20572%201709%20575C1705%20578%201695%20586%201687%20592C1679%20597%201667%20606%201661%20612C1648%20622%201623%20645%201621%20648C1619%20652%201620%20657%201624%20674C1636%20723%201641%20765%201644%20822L1644%20838L1712%20838L1780%20838L1780%20813ZM1412%20610C1425%20607%201460%20596%201464%20594C1471%20590%201477%20582%201483%20571C1486%20565%201490%20558%201492%20554C1496%20548%201498%20541%201497%20535C1495%20528%201468%20485%201449%20460C1389%20381%201313%20317%201226%20273C1205%20263%201174%20249%201166%20247C1158%20244%201149%20249%201142%20258C1135%20269%201135%20273%201134%20307C1133%20331%201133%20340%201131%20352C1127%20377%201127%20377%201157%20392C1212%20419%201251%20447%201293%20489C1326%20522%201351%20554%201374%20593C1385%20613%201389%20615%201412%20610ZM1606%20557C1609%20555%201644%20529%201658%20518C1676%20503%201691%20487%201693%20480C1696%20472%201693%20465%201675%20433C1600%20299%201490%20188%201356%20111C1336%2099%201288%2075%201281%2073C1274%2071%201264%2072%201257%2075C1243%2082%201219%20113%201203%20145C1199%20155%201198%20156%201198%20164C1198%20171%201199%20173%201201%20178C1205%20187%201210%20191%201226%20198C1309%20236%201378%20284%201440%20346C1493%20400%201535%20458%201571%20529C1577%20541%201583%20551%201584%20553C1590%20558%201599%20559%201606%20557Z%22/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/hero_bg_2600.webp" imagesrcset="assets/hero_bg.webp 1900w, assets/hero_bg_2600.webp 2600w" imagesizes="max(100vw, 117vh)" fetchpriority="high">
+<link rel="preload" href="assets/hl_door_full.webp" as="image" fetchpriority="high">
+<link rel="preload" href="assets/fonts/satista.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/opensans.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Satista"; src:url(assets/fonts/satista.woff2) format("woff2"); font-weight:400; font-style:normal; font-display:swap}
+@font-face{font-family:"Open Sans"; src:url(assets/fonts/opensans.woff2) format("woff2"); font-weight:300 800; font-style:normal; font-display:swap}
+@font-face{font-family:"Archivo"; src:url(assets/fonts/archivo.woff2) format("woff2"); font-weight:100 900; font-stretch:62% 125%; font-display:swap}
+@font-face{font-family:"DM Sans"; src:url(assets/fonts/dmsans.woff2) format("woff2"); font-weight:100 1000; font-style:normal; font-display:swap}
+
+:root{
+  --bg:#000; --text:#ece5d8; --muted:#8e877c; --line:rgba(236,229,216,.13);
+  --navy:#0b2442; --plum:#4a203b; --gold:#ffc200; --ember:#d15a24; --red:#da1415;
+  --serif:"Satista", "Iowan Old Style", Georgia, serif;
+  --sans:"Open Sans", "Segoe UI", system-ui, sans-serif;
+  --pad:clamp(16px, 4.4vw, 72px);
+  --u:min(1vw, 1.7778vh);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15.5px; line-height:1.75; overflow-x:hidden; -webkit-font-smoothing:antialiased}
+img,video{display:block; max-width:100%; height:auto}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--gold); outline-offset:4px}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:400; margin:0; line-height:1.04}
+p{margin:0 0 1.1em} p:last-child{margin-bottom:0}
+strong{font-weight:600; color:var(--text)}
+
+/* ---------- DAXX nav (unchanged from the main site) ---------- */
+.nav{position:fixed; top:0; left:0; right:0; z-index:70; display:flex; justify-content:space-between; align-items:center;
+  padding:calc(env(safe-area-inset-top,0px) + max(14px, 2.27*var(--u))) max(18px, 2.19*var(--u)) 18px; color:#F9E3D1; mix-blend-mode:difference}
+.nav .mark{text-decoration:none; font-family:"Archivo","Arial Black",sans-serif; font-weight:900; font-stretch:96%; font-size:max(20px, 2.33*var(--u)); line-height:1}
+.nav ul{list-style:none; display:flex; gap:clamp(14px,2.4vw,32px); margin:0; padding:0}
+.nav ul a{text-decoration:none; font-family:"DM Sans","Helvetica Neue",Arial,sans-serif; font-size:.95rem}
+.nav ul a:hover{text-decoration:underline; text-underline-offset:5px}
+@media (max-width:640px){ .nav ul li:not(:last-child){display:none} }
+
+/* ---------- reveal: quiet fade only ---------- */
+.rv{opacity:0; transform:translateY(18px); transition:opacity 1.1s ease, transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1; transform:none}
+.rv.d1{transition-delay:.1s} .rv.d2{transition-delay:.2s} .rv.d3{transition-delay:.3s}
+
+/* ---------- editorial grid ---------- */
+.wrap{max-width:1440px; margin:0 auto; padding:0 var(--pad)}
+.row{display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); gap:clamp(20px,3vw,48px)}
+.label{font-size:.74rem; font-weight:600; letter-spacing:.02em; line-height:1.5; color:var(--text)}
+.label span{display:block; font-weight:400; color:var(--muted)}
+.label .bt{display:block; font-family:var(--serif); font-weight:400; font-size:clamp(1.25rem, 1rem + .6vw, 1.6rem); line-height:1.1; color:var(--text); margin-bottom:6px}
+.label > span:last-child{font-size:.72rem; letter-spacing:.06em; text-transform:uppercase}
+.label .no{font-family:var(--serif); font-weight:400; font-size:1.5rem; color:var(--muted); display:block; margin-bottom:6px}
+.sec{padding:clamp(90px,15vh,170px) 0; border-top:1px solid var(--line)}
+.sec-title{font-size:clamp(2.4rem, 1.2rem + 4.4vw, 5.6rem); line-height:1}
+.statement{font-family:var(--serif); font-size:clamp(1.6rem, 1rem + 2.1vw, 2.9rem); line-height:1.2}
+.statement .dim{color:var(--muted)}
+.cols2{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,48px); color:var(--muted)}
+.cols2 strong{color:var(--text)}
+.muted{color:var(--muted)}
+.mt-s{margin-top:clamp(28px,4vh,44px)} .mt-m{margin-top:clamp(48px,8vh,90px)} .mt-l{margin-top:clamp(70px,12vh,140px)}
+@media (max-width:860px){ .row{grid-template-columns:1fr} .cols2{grid-template-columns:1fr} }
+
+/* =================== HERO =================== */
+#hero{position:relative; height:260vh; background:#000}
+#hero .stage{position:sticky; top:0; height:100vh; height:100svh; min-height:560px; overflow:hidden; background:#000}
+#hero .world{position:absolute; left:0; top:0; width:100%; height:100%}
+#hero .hcv{position:absolute; inset:0; width:100%; height:100%; display:block; opacity:0; transition:opacity .4s}
+#hero .stage.cv-on .hcv{opacity:1}
+#hero .stage.cv-on .world img.ly, #hero .stage.cv-on .world .glow{visibility:hidden}
+#hero .ly{position:absolute; inset:0; width:100%; height:100%; transform-origin:51.3% 36.8%; will-change:transform}
+#hero .glow{background:radial-gradient(ellipse 9% 20% at 51.3% 40%, rgba(255,200,90,.42), rgba(255,140,40,.12) 45%, transparent 75%); opacity:.6}
+#hero .flick{background:radial-gradient(ellipse 7% 17% at 51.3% 40%, rgba(255,226,150,.30), transparent 70%); animation:flicker 6s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:.35} 40%{opacity:1} 55%{opacity:.5} 70%{opacity:.85}}
+#hero img.ly{-webkit-user-drag:none; user-select:none}
+#hero .shade{position:absolute; inset:0; pointer-events:none; background:linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 34%, rgba(0,0,0,.12) 60%, rgba(0,0,0,.35) 82%, #000 100%)}
+#hero .lock{position:absolute; left:50%; top:30%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:clamp(12px,1.6vw,26px); color:#f6f0e6; will-change:transform,opacity}
+#hero .lock .in{display:flex; align-items:center; gap:inherit; opacity:0; animation:riseL 1.8s .3s cubic-bezier(.2,.7,.2,1) forwards}
+#hero .lock svg{height:clamp(84px, 10vw, 166px); width:auto; fill:url(#holoFill)}
+#hero .lock h1{font-size:clamp(3rem, 1.2rem + 5.2vw, 8rem); line-height:.84}
+@keyframes riseL{from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:none}}
+#hero .meta{position:absolute; left:0; right:0; bottom:0; padding:0 var(--pad) clamp(22px,4vh,40px); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)) auto auto; gap:20px clamp(20px,4vw,64px); font-size:.74rem; line-height:1.5; color:#d8d0c3}
+#hero .meta > div{opacity:0; animation:fade 1.6s 1s forwards}
+#hero .meta b{display:block; font-weight:600; color:#f6f0e6}
+#hero .meta .scroll{justify-self:end; text-align:right}
+#hero .meta .skip{align-self:end}
+.cta{position:relative; display:inline-flex; align-items:center; gap:12px; padding:9px 18px 9px 10px; border-radius:99px; text-decoration:none; color:#f6f0e6; overflow:hidden; isolation:isolate;
+  border:1.5px solid transparent; background:linear-gradient(rgba(10,10,14,.78),rgba(10,10,14,.78)) padding-box, var(--holo) border-box; background-size:100% 100%, 200% 100%;
+  animation:holoB 8s linear infinite; box-shadow:0 0 0 rgba(255,210,140,0); transition:box-shadow .5s, transform .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes holoB{to{background-position:0 0, 200% 0}}
+.cta .ic{flex:0 0 30px; height:30px; border-radius:50%; display:grid; place-items:center; background:var(--holo); background-size:200% 100%; animation:holo 8s linear infinite}
+.cta .ic svg{width:13px; height:auto; fill:#0a0a0a}
+.cta .tx{display:flex; flex-direction:column; line-height:1.25}
+.cta .tx b{font-size:.86rem; font-weight:600; letter-spacing:.01em; color:#fff}
+.cta .tx span{font-size:.68rem; color:#cfc6b8; letter-spacing:.04em}
+.cta .ar{font-size:1rem; transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.cta::after{content:""; position:absolute; inset:-2px; z-index:-1; background:linear-gradient(100deg, transparent 30%, rgba(255,255,255,.22) 50%, transparent 70%); transform:translateX(-120%); animation:shine 4.5s 2.4s ease-in-out infinite}
+@keyframes shine{0%{transform:translateX(-120%)} 35%,100%{transform:translateX(120%)}}
+.cta:hover{box-shadow:0 0 28px rgba(255,200,140,.28), 0 0 60px rgba(140,190,255,.14); transform:translateY(-2px)}
+.cta:hover .ar{transform:translateX(5px)}
+#hero .meta .scroll i{display:inline-block; font-style:normal; animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(5px)}}
+@keyframes fade{to{opacity:1}}
+#hero .end{position:absolute; inset:0; background:#000; opacity:0; pointer-events:none}
+#hero .ly.door{inset:auto; left:39.21%; top:2.761%; width:24.737%; height:55.828%; transform-origin:48.94% 60.99%}
+@media (min-width:761px){
+  #hero .shade{background:linear-gradient(to bottom, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 50%, rgba(0,0,0,.55) 78%, #000 100%), linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,0) 45%)}
+  #hero .lock{left:var(--pad); top:auto; bottom:clamp(90px,15vh,150px); transform:none}
+}
+@media (max-width:760px){ #hero .lock .in{flex-direction:column; text-align:center} #hero .meta{grid-template-columns:1fr 1fr; row-gap:14px} #hero .meta .scroll{display:none} #hero .meta .skip{grid-column:span 2; justify-self:start; margin-top:4px} }
+
+/* ---------- chapter bar (Rebuilding to the end) ---------- */
+#process, #atmosphere, #inscription, #palette-row, #logo-row, #research, #outcome, #learn{scroll-margin-top:130px}
+.chapters{position:fixed; left:0; right:0; top:calc(env(safe-area-inset-top,0px) + max(52px, 5.4*var(--u))); z-index:65; display:flex; justify-content:center; padding:0 var(--pad);
+  opacity:0; transform:translateY(-10px); pointer-events:none; transition:opacity .5s, transform .5s}
+.chapters.on{opacity:1; transform:none; pointer-events:auto}
+.chapters ol{list-style:none; margin:0; padding:5px; display:flex; gap:2px; align-items:center; border-radius:99px; background:rgba(8,8,10,.86); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border:1px solid rgba(236,229,216,.12); max-width:100%; overflow-x:auto; scrollbar-width:none; position:relative}
+.chapters ol::-webkit-scrollbar{display:none}
+.chapters li{flex:0 0 auto}
+.chapters li.sep{width:1px; height:16px; background:rgba(236,229,216,.18); margin:0 6px}
+.chapters a{display:block; padding:7px 13px; border-radius:99px; font-size:.72rem; color:var(--muted); text-decoration:none; white-space:nowrap; transition:color .3s, background .3s}
+.chapters a:hover{color:var(--text)}
+.chapters a.active{color:#0a0a0a; background:var(--holo); background-size:200% 100%; animation:holo 10s linear infinite; font-weight:600}
+@media (max-width:760px){ .chapters ol{-webkit-backdrop-filter:none; backdrop-filter:none; background:rgba(8,8,10,.94)} .chapters{justify-content:flex-start; padding:0 10px} .chapters a{padding:7px 11px; font-size:.7rem} }
+
+/* ---------- holographic system ---------- */
+:root{--holo:linear-gradient(100deg,#ff9fd6 0%,#ffd27a 16%,#b5f5cf 33%,#86d0ff 50%,#c3a4ff 66%,#ff9fd6 83%,#ffd27a 100%)}
+@keyframes holo{to{background-position:200% 0}}
+.holo-text, .label .no, .refs .n, .ruled .k{background:var(--holo); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent !important; animation:holo 10s linear infinite; animation-play-state:paused}
+.live .holo-text, .live .label .no, .live .refs .n, .live .ruled .k, .live.sec::before, .live .leak{animation-play-state:running}
+.sec{position:relative; border-top:0}
+.sec::before{content:""; position:absolute; top:0; left:var(--pad); right:var(--pad); height:1px; background:var(--holo); background-size:200% 100%; opacity:.75; animation:holo 14s linear infinite; animation-play-state:paused;
+  -webkit-mask:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent)}
+.wrap{position:relative; z-index:1}
+#overview{position:relative}
+.leaks{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+.leak{position:absolute; width:70vmax; height:9vmax; background:linear-gradient(90deg, transparent, rgba(255,120,190,.5), rgba(255,215,120,.55), rgba(150,240,200,.5), rgba(120,190,255,.55), rgba(190,150,255,.45), transparent);
+  -webkit-mask:radial-gradient(closest-side, #000 20%, transparent 100%); mask:radial-gradient(closest-side, #000 20%, transparent 100%); opacity:.3; will-change:transform; animation:sweep var(--d,22s) ease-in-out infinite alternate; animation-play-state:paused}
+@keyframes sweep{from{transform:translate(var(--x0),var(--y0)) rotate(var(--r))} to{transform:translate(var(--x1),var(--y1)) rotate(calc(var(--r) + 6deg))}}
+.leak.thin{height:1.8vmax; opacity:.4}
+
+/* =================== OVERVIEW =================== */
+#overview{padding:clamp(100px,18vh,200px) 0 clamp(80px,14vh,150px)}
+.song{display:flex; align-items:center; gap:18px; margin-top:clamp(40px,6vh,64px); padding-top:24px; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem}
+.song .disc{flex:0 0 46px; height:46px; border-radius:50%; background:radial-gradient(circle, #000 0 7%, #2a2a2a 8% 9%, #111 10% 60%, #1b1b1b 61% 62%, #0c0c0c 63%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); animation:spin 9s linear infinite}
+.song b{color:var(--text); font-weight:600}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* facts */
+.facts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:0; margin:0; border-top:1px solid var(--line)}
+.facts div{padding:18px 18px 0 0}
+.facts dt{font-size:.72rem; font-weight:600; margin-bottom:4px}
+.facts dd{margin:0; font-size:.86rem; color:var(--muted); line-height:1.6}
+@media (max-width:860px){ .facts{grid-template-columns:1fr 1fr; row-gap:14px} }
+
+/* ruled list */
+.ruled{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.ruled li{display:grid; grid-template-columns:70px minmax(0,4fr) minmax(0,6fr); gap:clamp(14px,2vw,32px); padding:clamp(20px,3vh,30px) 0; border-bottom:1px solid var(--line); align-items:baseline}
+.ruled .k{font-family:var(--serif); font-size:1.3rem; color:var(--muted)}
+.ruled h3{font-size:clamp(1.4rem, 1rem + 1vw, 2rem)}
+.ruled p{color:var(--muted); font-size:.92rem}
+@media (max-width:700px){ .ruled li{grid-template-columns:44px 1fr} .ruled li p{grid-column:2} }
+
+/* =================== CINEMATIC INTERLUDE =================== */
+.scene{position:relative; height:110vh; overflow:hidden; background:#000}
+.scene .mask{position:absolute; inset:0; overflow:hidden; border-radius:50% 50% 0 0 / 30% 30% 0 0; transform-origin:50% 100%; will-change:transform; transform:scale(.4,.82)}
+.scene .img{position:absolute; inset:-6% 0; background-size:cover; background-position:center; transform-origin:50% 100%; will-change:transform}
+.scene .veil{position:absolute; inset:0; background:linear-gradient(#000, rgba(0,0,0,.15) 22%, rgba(0,0,0,.25) 70%, #000)}
+.scene .cap{position:absolute; left:0; right:0; bottom:16vh; text-align:center; padding:0 var(--pad)}
+.scene .cap p{font-family:var(--serif); font-size:clamp(2rem, 1.2rem + 3.4vw, 4.6rem); line-height:1.05; color:#f6f0e6; margin:0}
+.scene .cap span{display:block; margin-top:16px; font-size:.74rem; color:#d0c8bb}
+
+/* =================== PROCESS =================== */
+.mood img{width:100%}
+.spec{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--line)}
+.spec > div{padding:clamp(28px,4vh,48px) clamp(16px,2.4vw,40px) 0 0}
+.spec > div + div{padding-left:clamp(16px,2.4vw,40px); border-left:1px solid var(--line)}
+.spec .aa{font-size:clamp(5rem, 3rem + 7vw, 11rem); line-height:.82}
+.spec .aa.sans{font-family:var(--sans); font-weight:600; letter-spacing:-.03em}
+.spec .aa.serif{font-family:var(--serif)}
+.spec h4{font-size:1.5rem; margin:22px 0 2px}
+.spec h4.sans{font-family:var(--sans); font-weight:600; font-size:1.15rem}
+.spec .use{font-size:.74rem; color:var(--muted)}
+.spec .glyphs{margin:18px 0 22px; font-size:.84rem; letter-spacing:.06em; color:var(--muted); line-height:1.9; word-break:break-all}
+.spec .glyphs.serif{font-family:var(--serif); font-size:1.1rem}
+.spec p{color:var(--muted); font-size:.9rem}
+@media (max-width:760px){ .spec{grid-template-columns:1fr} .spec > div + div{padding-left:0; border-left:0; border-top:1px solid var(--line); margin-top:30px} }
+
+.palette{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(10px,2.4vw,40px); align-items:end; height:clamp(300px,46vh,460px)}
+.sw{height:100%; border-radius:999px 999px 0 0 / 50% 50% 0 0; overflow:hidden; display:flex; flex-direction:column; transform-origin:bottom; transform:scaleY(.06); transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.palette.in .sw{transform:none}
+.palette.in .sw:nth-child(2){transition-delay:.08s} .palette.in .sw:nth-child(3){transition-delay:.16s} .palette.in .sw:nth-child(4){transition-delay:.24s} .palette.in .sw:nth-child(5){transition-delay:.32s}
+.sw i{flex:1}
+.bar{display:grid; grid-template-columns:repeat(5,1fr); height:22px; margin-top:0}
+.codes{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(10px,2.4vw,40px); margin-top:18px; font-size:.7rem; line-height:1.6; color:var(--muted)}
+.codes b{display:block; color:var(--text); font-weight:600; font-size:.76rem}
+@media (max-width:640px){ .codes span{display:none} .codes{font-size:.6rem} }
+
+.symbol{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:clamp(24px,4vw,64px); align-items:center}
+.lockup{display:flex; align-items:center; gap:clamp(12px,1.6vw,24px); padding:clamp(40px,8vh,90px) 0}
+.lockup svg{height:clamp(80px,11vw,170px); width:auto; fill:url(#holoFill)}
+.lockup .w{font-family:var(--serif); font-size:clamp(2.8rem, 1.2rem + 5vw, 7.4rem); line-height:.84}
+.parts{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; text-align:center}
+.parts svg{height:72px; width:auto; fill:var(--text); margin:0 auto 14px; display:block}
+.parts b{display:block; font-size:.76rem; font-weight:600}
+.parts span{display:block; font-size:.76rem; color:var(--muted); line-height:1.5; margin-top:4px}
+@media (max-width:860px){ .symbol{grid-template-columns:1fr} }
+
+.tiles{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px}
+.tile{display:flex; align-items:center; justify-content:center; gap:.45em; color:#f4eee4; aspect-ratio:16/9}
+.tile svg{height:38%; width:auto; fill:currentColor}
+.tile .t{font-family:var(--serif); font-size:clamp(1rem, .6rem + 1.4vw, 1.9rem); line-height:.86}
+.tile.big{grid-column:span 3} .tile.sm{grid-column:span 2; aspect-ratio:4/3} .tile.sm .t{font-size:clamp(.85rem, .5rem + 1vw, 1.35rem)}
+@media (max-width:640px){ .tile.big{grid-column:span 6} .tile.sm{grid-column:span 3} }
+
+/* =================== RESEARCH =================== */
+.refs{list-style:none; margin:0; padding:0; border-top:1px solid var(--line)}
+.refs li{display:grid; grid-template-columns:minmax(0,3fr) minmax(0,9fr); gap:clamp(20px,3vw,48px); padding:clamp(34px,6vh,64px) 0; border-bottom:1px solid var(--line)}
+.refs .n{font-family:var(--serif); font-size:clamp(2.6rem, 1.6rem + 3vw, 4.6rem); line-height:.9; color:var(--muted)}
+.refs h3{font-size:clamp(1.7rem, 1.1rem + 1.6vw, 2.8rem); margin-bottom:16px}
+.refs p{color:var(--muted); max-width:62ch}
+.refs .figs{display:flex; gap:12px; margin-top:24px; max-width:520px}
+.refs .figs img{width:33.33%}
+.refs .quote{font-family:var(--serif); font-size:clamp(1.5rem, 1rem + 1.4vw, 2.4rem); line-height:1.15; color:var(--text); margin:0 0 18px; max-width:28ch}
+.places{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px}
+.places span{font-size:.74rem; padding:5px 12px; border:1px solid var(--line); border-radius:99px; color:var(--text)}
+@media (max-width:860px){ .refs li{grid-template-columns:1fr} }
+
+/* =================== OUTCOME =================== */
+.collat{padding:clamp(80px,13vh,150px) 0 0}
+.collat .vis{margin-top:clamp(40px,7vh,80px)}
+.ids{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,3vw,48px); max-width:1100px; margin:0 auto}
+.ids figure{margin:0; text-align:center}
+.ids figcaption{margin-top:14px; font-size:.76rem; font-weight:600}
+.ids figcaption span{display:block; font-weight:400; color:var(--muted)}
+.poster-pair{max-width:680px; margin:0 auto}
+.poster-pair img{width:100%}
+.poster-pair .m{border-radius:50vw 50vw 0 0 / 30vw 30vw 0 0; overflow:hidden; aspect-ratio:3/5}
+.poster-pair .m img{width:100%; height:100%; object-fit:cover}
+.tix{display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,2.4vw,40px)}
+.tix figcaption{margin-top:12px; font-size:.76rem; font-weight:600}
+@media (max-width:760px){ .tix{grid-template-columns:1fr} .poster-pair{grid-template-columns:1fr} .poster-pair .m{max-width:60%; margin:0 auto} }
+
+/* flipbook */
+.flip{position:relative; margin:clamp(40px,7vh,80px) auto 0; user-select:none}
+.book{position:relative; width:min(1060px, 100%, 140vh); margin:0 auto; aspect-ratio:1190/842; perspective:2600px; transition:transform .9s cubic-bezier(.3,.7,.2,1)}
+.book.closed-front{transform:translateX(-25%)}
+.book.closed-back{transform:translateX(25%)}
+.leaf{position:absolute; top:0; left:50%; width:50%; height:100%; transform-origin:left center; transform-style:preserve-3d; transition:transform 1s cubic-bezier(.35,.6,.2,1); cursor:pointer}
+.leaf.turned{transform:rotateY(-180deg)}
+.leaf .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#0a0a0a center/cover no-repeat; overflow:hidden}
+.leaf .face::after{content:""; position:absolute; inset:0; pointer-events:none}
+.leaf .front::after{background:linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,0) 7%)}
+.leaf .back{transform:rotateY(180deg)}
+.leaf .back::after{background:linear-gradient(to left, rgba(0,0,0,.35), rgba(0,0,0,0) 7%)}
+.book::after{content:""; position:absolute; left:6%; right:6%; bottom:-28px; height:30px; background:radial-gradient(ellipse at 50% 0, rgba(255,140,40,.16), transparent 70%); pointer-events:none}
+.flip-ui{display:flex; justify-content:center; align-items:center; gap:22px; margin-top:34px; font-size:.78rem; color:var(--muted)}
+.flip-ui button{appearance:none; background:none; border:1px solid var(--line); color:var(--text); width:44px; height:44px; border-radius:50%; cursor:pointer; font-size:1rem; transition:border-color .3s, background .3s}
+.flip-ui button:hover:not(:disabled){border-color:var(--text)}
+.flip-ui button:disabled{opacity:.3; cursor:default}
+.flip-ui .count{min-width:110px; text-align:center; font-variant-numeric:tabular-nums}
+.flip .hint{text-align:center; font-size:.72rem; color:var(--muted); margin-top:10px}
+/* single-page mode on phones */
+.book.single{width:min(100%, 420px); aspect-ratio:595/842; perspective:none; transform:none !important}
+.book.single .leaf{display:none}
+.book.single .sp{position:absolute; inset:0; background:#0a0a0a center/cover no-repeat; transition:opacity .45s}
+
+.mocks{display:grid; gap:clamp(8px,1vw,14px)}
+.mocks img{width:100%}
+
+/* =================== LEARNINGS / CLOSE =================== */
+.close{position:relative; height:clamp(420px, 80vh, 760px); overflow:hidden; margin-top:clamp(80px,12vh,140px)}
+.close .bg{position:absolute; inset:-4% 0; background:url(assets/close_bg.webp) 62% 40%/cover no-repeat; will-change:transform}
+.close .shade{position:absolute; inset:0; background:linear-gradient(#000, rgba(0,0,0,.35) 28%, rgba(0,0,0,.45) 60%, #000), radial-gradient(ellipse 45% 40% at 50% 50%, rgba(0,0,0,.45), transparent 75%)}
+.close .in{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 var(--pad)}
+.close svg{height:clamp(54px,6vw,80px); width:auto; fill:url(#holoFill); margin-bottom:26px}
+.close p{font-family:var(--serif); font-size:clamp(2rem, 1.2rem + 3vw, 4.4rem); line-height:1.05; color:#f6f0e6; max-width:16ch; margin:0}
+
+footer{padding:clamp(50px,9vh,90px) 0 clamp(28px,5vh,44px)}
+footer .frow{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap}
+footer .daxx{font-family:"Archivo","Arial Black",sans-serif; font-weight:900; font-stretch:96%; font-size:clamp(3rem, 2rem + 4vw, 6rem); line-height:.9; margin:0}
+footer .small{font-family:"DM Sans",sans-serif; font-size:.85rem; color:var(--muted); margin-top:14px}
+footer .small a{text-decoration:none; color:var(--text)}
+footer a.next{font-family:var(--serif); font-size:clamp(1.4rem, 1rem + 1.2vw, 2.2rem); text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:4px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important}
+  .rv{opacity:1; transform:none} .sw{transform:none}
+  #hero{height:100vh} #hero .lock .in,#hero .meta > div{opacity:1} .leaks{display:none} .scene .mask,.scene .img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><symbol id="arch" viewBox="0 -6 1902 2130"><path fill-rule="evenodd" d="M575 2086C575 2046 574 2041 569 2031C562 2017 551 2007 535 2002C530 2001 520 2000 288 2000C55 2000 45 2001 40 2002C25 2007 13 2016 7 2029C0 2041 0 2044 0 2086L0 2123L288 2123L575 2123L575 2086ZM1902 2086C1902 2059 1902 2048 1901 2043C1897 2024 1882 2008 1864 2003L1856 2000L1614 2000L1372 2000L1365 2003C1347 2009 1332 2026 1328 2044C1327 2048 1327 2065 1327 2087L1327 2123L1614 2123L1902 2123L1902 2086ZM518 1919C517 1902 515 1894 510 1884C503 1868 491 1856 476 1849C460 1841 476 1842 282 1842C87 1842 103 1841 86 1849C71 1856 59 1869 52 1884C48 1894 46 1902 45 1919L45 1934L282 1934L518 1934L518 1919ZM1845 1919C1844 1903 1843 1896 1839 1886C1832 1870 1816 1854 1800 1847C1784 1841 1799 1842 1608 1842L1436 1842L1428 1844C1411 1849 1399 1857 1388 1869C1378 1883 1373 1896 1372 1919L1372 1934L1608 1934L1845 1934L1845 1919ZM1764 1772C1770 1769 1775 1764 1778 1758L1781 1752L1781 1534L1781 1316L1773 1316C1763 1315 1757 1312 1746 1302C1732 1290 1725 1288 1715 1293C1711 1295 1703 1302 1681 1324C1631 1373 1631 1373 1562 1395C1539 1403 1526 1409 1511 1420C1482 1442 1460 1465 1449 1488C1446 1493 1442 1499 1440 1501L1436 1505L1436 1627C1436 1707 1436 1751 1437 1753C1439 1762 1449 1771 1457 1774C1459 1774 1522 1775 1610 1775L1760 1774L1764 1772ZM442 1766C445 1765 449 1763 450 1761C456 1756 456 1759 456 1656L456 1562L453 1557C451 1554 448 1550 447 1548C443 1544 442 1543 426 1537C404 1529 385 1515 372 1498C366 1490 364 1487 354 1470C348 1460 341 1452 329 1442C301 1419 289 1394 289 1362C289 1351 289 1349 295 1323C296 1315 296 1303 295 1294C293 1283 290 1274 283 1263C270 1241 264 1226 259 1203C258 1196 258 1183 257 1130L256 1064L254 1061C253 1059 250 1056 248 1055L245 1052L183 1052L121 1052L117 1055C115 1057 112 1060 111 1062L109 1067L109 1379C109 1550 109 1704 110 1720C111 1747 111 1751 113 1755C115 1761 119 1764 124 1766C131 1768 436 1768 442 1766ZM454 1274C454 1073 454 1068 452 1064C450 1060 446 1057 442 1055C439 1053 431 1053 387 1053C339 1053 335 1053 332 1055C327 1057 323 1061 321 1066C319 1070 319 1136 320 1168C321 1203 323 1210 336 1227C363 1263 369 1298 357 1340C354 1350 354 1353 354 1362C353 1376 355 1380 362 1390C376 1409 420 1460 429 1467C432 1470 451 1481 453 1481C454 1481 454 1388 454 1274ZM1458 1365C1484 1344 1494 1339 1536 1325C1569 1314 1584 1308 1596 1299C1599 1296 1614 1282 1628 1268C1657 1239 1668 1230 1685 1222C1699 1215 1706 1213 1720 1212C1739 1211 1755 1216 1772 1226C1777 1229 1780 1231 1781 1231C1781 1231 1781 1197 1781 1155C1781 1071 1781 1076 1775 1068C1767 1060 1781 1060 1608 1060C1463 1060 1455 1061 1451 1062C1445 1064 1438 1072 1437 1077C1436 1079 1436 1133 1436 1232L1436 1383L1440 1379C1443 1377 1450 1371 1458 1365ZM458 993C461 992 469 989 474 986C482 982 485 980 492 973C497 968 503 961 505 958C512 946 515 932 515 912L515 901L279 901L43 901L43 916C43 935 45 943 51 955C57 967 70 980 82 986C99 994 83 994 278 994C426 994 452 994 458 993ZM1786 992C1806 987 1825 972 1834 954C1840 942 1841 936 1842 917L1842 901L1606 901L1370 901L1370 918C1371 934 1371 936 1373 944C1382 968 1402 987 1428 993C1432 994 1467 994 1606 994C1774 994 1778 994 1786 992ZM436 821C439 752 455 686 487 622C556 481 688 380 843 350C902 339 959 338 1020 348C1032 350 1040 351 1043 351C1047 350 1053 345 1054 340C1055 334 1057 316 1057 304C1057 280 1060 261 1065 243C1069 230 1069 224 1062 219C1059 216 1054 215 1032 212C928 196 822 206 723 241C652 267 587 304 526 355C507 370 464 414 449 432C404 485 369 544 344 606C317 674 302 744 299 821L299 840L367 840L436 840L436 821ZM1576 818C1574 763 1564 704 1548 653C1544 640 1542 637 1537 636C1532 635 1529 636 1521 645C1502 663 1487 670 1440 682C1422 686 1419 688 1419 694C1419 696 1421 707 1424 719C1433 754 1437 780 1439 816C1440 825 1440 835 1440 837L1440 840L1508 840L1576 840L1576 818ZM234 824C234 798 238 757 243 725C290 440 512 210 796 152C891 132 993 133 1085 152C1099 155 1104 156 1110 153C1116 150 1118 147 1128 128C1139 107 1153 85 1162 69C1172 54 1173 48 1167 38C1164 32 1159 30 1142 25C1044 1 935 -6 833 7C589 37 370 174 233 382C148 511 102 658 97 815L97 838L165 838L234 838L234 824ZM1780 813C1778 753 1770 692 1755 632C1748 607 1739 577 1737 573C1733 568 1725 566 1718 568C1717 569 1713 572 1709 575C1705 578 1695 586 1687 592C1679 597 1667 606 1661 612C1648 622 1623 645 1621 648C1619 652 1620 657 1624 674C1636 723 1641 765 1644 822L1644 838L1712 838L1780 838L1780 813ZM1412 610C1425 607 1460 596 1464 594C1471 590 1477 582 1483 571C1486 565 1490 558 1492 554C1496 548 1498 541 1497 535C1495 528 1468 485 1449 460C1389 381 1313 317 1226 273C1205 263 1174 249 1166 247C1158 244 1149 249 1142 258C1135 269 1135 273 1134 307C1133 331 1133 340 1131 352C1127 377 1127 377 1157 392C1212 419 1251 447 1293 489C1326 522 1351 554 1374 593C1385 613 1389 615 1412 610ZM1606 557C1609 555 1644 529 1658 518C1676 503 1691 487 1693 480C1696 472 1693 465 1675 433C1600 299 1490 188 1356 111C1336 99 1288 75 1281 73C1274 71 1264 72 1257 75C1243 82 1219 113 1203 145C1199 155 1198 156 1198 164C1198 171 1199 173 1201 178C1205 187 1210 191 1226 198C1309 236 1378 284 1440 346C1493 400 1535 458 1571 529C1577 541 1583 551 1584 553C1590 558 1599 559 1606 557Z"/></symbol>
+    <linearGradient id="holoFill" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1902" y2="2130" spreadMethod="reflect">
+      <stop offset="0" stop-color="#f6f0e6"/><stop offset=".3" stop-color="#f6f0e6"/><stop offset=".42" stop-color="#ffc4e6"/><stop offset=".5" stop-color="#ffe3a0"/><stop offset=".58" stop-color="#bff3ff"/><stop offset=".7" stop-color="#f6f0e6"/><stop offset="1" stop-color="#f6f0e6"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-2200 -2200; 2200 2200" dur="7s" repeatCount="indefinite"/>
+    </linearGradient></defs>
+</svg>
+
+<nav class="nav" id="nav" aria-label="Site">
+  <a href="../" class="mark" aria-label="DAXX, back to the homepage">DAXX</a>
+  <ul>
+    <li><a href="../#work">Work</a></li>
+    <li><a href="../#hero">Meet Me</a></li>
+    <li><a href="../#bloom">Off Clock</a></li>
+    <li><a href="../#foot">Contact</a></li>
+  </ul>
+</nav>
+
+<nav class="chapters" id="chapters" aria-label="Chapters">
+  <ol>
+    <li><a href="#atmosphere">The Atmosphere</a></li>
+    <li><a href="#inscription">The Inscription</a></li>
+    <li><a href="#palette-row">Night to Fire</a></li>
+    <li><a href="#logo-row">The Arch</a></li>
+    <li class="sep" aria-hidden="true"></li>
+    <li><a href="#research">Echoes in Stone</a></li>
+    <li><a href="#outcome">Into the Light</a></li>
+    <li><a href="#learn">What Endures</a></li>
+  </ol>
+</nav>
+
+<main>
+<!-- =================== HERO =================== -->
+<header id="hero">
+ <div class="stage">
+  <canvas class="hcv" id="hcv" aria-hidden="true"></canvas>
+  <div class="world" id="world" aria-hidden="true">
+    <img class="ly back" width="2600" height="2230" src="assets/hero_bg_2600.webp" srcset="assets/hero_bg.webp 1900w, assets/hero_bg_2600.webp 2600w" sizes="max(100vw, 117vh)" alt="" decoding="async" fetchpriority="high">
+    <div class="ly glow"></div>
+    <img class="ly door" width="876" height="1697" src="assets/hl_door_full.webp" alt="" decoding="async" fetchpriority="high">
+    <div class="ly flick"></div>
+    <img class="ly smoke" width="2600" height="2230" src="assets/hl_smoke_2600.webp" srcset="assets/hl_smoke.webp 1900w, assets/hl_smoke_2600.webp 2600w" sizes="max(100vw, 117vh)" alt="" decoding="async">
+  </div>
+  <div class="leaks" aria-hidden="true">
+    <i class="leak" style="--x0:-30vw;--y0:8vh;--x1:10vw;--y1:2vh;--r:-24deg;--d:24s;left:-10%;top:10%"></i>
+    <i class="leak thin" style="--x0:20vw;--y0:0;--x1:-10vw;--y1:6vh;--r:-30deg;--d:18s;left:30%;top:18%"></i>
+    <i class="leak" style="--x0:10vw;--y0:0;--x1:-20vw;--y1:-6vh;--r:18deg;--d:28s;left:20%;top:72%;opacity:.22"></i>
+  </div>
+  <div class="shade"></div>
+  <div class="lock" id="hlock"><div class="in">
+    <svg viewBox="0 -6 1902 2130" aria-hidden="true"><use href="#arch"/></svg>
+    <h1>Beautiful<br>Ruins</h1>
+  </div></div>
+  <div class="meta" id="hmeta">
+    <div><b>Exhibition Identity</b>Print collaterals</div>
+    <div><b>Exhibition 2025</b>16 November</div>
+    <div><b>Island Ground</b>Tamil Nadu</div>
+    <div class="skip"><a class="cta" href="#process"><span class="ic" aria-hidden="true"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg></span><span class="tx"><b>Skip to the process</b><span>Jump to Rebuilding</span></span><span class="ar" aria-hidden="true">→</span></a></div>
+    <div class="scroll"><b>Scroll to step through</b><i>↓</i></div>
+  </div>
+  <div class="end" id="hend"></div>
+ </div>
+</header>
+
+<!-- =================== OVERVIEW =================== -->
+<section id="overview">
+  <div class="wrap row">
+    <div class="label rv"><b class="bt">The Threshold</b><span>Overview</span></div>
+    <div>
+      <p class="statement rv d1">An exhibition that celebrates resilience and renewal. Through fragments of ancient architecture and faded artistry, it reminds us that <span class="dim">beauty endures even in decay,</span> and that in every ruin lies the promise of a new beginning.</p>
+      <div class="song rv d2"><span class="disc" aria-hidden="true"></span><div>It all began with a song: <b>“Beautiful Ruins” by Ashley Park.</b> What started as a feeling in a piece of music grew into a full exhibition identity.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 01 BRIEF =================== -->
+<section class="sec" id="brief">
+  <div class="wrap row">
+    <div class="label rv"><span class="no">01</span><b class="bt">The Foundation</b><span>Project brief</span></div>
+    <div>
+      <h2 class="sec-title rv d1">An exhibition about what survives.</h2>
+      <div class="cols2 mt-s rv d2">
+        <p>Across time, people have rebuilt and reimagined their worlds. Beautiful Ruins reflects that shared ability to find hope in what remains, and to see possibility where something has been lost.</p>
+        <p>The task was to create its complete visual identity, from the symbol and wordmark to every printed piece a visitor would see or hold, all built around one timeless truth: <strong>when one door closes, another opens.</strong></p>
+      </div>
+      <dl class="facts mt-m rv d3">
+        <div><dt>Project</dt><dd>Exhibition identity and collaterals</dd></div>
+        <div><dt>Deliverables</dt><dd>Symbol, wordmark, palette, type, ID passes, poster, tickets, magazine</dd></div>
+        <div><dt>Tools</dt><dd>Photoshop, Illustrator, Figma</dd></div>
+        <div><dt>Context</dt><dd>BVA GD, 5th semester. Guided by Mr. Baisil James</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 02 ISSUE =================== -->
+<section class="sec" id="issue">
+  <div class="wrap row">
+    <div class="label rv"><span class="no">02</span><b class="bt">The Fracture</b><span>The main issue</span></div>
+    <div>
+      <h2 class="sec-title rv d1">Ruins usually speak of loss. This exhibition needed them to speak of hope.</h2>
+      <div class="cols2 mt-s rv d2">
+        <p>Broken arches and faded stone are easy to read as endings: grief, neglect, something gone for good. If the identity leaned that way, the message would be lost before a visitor ever walked in.</p>
+        <p>The challenge was to keep the weight and dignity of history while turning every crack into a sign of survival, and to make one visual language work across very different printed pieces without losing its emotional pull.</p>
+      </div>
+      <ol class="ruled mt-m">
+        <li class="rv"><span class="k">i</span><h3>Decay into dignity</h3><p>Show ruin as endurance and strength, never as damage.</p></li>
+        <li class="rv d1"><span class="k">ii</span><h3>One language</h3><p>A single, recognisable system across every printed touchpoint.</p></li>
+        <li class="rv d2"><span class="k">iii</span><h3>Clear at a glance</h3><p>Passes, roles and details that stay functional as well as beautiful.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== INTERLUDE: poster world =================== -->
+<section class="scene arch" id="scene1" aria-label="Every crack lets the light in">
+  <div class="mask" id="smask"><div class="img" id="simg" style="background-image:url(assets/n_poster.webp); background-position:50% 62%"></div></div>
+  <div class="veil"></div>
+  <div class="leaks" aria-hidden="true">
+    <i class="leak" style="--x0:-20vw;--y0:0;--x1:15vw;--y1:8vh;--r:-28deg;--d:20s;left:0;top:20%"></i>
+    <i class="leak thin" style="--x0:15vw;--y0:4vh;--x1:-15vw;--y1:-4vh;--r:-34deg;--d:16s;left:35%;top:40%"></i>
+  </div>
+  <div class="cap rv"><p>Every crack lets the <em class="holo-text" style="font-style:normal">light</em> in.</p><span>From the Beautiful Ruins poster</span></div>
+</section>
+
+<!-- =================== 03 PROCESS =================== -->
+<section class="sec" id="process">
+  <div class="wrap">
+    <div class="row">
+      <div class="label rv"><span class="no">03</span><b class="bt">Rebuilding</b><span>Process</span></div>
+      <h2 class="sec-title rv d1">Building a language from fragments.</h2>
+    </div>
+
+    <div class="row mt-l" id="atmosphere">
+      <div class="label rv"><b class="bt">The Atmosphere</b><span>Overall feel · Moodboard</span></div>
+      <div>
+        <p class="muted rv" style="max-width:60ch">The moodboard set the tone: torn and fading reds, flowers past their bloom, figures dissolving into light and deep blues broken by a single glow. Fragility meeting radiance.</p>
+        <figure class="mood mt-s rv d1" style="margin-left:0;margin-right:0"><img decoding="async" width="1720" height="1080" src="assets/mood.webp" alt="Moodboard of eight images in reds, blues and gold, including fading flowers, ghostly figures and a poster titled Light" loading="lazy"></figure>
+      </div>
+    </div>
+
+    <div class="row mt-l" id="inscription">
+      <div class="label rv"><b class="bt">The Inscription</b><span>Typography</span></div>
+      <div class="spec rv d1">
+        <div>
+          <div class="aa serif">Aa</div>
+          <h4>Satista</h4><div class="use">Regular · Display</div>
+          <div class="glyphs serif">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890 !@#$%^&amp;*()</div>
+          <p>Elegant and present while staying refined. Its graceful curves and subtle contrast echo classical architecture with a contemporary polish: even in decay there is dignity.</p>
+        </div>
+        <div>
+          <div class="aa sans">Aa</div>
+          <h4 class="sans">Open Sans</h4><div class="use">Semibold · Subheads &nbsp; Regular · Body</div>
+          <div class="glyphs">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890 !@#$%^&amp;*()</div>
+          <p>Clear, warm and accessible. A humanist touch makes long passages easy to read and keeps the tone gentle and hopeful rather than cold.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-l" id="palette-row">
+      <div class="label rv"><b class="bt">Night to Fire</b><span>Colour palette</span></div>
+      <div>
+        <div class="palette" id="palette">
+          <div class="sw" data-c="#0b2442"></div><div class="sw" data-c="#4a203b"></div><div class="sw" data-c="#da1415"></div><div class="sw" data-c="#d15a24"></div><div class="sw" data-c="#ffc200"></div>
+        </div>
+        <div class="bar"><i style="background:#0b2442"></i><i style="background:#4a203b"></i><i style="background:#da1415"></i><i style="background:#d15a24"></i><i style="background:#ffc200"></i></div>
+        <div class="codes rv">
+          <div><b>#0B2442</b><span>R10 G36 B66<br>C99 M84 Y45 K45</span></div>
+          <div><b>#4A203B</b><span>R74 G32 B59<br>C60 M88 Y47 K50</span></div>
+          <div><b>#DA1415</b><span>R218 G31 B39<br>C8 M100 Y100 K1</span></div>
+          <div><b>#D15A24</b><span>R209 G91 B39<br>C13 M77 Y100 K3</span></div>
+          <div><b>#FFC200</b><span>R254 G194 B50<br>C0 M25 Y100 K0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-l" id="logo-row">
+      <div class="label rv"><b class="bt">The Arch</b><span>Logo &amp; wordmark</span></div>
+      <div>
+        <div class="symbol">
+          <div class="lockup rv"><svg viewBox="0 -6 1902 2130" aria-hidden="true"><use href="#arch"/></svg><span class="w">Beautiful<br>Ruins</span></div>
+          <div class="parts rv d1">
+            <div><svg viewBox="0 -6 1902 900" aria-hidden="true"><use href="#arch" x="0" y="-6" width="1902" height="2130"/></svg><b>Water ripples</b><span>Renewal finds its way through</span></div>
+            <div><svg viewBox="-60 1040 640 820" aria-hidden="true"><use href="#arch" x="0" y="-6" width="1902" height="2130"/></svg><b>Cracked pillars</b><span>Scars as proof of survival</span></div>
+            <div><svg viewBox="-20 1820 620 320" aria-hidden="true"><use href="#arch" x="0" y="-6" width="1902" height="2130"/></svg><b>Strong solid base</b><span>Grounded through time</span></div>
+          </div>
+        </div>
+        <div class="cols2 mt-s rv">
+          <p>Cracked but unfallen, the arch stands as a reminder that scars are proof of survival. Its flowing top evokes water's quiet persistence, the way renewal finds a path when one door closes and another opens. As a whole, the mark balances ruin and hope.</p>
+          <p>Satista's high-contrast letterforms evoke carved stone inscriptions, while their smooth curves keep the wordmark from feeling rigid or dated. Ruins may represent the past, but within them lies the seed of new beginnings.</p>
+        </div>
+        <div class="tiles mt-m">
+          <div class="tile big rv" style="background:#0b2442"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg><span class="t">Beautiful<br>Ruins</span></div>
+          <div class="tile big rv d1" style="background:#111"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg><span class="t">Beautiful<br>Ruins</span></div>
+          <div class="tile sm rv" style="background:#4a203b"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg><span class="t">Beautiful<br>Ruins</span></div>
+          <div class="tile sm rv d1" style="background:#ffc200"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg><span class="t">Beautiful<br>Ruins</span></div>
+          <div class="tile sm rv d2" style="background:#d15a24"><svg viewBox="0 -6 1902 2130"><use href="#arch"/></svg><span class="t">Beautiful<br>Ruins</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 04 RESEARCH =================== -->
+<section class="sec" id="research">
+  <div class="wrap">
+    <div class="row">
+      <div class="label rv"><span class="no">04</span><b class="bt">Echoes in Stone</b><span>Research and history</span></div>
+      <h2 class="sec-title rv d1">Looking back to find the light.</h2>
+    </div>
+    <ol class="refs mt-m">
+      <li class="rv"><span class="n">I</span><div><h3>The arch as a gateway</h3><p>In classical architecture the arch marks a threshold, a passage from one space into the next. Cracked yet still standing, it became the exhibition's symbol, and its curve returns in the shape of every ticket and ID pass: a sign of moving from darkness into light.</p></div></li>
+      <li class="rv"><span class="n">II</span><div><h3>Inscriptions in stone</h3><p>Satista was chosen for letterforms that recall inscriptions carved into stone, carrying the weight of history while staying contemporary.</p></div></li>
+      <li class="rv"><span class="n">III</span><div><h3>Figures from history</h3><p>Historical figures became symbols for each role: a <strong>king</strong> for authority and exclusive access, <strong>Queen Cleopatra</strong> for knowledge and curiosity, and an <strong>angel</strong> for guidance and support.</p><div class="figs"><img decoding="async" width="638" height="900" src="assets/n_vip.webp" alt="" loading="lazy"><img decoding="async" width="638" height="900" src="assets/n_visitor.webp" alt="" loading="lazy"><img decoding="async" width="638" height="900" src="assets/n_volunteer.webp" alt="" loading="lazy"></div></div></li>
+      <li class="rv"><span class="n">IV</span><div><p class="quote">“When one door closes, another opens.”</p><h3 style="font-size:clamp(1.3rem,1rem + .8vw,1.7rem)">Cities that rose again</h3><p>The idea is grounded in real stories of rebuilding that the exhibition and its magazine draw on, proof that loss can be a prelude to renewal.</p><div class="places"><span>London after the Blitz</span><span>The Parthenon</span><span>Dresden</span><span>Warsaw</span><span>Hiroshima</span></div></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- =================== 05 OUTCOME =================== -->
+<section class="sec" id="outcome">
+  <div class="wrap">
+    <div class="row">
+      <div class="label rv"><span class="no">05</span><b class="bt">Into the Light</b><span>Final design</span></div>
+      <div>
+        <h2 class="sec-title rv d1">Every piece walks toward the light.</h2>
+        <p class="muted mt-s rv d2" style="max-width:62ch">A complete print identity where every object tells the same story, movement from darkness into light, carried by arched forms, rich contrast and glowing portals.</p>
+      </div>
+    </div>
+
+    <article class="collat">
+      <div class="row">
+        <div class="label rv"><b class="bt">The Call</b><span>Poster</span></div>
+        <p class="muted rv d1" style="max-width:70ch">A fierce queen stands at the end of a ruined hall, facing a radiant portal of light, a metaphor for <strong>brighter days</strong> after hardship. Motion blur and streaks of light pull the eye toward that moment of transition, and the dark ruins around her make the light feel earned. A QR code invites curious viewers to explore further.</p>
+      </div>
+      <div class="vis poster-pair">
+        <img decoding="async" class="rv" width="1064" height="1500" src="assets/n_poster.webp" alt="Beautiful Ruins poster: a queen facing a glowing doorway in a ruined hall, titled Every crack lets the light in" loading="lazy">
+      </div>
+    </article>
+
+    <article class="collat">
+      <div class="row">
+        <div class="label rv"><b class="bt">The Keepers</b><span>ID passes</span></div>
+        <p class="muted rv d1" style="max-width:70ch">The ID passes carry the identity while telling roles apart through symbolic imagery: a <strong>king</strong> on the VIP pass for authority and exclusive access, <strong>Queen Cleopatra</strong> on the Visitor (Scholar) pass for knowledge and curiosity, and an <strong>angel</strong> on the Volunteer pass for guidance and support. Consistent type, layout and barcodes keep them functional.</p>
+      </div>
+      <div class="vis ids">
+        <figure class="rv"><img decoding="async" width="638" height="900" src="assets/n_vip.webp" alt="VIP pass with a king on his throne" loading="lazy"><figcaption>VIP<span>The King</span></figcaption></figure>
+        <figure class="rv d1"><img decoding="async" width="638" height="900" src="assets/n_visitor.webp" alt="Visitor pass with Queen Cleopatra reading a glowing book" loading="lazy"><figcaption>Visitor<span>Cleopatra</span></figcaption></figure>
+        <figure class="rv d2"><img decoding="async" width="638" height="900" src="assets/n_volunteer.webp" alt="Volunteer pass with an angel statue in a beam of light" loading="lazy"><figcaption>Volunteer<span>The Angel</span></figcaption></figure>
+      </div>
+    </article>
+
+    <article class="collat">
+      <div class="row">
+        <div class="label rv"><b class="bt">The Passage</b><span>Tickets</span></div>
+        <p class="muted rv d1" style="max-width:70ch">The tickets take an <strong>arched shape</strong> that echoes the logo, symbolising gateways and the move from darkness to light. Visitor and VIP passes share one palette, type and layout, with dramatic imagery, warm light and barcodes creating a cohesive, intentional experience.</p>
+      </div>
+      <div class="vis tix">
+        <figure class="rv" style="margin:0"><img decoding="async" width="1654" height="591" src="assets/n_tix_vip.webp" alt="VIP pass ticket with a sphinx lit by rays of light" loading="lazy"><figcaption>VIP Pass</figcaption></figure>
+        <figure class="rv d1" style="margin:0"><img decoding="async" width="1654" height="591" src="assets/n_tix_visitor.webp" alt="Visitor pass ticket with the Colosseum under a fiery sky" loading="lazy"><figcaption>Visitor Pass</figcaption></figure>
+      </div>
+    </article>
+
+    <article class="collat" id="magazine">
+      <div class="row">
+        <div class="label rv"><b class="bt">Renascence</b><span>Magazine</span></div>
+        <p class="muted rv d1" style="max-width:70ch">The cover of <em>Renascence</em> shows a lone figure before a glowing doorway among fragmented walls and floating doors: choice, transition and rebirth. Inside, sixteen pages gather stories of how hope led people forward when everything else fell apart, presenting it not as a fragile idea but as an enduring light. <strong>Turn the pages below.</strong></p>
+      </div>
+      <div class="flip rv d1">
+        <div class="book closed-front" id="book" aria-label="Renascence magazine flipbook" role="region"></div>
+        <div class="flip-ui">
+          <button id="prev" aria-label="Previous page">←</button>
+          <span class="count" id="count">Cover</span>
+          <button id="next" aria-label="Next page">→</button>
+        </div>
+        <p class="hint">Click a page or use the arrow keys</p>
+      </div>
+    </article>
+
+    <article class="collat">
+      <div class="row">
+        <div class="label rv"><b class="bt">In the World</b><span>Mockups</span></div>
+        <p class="muted rv d1" style="max-width:70ch">The identity in the hand and in the light: passes on lanyards, tickets fanned in window-grid shadows, the poster and magazine out in the world.</p>
+      </div>
+      <div class="vis mocks">
+        <img decoding="async" class="rv" width="1400" height="872" src="assets/bm1.webp" alt="Mockups: poster held in hand, ID passes on lanyards, magazine read by a window" loading="lazy">
+        <img decoding="async" class="rv" width="1400" height="597" src="assets/bm2.webp" alt="Mockups: magazine held at someone's side, poster displayed" loading="lazy">
+        <img decoding="async" class="rv" width="1400" height="883" src="assets/bm3.webp" alt="Mockups: VIP pass on a lanyard, tickets fanned out, magazine spread, volunteer pass" loading="lazy">
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- =================== 06 LEARNINGS =================== -->
+<section class="sec" id="learn">
+  <div class="wrap">
+    <div class="row">
+      <div class="label rv"><span class="no">06</span><b class="bt">What Endures</b><span>Learnings</span></div>
+      <h2 class="sec-title rv d1">What the ruins taught me.</h2>
+    </div>
+    <ol class="ruled mt-m">
+      <li class="rv"><span class="k">i</span><h3>A symbol can hold a story</h3><p>Designing the arch showed me how much meaning one mark can carry when every detail, from the cracks to the base, is intentional.</p></li>
+      <li class="rv"><span class="k">ii</span><h3>Consistency makes it real</h3><p>One palette, one type pairing and one arched silhouette across very different formats turned separate pieces into a single exhibition.</p></li>
+      <li class="rv"><span class="k">iii</span><h3>Function and feeling coexist</h3><p>Passes and tickets had to work, with barcodes, QR codes and clear roles, without losing their emotional pull.</p></li>
+      <li class="rv"><span class="k">iv</span><h3>Contrast carries emotion</h3><p>Placing light against deep shadow taught me how composition and lighting can guide the eye and turn despair into optimism.</p></li>
+    </ol>
+  </div>
+  <div class="close">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="shade"></div>
+    <div class="in rv"><svg viewBox="0 -6 1902 2130" aria-hidden="true"><use href="#arch"/></svg><p>From what endures, new light always emerges.</p></div>
+  </div>
+</section>
+</main>
+
+<footer id="foot">
+  <div class="wrap">
+    <div class="frow">
+      <div>
+        <p class="daxx">DAXX</p>
+        <p class="small">Got a strange little idea? Let's make it real. &nbsp;<a href="mailto:dakshatashyam.design@gmail.com">dakshatashyam.design@gmail.com ↗</a></p>
+      </div>
+      <a class="next" href="../#work">Back to all work →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(id){ return document.getElementById(id) };
+
+  /* ---------- one frame scheduler for everything scroll / pointer driven ---------- */
+  var tasks=[], queued=false;
+  function tick(){ queued=false; var y=scrollY, vh=innerHeight, again=false; for (var t=0;t<tasks.length;t++){ if (tasks[t](y,vh)) again=true; } if (again) kick(); }
+  function kick(){ if(!queued){ queued=true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', kick, {passive:true});
+  var geo={}; function measure(){ var y=scrollY; ['hero','process','scene1','learn'].forEach(function(id){ var el=$(id); var r=el.getBoundingClientRect(); geo[id]={top:r.top+y, h:r.height}; }); var c=document.querySelector('.close').getBoundingClientRect(); geo.close={top:c.top+y,h:c.height}; chapterTops(); kick(); }
+
+  /* ---------- quick, smooth in-page jumps (skip link + chapter bar) ---------- */
+  var jumping=null;
+  function jumpTo(el){
+    var off=(el.id==='process'?20:120), start=scrollY;
+    function target(){ return Math.max(0, el.getBoundingClientRect().top+scrollY-off); }
+    var d=target()-start;
+    if (reduce || Math.abs(d)<2){ scrollTo(0,target()); return; }
+    var dur=Math.min(1100, 420+Math.abs(d)*0.12), t0=performance.now();
+    if (jumping) cancelAnimationFrame(jumping);
+    (function step(now){ var p=Math.min(1,(now-t0)/dur), e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2, end=target(); scrollTo(0,start+(end-start)*e);
+      jumping = p<1 ? requestAnimationFrame(step) : (Math.abs(target()-scrollY)>2 ? (scrollTo(0,target()), null) : null); })(t0);
+  }
+  ['wheel','touchstart','keydown'].forEach(function(ev){ addEventListener(ev,function(){ if(jumping){ cancelAnimationFrame(jumping); jumping=null; } },{passive:true}); });
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ var id=a.getAttribute('href'); if(id.length<2) return; a.addEventListener('click',function(e){ var t=document.querySelector(id); if(!t) return; e.preventDefault(); jumpTo(t); history.replaceState(null,'',id); }); });
+
+  /* ---------- chapter bar: shows from Rebuilding to the end, highlights the current part ---------- */
+  var bar=$('chapters'), links=[].slice.call(bar.querySelectorAll('a')), last=null, tops=[];
+  function chapterTops(){ var y=scrollY; tops=links.map(function(a){ return document.querySelector(a.getAttribute('href')).getBoundingClientRect().top+y; }); }
+  tasks.push(function(y,vh){
+    bar.classList.toggle('on', y+140 >= geo.process.top);
+    var cur=-1, line=y+vh*0.35; for (var i=0;i<tops.length;i++) if (tops[i] <= line) cur=i;
+    if (cur!==last){ links.forEach(function(a,i){ a.classList.toggle('active', i===cur); if(i===cur) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+      if (cur>=0){ var a=links[cur], ol=a.parentNode.parentNode; ol.scrollTo({left:a.offsetLeft-ol.clientWidth/2+a.offsetWidth/2, behavior:'smooth'}); }
+      last=cur; }
+  });
+
+  /* ---------- hero: layered poster, walk through the door ---------- */
+  var hshade=document.querySelector('#hero .shade'), hleaks=document.querySelector('#hero .leaks');
+  var world=$('world'), lock=$('hlock'), meta=$('hmeta'), hend=$('hend'), stage=$('hero').querySelector('.stage');
+  var L={back:world.querySelector('.back'), glow:world.querySelector('.glow'), flick:world.querySelector('.flick'), door:world.querySelector('.door'), smoke:world.querySelector('.smoke')};
+  var IW=1900, IH=1630, mx=0, my=0, tx=0, ty=0, heroOn=true, lastSig='';
+  function layoutWorld(){
+    var W=innerWidth, H=stage.clientHeight, sc=Math.max(W/IW, H/IH), py = W>760 ? 0.22 : 0.78;
+    world.style.width=IW*sc+'px'; world.style.height=IH*sc+'px';
+    world.style.left=(W-IW*sc)*0.5+'px'; world.style.top=(H-IH*sc)*py+'px';
+    stage.style.setProperty('--bx', ((W-IW*sc)*0.5 + 975*sc)+'px'); stage.style.setProperty('--by', ((H-IH*sc)*py + 640*sc)+'px');
+  }
+  function set(el,depth,scale,op){ el.style.transform='translate3d('+(tx*depth).toFixed(2)+'px,'+(ty*depth).toFixed(2)+'px,0) scale('+scale.toFixed(4)+')'; if(op!==undefined) el.style.opacity=op.toFixed(3); }
+  /* canvas renderer: every frame is drawn straight from the full-resolution sources, so the zoom stays sharp and costs the same each frame */
+  var cv=$('hcv'), cx=cv.getContext('2d',{alpha:false}), dpr=1, CW=0, CH=0, srcs=[L.back,L.door,L.smoke], ready=false;
+  function sizeCanvas(){ dpr=Math.min(window.devicePixelRatio||1, 2); CW=innerWidth; CH=stage.clientHeight; cv.width=Math.round(CW*dpr); cv.height=Math.round(CH*dpr); lastSig=''; }
+  Promise.all(srcs.map(function(im){ return im.decode ? im.decode().catch(function(){}) : Promise.resolve(); })).then(function(){
+    if (srcs.every(function(im){ return im.complete && im.naturalWidth; })){ ready=true; sizeCanvas(); lastSig=''; kick(); requestAnimationFrame(function(){ stage.classList.add('cv-on'); }); }
+  });
+  function drawHero(e, hp){
+    var sc=Math.max(CW/IW, CH/IH), py=CW>760?0.22:0.78, wx=(CW-IW*sc)*0.5, wy=(CH-IH*sc)*py, ox=wx+975*sc, oy=wy+600*sc;
+    cx.setTransform(dpr,0,0,dpr,0,0); cx.globalAlpha=1; cx.fillStyle='#000'; cx.fillRect(0,0,CW,CH);
+    cx.imageSmoothingEnabled=true; cx.imageSmoothingQuality='high';
+    function img(im, rx,ry,rw,rh, s, d, a){ if(a<=0) return; cx.globalAlpha=a; cx.drawImage(im, ox+(wx+rx*sc-ox)*s+tx*d, oy+(wy+ry*sc-oy)*s+ty*d, rw*sc*s, rh*sc*s); }
+    img(L.back, 0,0,IW,IH, Math.pow(1.8,e), -8, 1);
+    // warm glow behind the doorway
+    var gs=Math.pow(5,e), gx=ox+(wx+975*sc-ox)*gs+tx*-14, gy=oy+(wy+652*sc-oy)*gs+ty*-14, rx=171*sc*gs, ry=326*sc*gs;
+    cx.save(); cx.globalAlpha=0.6+e*0.4; cx.translate(gx,gy); cx.scale(rx/ry,1);
+    var g=cx.createRadialGradient(0,0,0,0,0,ry); g.addColorStop(0,'rgba(255,200,90,.42)'); g.addColorStop(.45,'rgba(255,140,40,.12)'); g.addColorStop(.75,'rgba(255,140,40,0)');
+    cx.fillStyle=g; cx.fillRect(-ry,-ry,ry*2,ry*2); cx.restore();
+    img(L.door, 745,45,470,910, Math.pow(6,e), -18, 1);
+    img(L.smoke, 0,0,IW,IH, Math.pow(4,e), -42, Math.max(0,1-e*1.5));
+    var vmax=Math.max(CW,CH), bx=ox+tx*-18, by=wy+640*sc+ty*-18;
+    // warm light that takes over before the photo's pixels would show
+    var bl=Math.min(1,Math.max(0,(hp-0.42)/0.36)); bl=bl*bl*(3-2*bl);
+    if (bl>0){ var br=0.3*vmax*(0.62+bl*2.75); var bg=cx.createRadialGradient(bx,by,0,bx,by,br);
+      bg.addColorStop(0,'#fff8e6'); bg.addColorStop(.09,'#ffe6a8'); bg.addColorStop(.2,'#ffc45a'); bg.addColorStop(.34,'#f08a32'); bg.addColorStop(.5,'rgba(209,90,36,.45)'); bg.addColorStop(.7,'rgba(120,30,20,0)'); bg.addColorStop(1,'rgba(120,30,20,0)');
+      cx.globalAlpha=bl; cx.fillStyle=bg; cx.fillRect(0,0,CW,CH); }
+    // the light closes into a point (iris)
+    var ic=Math.min(1,Math.max(0,(hp-0.76)/0.18)); ic=ic*ic*(3-2*ic);
+    if (ic>0){ var ir=0.0849*vmax*16*Math.pow(0.15,ic); var ig=cx.createRadialGradient(bx,by,0,bx,by,ir);
+      ig.addColorStop(0,'rgba(0,0,0,0)'); ig.addColorStop(1/3,'rgba(0,0,0,0)'); ig.addColorStop(2/3,'rgba(0,0,0,.7)'); ig.addColorStop(1,'#000');
+      cx.globalAlpha=1; cx.fillStyle=ig; cx.fillRect(0,0,CW,CH); }
+    cx.globalAlpha=1;
+  }
+  if (!reduce) tasks.push(function(y,vh){
+    if (!heroOn) return false;
+    var hp=Math.min(1,Math.max(0,y/(geo.hero.h-vh)));
+    tx+=(mx-tx)*0.08; ty+=(my-ty)*0.08;
+    var moving = Math.abs(mx-tx)>0.002 || Math.abs(my-ty)>0.002;
+    var sig=hp.toFixed(4)+'|'+tx.toFixed(3)+'|'+ty.toFixed(3); if (sig===lastSig) return moving; lastSig=sig;
+    var e=hp*hp*(3-2*hp);
+    if (ready) drawHero(e, hp); else { set(L.back, -8, Math.pow(1.8, e)); set(L.glow, -14, Math.pow(5, e), 0.6+e*0.4); set(L.door, -18, Math.pow(6, e)); set(L.smoke, -42, Math.pow(4, e), Math.max(0, 1-e*1.5)); }
+    var fadeOv=Math.min(1,Math.max(0,(hp-0.4)/0.25)); hshade.style.opacity=(1-fadeOv).toFixed(3); hleaks.style.opacity=(1-Math.min(1,Math.max(0,(hp-0.55)/0.2))).toFixed(3);
+    set(L.flick, -16, 1); L.flick.style.visibility = e>0.12 ? 'hidden' : 'visible';
+    var t=Math.min(1,hp/0.28);
+    lock.style.opacity=(1-t).toFixed(3); lock.style.transform=(innerWidth>760?'':'translate(-50%,-50%) ')+'translate3d(0,'+(-t*60).toFixed(1)+'px,0)';
+    meta.style.opacity=(1-t).toFixed(3); meta.style.visibility = t>=1 ? 'hidden' : 'visible';
+    hend.style.opacity=Math.max(0,(hp-0.9)/0.1).toFixed(3);
+    return moving;
+  });
+  if (!reduce && matchMedia('(pointer:fine)').matches) addEventListener('pointermove',function(e){ if(!heroOn) return; mx=(e.clientX/innerWidth-.5)*2; my=(e.clientY/innerHeight-.5)*2; kick(); },{passive:true});
+  new IntersectionObserver(function(es){ heroOn=es[0].isIntersecting; if(heroOn) kick(); }).observe(stage);
+
+  /* ---------- pause decorative animation while it is off screen ---------- */
+  var defs=document.querySelector('svg[aria-hidden] defs').parentNode, archVis=new Set();
+  var liveIO=new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('live', e.isIntersecting);
+    if (e.target.dataset.arch){ if(e.isIntersecting) archVis.add(e.target); else archVis.delete(e.target); } });
+    if (defs.pauseAnimations){ if (archVis.size) defs.unpauseAnimations(); else defs.pauseAnimations(); } }, {rootMargin:'100px 0px'});
+  document.querySelectorAll('.sec, .scene, #hero .stage, .close, #overview').forEach(function(el){ liveIO.observe(el); });
+  ['#hero .stage', '.lockup', '.close'].forEach(function(q){ var el=document.querySelector(q); if(el){ el.dataset.arch='1'; liveIO.observe(el); } });
+
+  /* palette arches: stepped tints, as in the identity guide */
+  document.querySelectorAll('.sw').forEach(function(sw){
+    var c = sw.dataset.c;
+    for (var i=0;i<8;i++){ var el=document.createElement('i'); el.style.background='color-mix(in srgb, '+c+' '+(100-i*9)+'%, #000)'; sw.appendChild(el); }
+  });
+
+  /* reveals */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -10% 0px', threshold:.06});
+  document.querySelectorAll('.rv, #palette').forEach(function(el){ io.observe(el) });
+
+  /* ---------- closing image drift ---------- */
+  var cb=document.querySelector('.close .bg');
+  if (!reduce) tasks.push(function(y,vh){ var g=geo.close, p=(y+vh-g.top)/(vh+g.h); if (p>0 && p<1) cb.style.transform='translate3d(0,'+((p-.5)*-6).toFixed(2)+'%,0) scale(1.06)'; });
+
+  /* ---------- interlude: the arch opens onto the poster world (transform only) ---------- */
+  var smask=$('smask'), simg=$('simg');
+  if (!reduce) tasks.push(function(y,vh){
+    var g=geo.scene1, top=g.top-y; if (top>vh || top+g.h<0) return;
+    var p=Math.min(1, Math.max(0, (vh - top) / (vh + g.h*0.55))), e=p*p*(3-2*p);
+    var sx=0.4+0.6*e, sy=0.82+0.18*e, z=1.12-0.12*e;
+    smask.style.transform='scale('+sx.toFixed(4)+','+sy.toFixed(4)+')';
+    simg.style.transform='scale('+(z/sx).toFixed(4)+','+(z/sy).toFixed(4)+')';
+  });
+
+  addEventListener('resize', function(){ layoutWorld(); if(ready) sizeCanvas(); measure(); });
+  layoutWorld(); measure();
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ measure(); }).observe(document.body);
+  addEventListener('load', measure);
+
+  /* ---------- Renascence flipbook ---------- */
+  var pages = ["assets/mag01.webp","assets/mag02.webp","assets/mag03.webp","assets/mag04.webp","assets/mag05.webp","assets/mag06.webp","assets/mag07.webp","assets/mag08.webp","assets/mag09.webp","assets/mag10.webp","assets/mag11.webp","assets/mag12.webp","assets/mag13.webp","assets/mag14.webp","assets/mag15.webp","assets/mag16.webp"];
+  var book = $('book'), prev = $('prev'), next = $('next'), count = $('count');
+  var leaves = [], n = 0, single = false, sp = 0, pagesLoaded = false;
+  var N = pages.length / 2;
+  for (var k=0; k<N; k++){
+    var leaf = document.createElement('div'); leaf.className = 'leaf';
+    leaf.innerHTML = '<div class="face front" data-p="'+(2*k)+'"></div><div class="face back" data-p="'+(2*k+1)+'"></div>';
+    (function(k){ leaf.addEventListener('click', function(){ if (single) return; if (k < n) go(n-1); else go(n+1); }); })(k);
+    book.appendChild(leaf); leaves.push(leaf);
+  }
+  var spEl = document.createElement('div'); spEl.className = 'sp'; book.appendChild(spEl);
+  function z(){ leaves.forEach(function(l,i){ l.style.zIndex = i < n ? (i+1) : (N - i + N); l.style.visibility = (i===n-1 || i===n) ? 'visible' : 'hidden'; }); }
+  function label(){
+    if (single) return (sp===0 ? 'Cover' : sp===pages.length-1 ? 'Back cover' : 'Page '+(sp+1)) + ' / ' + pages.length;
+    if (n===0) return 'Cover';
+    if (n===N) return 'Back cover';
+    return 'Pages ' + (2*n) + '–' + (2*n+1) + ' / ' + pages.length;
+  }
+  function render(){
+    book.classList.toggle('closed-front', !single && n===0);
+    book.classList.toggle('closed-back', !single && n===N);
+    if (single){
+      if (pagesLoaded) spEl.style.backgroundImage = 'url('+pages[sp]+')';
+      prev.disabled = sp===0; next.disabled = sp===pages.length-1;
+    } else {
+      leaves.forEach(function(l,i){ l.classList.toggle('turned', i < n); });
+      prev.disabled = n===0; next.disabled = n===N;
+    }
+    count.textContent = label();
+  }
+  function go(t){
+    if (single){ sp = Math.max(0, Math.min(pages.length-1, t)); render(); return; }
+    t = Math.max(0, Math.min(N, t)); if (t===n) return;
+    var lo=Math.min(n,t)-1, hi=Math.max(n,t); leaves.forEach(function(l,i){ if(i>=lo && i<=hi) l.style.visibility='visible'; });
+    var moving = t > n ? leaves[n] : leaves[t];
+    moving.style.zIndex = 100;
+    n = t; render();
+    clearTimeout(window.__zt); window.__zt = setTimeout(z, 1000);
+  }
+  prev.addEventListener('click', function(){ go(single ? sp-1 : n-1) });
+  next.addEventListener('click', function(){ go(single ? sp+1 : n+1) });
+  addEventListener('keydown', function(e){
+    var r = book.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+    if (e.key==='ArrowRight') go(single ? sp+1 : n+1);
+    if (e.key==='ArrowLeft') go(single ? sp-1 : n-1);
+  });
+  var sx = null;
+  book.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX }, {passive:true});
+  book.addEventListener('touchend', function(e){ if (sx===null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go((single ? sp : n) + (dx < 0 ? 1 : -1)); sx = null; });
+  spEl.addEventListener('click', function(e){ var r = book.getBoundingClientRect(); go(sp + (e.clientX - r.left > r.width/2 ? 1 : -1)); });
+  function mode(){
+    var s = innerWidth < 760;
+    if (s !== single){ single = s; book.classList.toggle('single', s); if (s) sp = n===0 ? 0 : Math.min(pages.length-1, 2*n-1); else n = Math.round((sp+1)/2); z(); }
+    render();
+  }
+  addEventListener('resize', mode); z(); mode();
+  new IntersectionObserver(function(es,o){ if(!es[0].isIntersecting) return; o.disconnect();
+    book.querySelectorAll('.face').forEach(function(f){ f.style.backgroundImage='url('+pages[+f.dataset.p]+')'; });
+    pagesLoaded = true; render();
+  }, {rootMargin:'900px 0px'}).observe(book);
+})();
+</script>
+<script src="../assets/js/site-nav.v1.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+/* shared by every page: the site fonts */
+@font-face{font-family:"Flowers Kingdom"; src:url(../fonts/flowers-kingdom.ea959573.woff2) format("woff2"); font-weight:400; font-style:normal; font-display:swap;
+  ascent-override:83.79%; descent-override:20.41%; line-gap-override:0%}
+@font-face{font-family:"DM Sans"; src:url(../fonts/dm-sans.3a922bc7.woff2) format("woff2"); font-weight:100 1000; font-style:normal; font-display:swap}
+@font-face{font-family:"Archivo"; src:url(../fonts/archivo.be687844.woff2) format("woff2"); font-weight:100 900; font-stretch:62% 125%; font-display:swap}

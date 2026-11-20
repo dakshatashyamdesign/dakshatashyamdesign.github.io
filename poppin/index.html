@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en" data-page="project">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Popp'in Case Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/amina-regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/logo_hero.webp" as="image" fetchpriority="high">
+<style>
+@font-face{font-family:"DM Sans";src:url(../assets/fonts/dm-sans.3a922bc7.woff2) format("woff2");font-weight:100 1000;font-display:swap}
+@font-face{font-family:"Archivo";src:url(../assets/fonts/archivo.be687844.woff2) format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Bricolage Grotesque";src:url(fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:"Amina";src:url(fonts/amina-regular.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Amina";src:url(fonts/amina-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Amina";src:url(fonts/amina-bold.woff2) format("woff2");font-weight:600 800;font-style:normal;font-display:swap}
+
+/* Layout: DAXX portfolio shell (cream paper, fixed nav, scroll ruler) carrying Popp'in's navy/yolk/pink/teal in full-bleed bands.
+   Site chrome keeps DAXX fonts; all case-study content uses Popp'in's type: Bricolage Grotesque Condensed Extra Bold + Amina. */
+:root{
+  --cream:#F3EADB; --paper:#FFF8EE; --ink:#1E1012; --muted:#6b5a55;
+  --navy:#2F2E82; --navy-deep:#1d1c5c; --yolk:#E5D227; --pink:#F46BA6; --teal:#28A6A9; --chili:#E2352F;
+  --line:rgba(30,16,18,.14);
+  --site:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --site-label:"Archivo","Arial Narrow",Arial,sans-serif;
+  --head:"Bricolage Grotesque","DM Sans","Arial Narrow",sans-serif;
+  --body:"Amina","DM Sans","Helvetica Neue",Arial,sans-serif;
+  --gut:max(20px,env(safe-area-inset-left,0px));
+  --gutR:max(20px,env(safe-area-inset-right,0px));
+  --wrap:1240px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--navy)}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:var(--gut);padding-right:var(--gutR)}
+section{position:relative}
+
+/* Popp'in heading face: Bricolage Grotesque Condensed Extra Bold */
+.h-xl,.h-l,.h-m,.eyebrow b,.pill,.cap,.eyebrow,.nots span,.facts strong,.sticker,.belief h4,.how .num,.how h4,.grade b,.origami-note h4,.price-card b,.insights b,.persona .age,.persona h5,.cities b,.voice li,.mood b,.tag,.logo-why h5,.sw b,.ts .big,.ts .glyph,.poppy h3,.out-head h3,.week .n,.week h4,.handnote q,.pack-row h4,.why h5,.lessons li::before,.lessons h4,.steps-nav a,.sub-h h4,.quote{font-family:var(--head);font-stretch:75%;font-weight:800;letter-spacing:0}
+
+/* ---------- NAV (DAXX, site fonts) ---------- */
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px var(--gutR) 18px var(--gut);color:var(--cream);transition:color .35s;font-family:var(--site)}
+nav.dark{color:var(--ink)}
+nav .mark{text-decoration:none;font-weight:900;font-stretch:96%;font-size:clamp(20px,1.75vw,28px);line-height:1}
+nav ul{list-style:none;display:flex;gap:clamp(14px,2.4vw,32px);margin:0;padding:0}
+nav ul a{text-decoration:none;font-size:.92rem}
+nav ul a:hover{text-decoration:underline;text-underline-offset:4px}
+@media (max-width:560px){nav ul li:not(:first-child){display:none}}
+.ruler{position:fixed;left:0;right:0;bottom:0;z-index:50;height:30px;display:flex;align-items:center;gap:12px;padding:0 var(--gutR) env(safe-area-inset-bottom,0px) var(--gut);font-family:var(--site-label);font-weight:700;font-size:10px;letter-spacing:.14em;color:var(--cream);pointer-events:none;transition:color .35s}
+.ruler.dark{color:var(--ink)}
+.ruler .ticks{position:relative;flex:1;height:8px;background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 9px);opacity:.75}
+.ruler .ticks::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 90px);transform:scaleY(1.7)}
+.ruler .dot{position:absolute;top:50%;left:-4.5px;margin-top:-4.5px;width:9px;height:9px;border-radius:50%;background:var(--yolk);will-change:transform}
+.ruler.dark .dot{background:var(--pink)}
+
+/* ---------- TYPE ---------- */
+.h-xl,.h-l,.h-m{margin:0;line-height:.9;text-wrap:balance;text-transform:uppercase}
+.h-xl{font-size:clamp(50px,7.4vw,116px)}
+.h-l{font-size:clamp(42px,5.6vw,88px)}
+.h-m{font-size:clamp(30px,3.2vw,48px);line-height:.95}
+.acc-pink{color:var(--pink)} .acc-yolk{color:var(--yolk)} .acc-teal{color:var(--teal)} .acc-chili{color:var(--chili)}
+.eyebrow{text-transform:uppercase;font-weight:700;letter-spacing:.08em;font-size:.95rem;display:flex;align-items:center;gap:10px}
+.eyebrow b{font-size:1.05rem;padding:3px 12px 2px;border-radius:99px;background:var(--pink);color:var(--paper);letter-spacing:0}
+.lede{font-size:clamp(18px,1.4vw,20px);line-height:1.55;max-width:60ch}
+p{margin:0;max-width:64ch}
+.small{font-size:.9rem}
+.cap{font-weight:700;font-size:.86rem;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.pill{display:inline-block;padding:6px 18px 5px;border-radius:99px;background:var(--pink);color:var(--paper);font-size:clamp(16px,1.4vw,21px)}
+
+/* ---------- HERO ---------- */
+.hero{background:radial-gradient(120% 80% at 50% 0%,#3a39a0 0%,var(--navy) 45%,var(--navy-deep) 100%);color:var(--cream);min-height:min(100svh,940px);overflow:hidden;display:grid;grid-template-rows:1fr auto;padding-top:calc(76px + env(safe-area-inset-top,0px))}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background:url(img/grain.png)}
+.hero-stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding-left:var(--gut);padding-right:var(--gutR);padding-block:20px 40px;z-index:2}
+.hero .kicker{font-size:clamp(15px,1.4vw,20px);opacity:.92}
+.hero .lockup img.logo{width:110%;max-width:none;margin:-5%;margin-bottom:-5%}
+@keyframes pop{0%{transform:scale(.6) rotate(-4deg);opacity:0}60%{opacity:1}100%{transform:none}}
+.hero .sub{max-width:52ch;opacity:.9;font-size:clamp(15px,1.2vw,18px)}
+.hero .mascot{position:absolute;right:max(2vw,var(--gutR));bottom:-10px;width:clamp(150px,19vw,290px);z-index:3;animation:bob 5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(1.5deg)}}
+.kernel{position:absolute;z-index:1;pointer-events:none;will-change:transform;backface-visibility:hidden}
+.k1{width:clamp(110px,15vw,230px);left:-2%;top:16%}
+.k2{width:clamp(70px,8vw,130px);left:14%;bottom:12%}
+.k3{width:clamp(80px,10vw,160px);right:8%;top:12%}
+.k4{width:clamp(50px,5vw,80px);left:30%;top:9%;opacity:.8}
+.k5{width:clamp(90px,11vw,170px);right:30%;top:4%;opacity:.85}
+.k6{width:clamp(60px,6vw,96px);left:24%;top:58%;opacity:.95}
+.hero-meta{position:relative;z-index:4;border-top:1px solid rgba(243,234,219,.22);display:grid;grid-template-columns:repeat(2,minmax(0,max-content));column-gap:clamp(40px,8vw,120px);row-gap:20px;padding-block:22px 54px;padding-left:var(--gut);padding-right:calc(var(--gutR) + clamp(150px,19vw,290px))}
+.hero-meta div{min-width:0}
+.hero-meta .cap{color:var(--yolk);display:block;margin-bottom:4px}
+.hero-meta span{font-size:.92rem;line-height:1.4;display:block}
+@media (max-width:900px){.hero{grid-template-rows:auto auto auto}.hero-meta{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;padding-right:var(--gutR)}.hero .mascot{position:relative;right:auto;bottom:auto;justify-self:center;width:150px;margin:-10px 0 -4px}.k2,.k5,.k6{display:none}}
+
+.arc{display:block;width:100%;height:clamp(40px,7vw,110px)}
+
+/* ---------- GENERIC ---------- */
+.band{padding-block:clamp(72px,9vw,130px)}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,5vw,64px)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,64px);align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
+figure{margin:0}
+figcaption{margin-top:10px}
+.shot{border-radius:14px;overflow:hidden;background:#ddd2c0;cursor:zoom-in;position:relative}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.shot:hover img{transform:scale(1.025)}
+.shot.full img{height:auto;object-fit:contain}
+.rise.in{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(34px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ---------- 01 BRIEF ---------- */
+.brief-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(30px,5vw,80px);align-items:center}
+@media (max-width:860px){.brief-grid{grid-template-columns:minmax(0,1fr)}}
+.brief-copy{display:grid;gap:24px}
+.nots{display:flex;flex-wrap:wrap;gap:10px}
+.nots span{font-size:1.1rem;text-transform:uppercase;border:2px solid var(--ink);border-radius:99px;padding:6px 16px 5px;position:relative}
+.nots span::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:2px;background:var(--chili);transform:rotate(-4deg)}
+.pack-fig{position:relative}
+.pack-fig .shot{aspect-ratio:4/5;border-radius:200px 200px 18px 18px}
+.sticker{position:absolute;left:-18px;bottom:28px;background:var(--yolk);color:var(--navy);line-height:1;border-radius:50%;width:120px;height:120px;display:grid;place-content:center;text-align:center;transform:rotate(-12deg);box-shadow:0 10px 24px rgba(30,16,18,.18);font-size:16px}
+.sticker strong{font-size:42px;display:block}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1.5px solid var(--ink);margin-top:clamp(44px,6vw,72px)}
+.facts div{padding:22px 18px 0 0;min-width:0}
+.facts div+div{padding-left:18px;border-left:1px solid var(--line)}
+.facts strong{font-size:clamp(42px,4.8vw,68px);line-height:1;color:var(--navy);display:block;font-variant-numeric:tabular-nums}
+.facts span{font-size:.9rem;color:var(--muted);display:block;margin-top:6px;line-height:1.4}
+@media (max-width:700px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts div:nth-child(3){padding-left:0;border-left:0}}
+
+/* ---------- 02 ORIGIN ---------- */
+.origin{background:var(--navy);color:var(--cream);overflow:hidden}
+.origin .lede{color:rgba(243,234,219,.9)}
+.origin strong{color:var(--yolk);font-weight:600}
+.origin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center;margin-bottom:clamp(150px,16vw,230px)}
+.origin-copy{display:grid;gap:18px}
+@media (max-width:860px){.origin-grid{grid-template-columns:minmax(0,1fr)}}
+.belief{position:relative}
+.b1 .peeper{position:absolute;left:clamp(16px,3vw,40px);bottom:calc(100% - 22px);width:clamp(150px,16vw,230px);z-index:-1;pointer-events:none}
+.beliefs{position:relative;z-index:0}
+.belief{z-index:0}
+.quote{text-transform:uppercase;font-size:clamp(40px,5vw,80px);line-height:.92;color:var(--yolk);margin:0;max-width:14ch;text-wrap:balance}
+.quote-row img{width:clamp(180px,24vw,340px)}
+@media (max-width:700px){.quote-row{grid-template-columns:minmax(0,1fr)}.quote-row img{justify-self:end;width:200px}}
+.beliefs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.belief{border-radius:22px;padding:28px 26px 30px;display:grid;align-content:start;gap:10px;min-width:0}
+.belief h4{margin:0;font-size:clamp(26px,2.4vw,36px);line-height:1}
+.belief .cap{color:inherit;opacity:.7}
+.b1{background:var(--yolk);color:var(--navy)} .b2{background:var(--pink);color:#2a0f22}
+@media (max-width:640px){.beliefs{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- 03 TECH ---------- */
+.tech{background:var(--paper)}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--ink);border-radius:24px;overflow:hidden}
+.how > div{padding:26px 24px 28px;display:grid;gap:10px;align-content:start;min-width:0}
+.how > div+div{border-left:1.5px solid var(--ink)}
+.how .num{font-size:3.2rem;line-height:1;color:var(--teal)}
+.how h4{margin:0;font-size:1.6rem;line-height:1.05}
+.how p{font-size:.95rem}
+@media (max-width:860px){.how{grid-template-columns:minmax(0,1fr)}.how > div+div{border-left:0;border-top:1.5px solid var(--ink)}}
+.specs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,60px);margin-top:clamp(48px,6vw,80px);align-items:stretch}
+.specs > .grade-col{display:flex;flex-direction:column}
+@media (max-width:860px){.specs{grid-template-columns:minmax(0,1fr)}}
+.grade{display:grid;gap:6px;margin-top:14px;flex:1;grid-auto-rows:1fr}
+.grade div{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;align-items:center;padding:9px 14px;border-radius:10px;background:var(--cream);font-size:.9rem}
+.grade b{font-size:1.25rem;font-variant-numeric:tabular-nums}
+.grade div.pick{background:var(--navy);color:var(--cream)}
+.grade div.pick b{color:var(--yolk)}
+.price-card{background:var(--navy);color:var(--cream);border-radius:24px;padding:26px;display:grid;gap:16px;margin-top:26px}
+.price-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-bottom:1px solid rgba(243,234,219,.2);padding-bottom:12px}
+.price-card .row:last-child{border:0;padding:0}
+.price-card .row span{font-size:.92rem;opacity:.85}
+.price-card b{font-size:1.8rem;line-height:1;white-space:nowrap}
+.price-card .row.big b{font-size:3.6rem;color:var(--yolk)}
+.origami{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.6fr);gap:14px;margin-top:clamp(48px,6vw,80px);align-items:stretch}
+.origami .shot{aspect-ratio:3/4;background:#f6f3ee}
+.origami .shot img{object-fit:contain}
+.origami .ph{aspect-ratio:auto}
+.origami .ph img{object-fit:cover}
+@media (max-width:860px){.origami{grid-template-columns:repeat(2,minmax(0,1fr))}.origami .ph{grid-column:1/-1;aspect-ratio:4/5}}
+.origami-note{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin-top:14px}
+.origami-note h4{margin:0;font-size:1.6rem;line-height:1;text-transform:uppercase}
+
+/* ---------- 04 PROCESS ---------- */
+.steps-nav{position:sticky;top:calc(58px + env(safe-area-inset-top,0px));z-index:20;background:rgba(243,234,219,.97);border-block:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.steps-nav::-webkit-scrollbar{display:none}
+.steps-nav ol{list-style:none;margin:0 auto;max-width:var(--wrap);display:flex;gap:6px;padding:10px var(--gutR) 10px var(--gut);counter-reset:s}
+.steps-nav a{display:block;white-space:nowrap;text-decoration:none;font-size:1rem;padding:6px 14px 5px;border-radius:99px;counter-increment:s;text-transform:uppercase}
+.steps-nav a::before{content:counter(s,decimal-leading-zero) " ";opacity:.45}
+.steps-nav a.on{background:var(--ink);color:var(--cream)}
+.step{padding-block:clamp(60px,7vw,100px);border-bottom:1px solid var(--line);scroll-margin-top:120px}
+.step:last-child{border-bottom:0}
+.step-head{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,64px);align-items:end;margin-bottom:clamp(28px,4vw,44px)}
+@media (max-width:860px){.step-head{grid-template-columns:minmax(0,1fr)}}
+.step-head .cap{display:block;margin-bottom:10px}
+.insights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.insights div{background:var(--paper);border-radius:16px;padding:22px;font-size:.93rem;line-height:1.5;min-width:0}
+.insights b{display:block;font-size:2.1rem;color:var(--teal);line-height:1;margin-bottom:8px}
+@media (max-width:860px){.insights{grid-template-columns:minmax(0,1fr)}}
+.space{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.space div{border-radius:16px;padding:18px;background:var(--navy);color:var(--cream);font-size:.88rem;line-height:1.45;display:grid;gap:8px;align-content:start;min-width:0}
+.space .cap{color:var(--yolk)}
+@media (max-width:980px){.space{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.space{grid-template-columns:minmax(0,1fr)}}
+.persona{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);border-radius:28px;overflow:hidden;background:var(--paper)}
+.persona .id{background:var(--pink);color:#2a0f22;padding:30px 28px;display:grid;gap:16px;align-content:start}
+.persona .age{font-size:clamp(64px,7.4vw,104px);line-height:.85;color:var(--navy)}
+.persona .id h5{margin:0;font-size:1.6rem;color:var(--paper);text-transform:uppercase}
+.cities{display:grid;gap:10px;font-size:.9rem}
+.cities b{display:block;text-transform:uppercase;font-size:.95rem}
+.persona .psy{padding:30px 28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.persona h5{margin:0 0 4px;font-size:1.4rem}
+.persona .psy p{font-size:.93rem;line-height:1.5}
+@media (max-width:860px){.persona{grid-template-columns:minmax(0,1fr)}.persona .psy{grid-template-columns:minmax(0,1fr)}}
+.voice{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);gap:16px;margin-bottom:clamp(36px,5vw,60px)}
+.voice > div{border-radius:22px;padding:24px 26px;min-width:0}
+.voice .usp{background:var(--navy);color:var(--cream)}
+.voice .usp .cap{color:var(--yolk)}
+.voice .usp p{font-size:1.02rem;margin-top:8px}
+.voice .vt{border:1.5px solid var(--ink)}
+.voice ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.voice li{font-size:1.4rem;background:var(--yolk);color:var(--navy);border-radius:99px;padding:4px 16px 3px}
+.voice .vt.t li{background:var(--teal);color:#06252a}
+@media (max-width:860px){.voice{grid-template-columns:minmax(0,1fr)}}
+.mood{border-radius:24px;padding:clamp(14px,2vw,24px);display:grid;gap:14px}
+.mood + .mood{margin-top:16px}
+.mood.d1{background:#2b2a2e;color:var(--cream)}
+.mood.d2{background:var(--navy);color:var(--cream)}
+.mood header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.mood header b{font-size:1.7rem;text-transform:uppercase}
+.mood header p{font-size:.92rem;opacity:.8;flex:1 1 300px;max-width:58ch}
+.tag{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.85rem;padding:4px 12px 3px;border-radius:99px;border:1px solid currentColor}
+.tag.ok{background:var(--yolk);color:var(--navy);border-color:var(--yolk)}
+.mood .shot{background:transparent;border-radius:12px}
+.cbar{display:flex;height:clamp(22px,2.6vw,40px);border-radius:999px;overflow:hidden;border:1.5px solid rgba(243,234,219,.6)}
+.cbar i{flex:1}
+.logo-panel{background:var(--navy);border-radius:28px;padding:clamp(40px,7vw,100px) clamp(24px,5vw,80px);display:grid;justify-items:center;gap:22px;position:relative;overflow:hidden}
+
+.logo-panel .k{position:absolute;width:clamp(80px,12vw,180px);pointer-events:none}
+.logo-why{margin-top:30px}
+.logo-why h5{margin:0 0 6px;font-size:1.5rem;text-transform:uppercase}
+.logo-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.logo-grid img{width:100%;height:auto}
+@media (max-width:980px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.logo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sub-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin:clamp(44px,6vw,72px) 0 18px}
+.sub-h h4{margin:0;font-size:clamp(26px,2.6vw,38px);text-transform:uppercase;line-height:1}
+.sub-h p{font-size:.95rem;color:var(--muted);max-width:56ch}
+.swatches{display:grid;grid-template-columns:2.2fr 2.2fr 1fr 1fr 1fr 1fr 1fr;gap:10px}
+.sw{border-radius:22px;padding:18px;min-height:clamp(220px,24vw,340px);display:grid;align-content:end;gap:4px;font-size:.8rem;line-height:1.35;font-variant-numeric:tabular-nums;min-width:0}
+.sw b{font-size:1.4rem;line-height:1.05;margin-bottom:4px}
+.sw.tall{border-radius:999px 999px 22px 22px}
+.sw.round{border-radius:22px 22px 999px 999px}
+@media (max-width:860px){.swatches{grid-template-columns:repeat(2,minmax(0,1fr))}.sw{min-height:160px}.sw.tall,.sw.round{border-radius:22px}}
+.type-spec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch}
+.ts.ts2{background:var(--pink);color:#2a0f22}
+.ts2 .big,.ts2 .glyph{font-family:var(--body);font-stretch:normal;font-weight:400}
+.ts{border-radius:22px;padding:28px;min-width:0;overflow:hidden;background:var(--teal);color:var(--paper)}
+.ts .big{font-size:clamp(84px,10vw,150px);line-height:.85;margin:8px 0 14px}
+.ts .glyph{font-size:1.3rem;line-height:1.25;word-break:break-all}
+.ts .cap{color:inherit;opacity:.8}
+.type-spec .shot{background:var(--pink)}
+.type-spec .shot img{object-fit:contain}
+@media (max-width:760px){.type-spec{grid-template-columns:minmax(0,1fr)}}
+.poppy{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,60px);align-items:stretch}
+.poppy-copy{display:flex;flex-direction:column}
+.poppy .stage{background:radial-gradient(120% 90% at 50% 10%,#3a39a0 0%,var(--navy) 55%,var(--navy-deep) 100%);border-radius:28px;padding:clamp(24px,4vw,48px);display:grid;place-items:center}
+.poppy .stage img{width:100%;max-width:420px;height:auto}
+.poppy h3{margin:10px 0 18px;font-size:clamp(40px,4.6vw,72px);line-height:.9;text-transform:uppercase}
+.poppy .sk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px;flex:1;min-height:220px}
+.poppy .sk > *{min-width:0;min-height:0}
+.poppy .sk .shot{background:#fff;height:100%}
+@media (max-width:860px){.poppy{grid-template-columns:minmax(0,1fr)}.poppy .sk{flex:none}.poppy .sk .shot{height:auto;aspect-ratio:4/5}}
+
+/* ---------- 05 OUTCOME ---------- */
+.outcome{background:var(--navy);color:var(--cream)}
+.outcome .lede{color:rgba(243,234,219,.88)}
+.out-block{margin-top:clamp(64px,8vw,120px)}
+.out-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:24px;border-bottom:1px solid rgba(243,234,219,.2);padding-bottom:16px}
+.out-head h3{margin:0;font-size:clamp(38px,4.4vw,66px);line-height:.9;text-transform:uppercase}
+.out-head .cap{color:var(--yolk)}
+.outcome .shot{background:#24235f}
+.outcome .cap{color:rgba(243,234,219,.6)}
+.label-big{border-radius:18px;background:#14134a}
+.label-big img{object-fit:contain}
+.pack-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:16px;margin-top:16px}
+.pack-row > .shot{aspect-ratio:4/5}
+.pack-row .note{background:var(--yolk);color:var(--navy);border-radius:14px;padding:28px;display:grid;gap:16px}
+.pack-side{display:flex;flex-direction:column;gap:14px}
+.pack-row h4{margin:0;font-size:clamp(34px,3.4vw,52px);line-height:.92;text-transform:uppercase}
+@media (max-width:760px){.pack-row{grid-template-columns:minmax(0,1fr)}}
+.pack-sk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;flex:1;min-height:200px}
+.pack-sk > *{min-width:0;min-height:0}
+.pack-sk .shot{background:#f6f3ee;height:100%}
+.pack-sk .shot img,.poppy .sk .shot img{object-fit:cover!important;object-position:center}
+@media (max-width:760px){.pack-sk{flex:none}.pack-sk .shot{height:auto;aspect-ratio:3/4}}
+
+
+.weeks{display:grid;gap:clamp(48px,6vw,80px)}
+.week{display:grid;grid-template-columns:minmax(0,.34fr) minmax(0,1fr);gap:clamp(20px,4vw,56px)}
+.week .wk{position:sticky;top:120px;align-self:start;display:grid;gap:10px}
+.week .n{font-size:clamp(50px,5.4vw,82px);line-height:.85;color:var(--pink)}
+.week h4{margin:0;font-size:1.8rem;line-height:1;text-transform:uppercase}
+.week .wk p{font-size:.94rem;color:rgba(243,234,219,.85)}
+.week .imp{border-left:3px solid var(--yolk);padding-left:14px;font-size:.9rem}
+@media (max-width:860px){.week{grid-template-columns:minmax(0,1fr)}.week .wk{position:static}}
+.g-posters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.g-posters .shot{aspect-ratio:2.37/1}
+.g-mk{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:10px}
+.g-mk .shot{aspect-ratio:4/3}
+.g-mk .a,.g-mk .b{grid-column:span 3} .g-mk .c,.g-mk .d,.g-mk .e{grid-column:span 2}
+@media (max-width:760px){.g-posters{grid-template-columns:minmax(0,1fr)}.g-mk{grid-template-columns:repeat(2,minmax(0,1fr))}.g-mk > *{grid-column:auto!important}.g-mk .e{grid-column:1/-1!important}}
+.g-reveal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.g-reveal .shot{aspect-ratio:3/4}
+.handnote{margin-top:10px;background:var(--cream);color:var(--ink);border-radius:14px;padding:22px 24px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.handnote q{font-size:clamp(32px,3.4vw,50px);line-height:1;quotes:"\201C" "\201D";text-transform:uppercase}
+.handnote span{font-size:.9rem;color:var(--muted);max-width:38ch}
+.g-tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.g-tr .shot{aspect-ratio:4/5}
+@media (max-width:560px){.g-reveal,.g-tr{grid-template-columns:minmax(0,1fr)}}
+.why{margin-top:22px;background:var(--pink);color:#2a0f22;border-radius:22px;padding:26px 28px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:start}
+.why h5{margin:0;font-size:1.8rem;line-height:1;text-transform:uppercase}
+@media (max-width:640px){.why{grid-template-columns:minmax(0,1fr)}}
+.g-bb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.g-bb .shot{aspect-ratio:2.37/1}
+.g-bb .shot.ph{aspect-ratio:16/9}
+@media (max-width:640px){.g-bb{grid-template-columns:minmax(0,1fr)}}
+.strip{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(220px,26vw,330px);gap:12px;overflow-x:auto;padding-bottom:14px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--yolk) transparent;cursor:grab}
+.strip .shot{aspect-ratio:4/5;scroll-snap-align:start}
+.strip-ctrl{display:flex;gap:8px}
+.strip-ctrl button{width:42px;height:42px;border-radius:50%;border:1.5px solid currentColor;background:transparent;color:inherit;font-size:18px;cursor:pointer;display:grid;place-items:center}
+.strip-ctrl button:hover{background:var(--yolk);color:var(--navy);border-color:var(--yolk)}
+.strip-label{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:30px 0 12px;flex-wrap:wrap}
+.strip-label.first{margin-top:0}
+.mock-wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:10px}
+.mock-wide .shot{aspect-ratio:2.2/1;background:#1b1a55}
+.mock-wide .shot img{object-fit:contain}
+@media (max-width:640px){.mock-wide{grid-template-columns:minmax(0,1fr)}}
+.g-world{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.g-world .shot{aspect-ratio:4/5}
+.g-world .card{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;background:var(--teal)}
+.g-world .card img{object-fit:contain;padding:6%}
+@media (max-width:760px){.g-world{grid-template-columns:repeat(2,minmax(0,1fr))}.g-world .card{grid-column:1/-1;grid-row:auto;aspect-ratio:1}}
+
+/* ---------- 06 LEARNINGS ---------- */
+.learn{background:var(--cream);overflow:hidden}
+.lessons{list-style:none;margin:0;padding:0;counter-reset:l;border-top:1.5px solid var(--ink)}
+.lessons li{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1.3fr);gap:clamp(16px,3vw,40px);padding-block:clamp(24px,3vw,36px);border-bottom:1px solid var(--line);align-items:start;counter-increment:l}
+.lessons li::before{content:counter(l,decimal-leading-zero);font-size:2.8rem;line-height:.9;color:var(--pink)}
+.lessons h4{margin:0;font-size:clamp(28px,2.6vw,40px);line-height:.95;text-transform:uppercase}
+.lessons p{font-size:1rem;color:#3d2e2c}
+@media (max-width:860px){.lessons li{grid-template-columns:52px minmax(0,1fr)}.lessons li p{grid-column:2}.lessons li::before{font-size:2.1rem}}
+.learn .peek{position:absolute;right:-20px;bottom:-6px;width:clamp(150px,18vw,260px);pointer-events:none}
+
+footer{background:var(--ink);color:var(--cream);padding-block:clamp(70px,9vw,120px) 70px}
+footer .wrap{display:grid;gap:40px}
+.next{text-decoration:none;display:grid;gap:8px}
+.next .h-l{transition:color .3s}
+.next:hover .h-l{color:var(--yolk)}
+.credits{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:.88rem;opacity:.75;border-top:1px solid rgba(243,234,219,.2);padding-top:22px}
+
+.lb[hidden]{display:none!important}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(14,10,30,.92);display:grid;place-items:center;padding:calc(48px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(48px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img{max-width:min(1600px,100%);max-height:100%;object-fit:contain;border-radius:8px}
+.lb button{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:var(--yolk);color:var(--navy);font-size:22px;cursor:pointer}
+
+/* Logo + tagline lockup: pill sits left-aligned under the wordmark at ~42% of its width */
+.lockup{container-type:inline-size;display:flex;flex-direction:column;align-items:flex-start;gap:5.2cqw}
+.lockup img{width:100%;height:auto}
+.lockup .pill{width:42cqw;font-size:3.5cqw;padding:1.45cqw 0 1.25cqw;text-align:center;line-height:1.1;position:relative;overflow:hidden;background:var(--pink)}
+.lockup .pill::after{content:"";position:absolute;inset:0;opacity:.7;background:url(img/grain.png);pointer-events:none}
+.hero .lockup{width:min(78vw,900px);animation:pop 1.1s cubic-bezier(.2,1.6,.4,1) both}
+.logo-panel .lockup{width:min(100%,760px)}
+
+/* Hero quick-jump */
+.hero-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
+.jump{font-family:var(--head);font-stretch:75%;font-weight:800;text-transform:uppercase;font-size:clamp(15px,1.2vw,18px);letter-spacing:.02em;text-decoration:none;padding:11px 22px 10px;border-radius:99px;background:var(--yolk);color:var(--navy);display:inline-flex;gap:8px;align-items:center;transition:transform .25s,background .25s}
+.jump:hover{transform:translateY(-2px);background:#f2e04a}
+.jump span{display:inline-block;transition:transform .25s}
+.jump:hover span{transform:translateY(3px)}
+.jump.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1.5px rgba(243,234,219,.6)}
+.jump.ghost:hover{background:rgba(243,234,219,.12)}
+/* Final design sticky sub-nav */
+.out-nav{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:20;margin:0 0 clamp(40px,5vw,64px);background:rgba(29,28,92,.97);border:1px solid rgba(243,234,219,.18);border-radius:99px;overflow-x:auto;scrollbar-width:none}
+.out-nav::-webkit-scrollbar{display:none}
+.out-nav ol{list-style:none;margin:0;padding:6px;display:flex;gap:4px;counter-reset:o}
+.out-nav a{display:block;white-space:nowrap;text-decoration:none;font-family:var(--head);font-stretch:75%;font-weight:800;text-transform:uppercase;font-size:1rem;padding:8px 16px 7px;border-radius:99px;color:var(--cream);counter-increment:o;transition:background .25s,color .25s}
+.out-nav a::before{content:counter(o,decimal-leading-zero) " ";opacity:.5}
+.out-nav a:hover{background:rgba(243,234,219,.12)}
+.out-nav a.on{background:var(--yolk);color:var(--navy)}
+.out-block{scroll-margin-top:140px}
+.week .wk{top:150px}
+
+/* Floating shortcut to Final design: shows after the opening screen, hides once Final design is reached */
+.fab-jump{position:fixed;z-index:49;right:max(16px, calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(44px + env(safe-area-inset-bottom,0px));
+  font-family:var(--head);font-stretch:75%;font-weight:800;text-transform:uppercase;font-size:14px;letter-spacing:.03em;line-height:1;text-decoration:none;
+  display:inline-flex;align-items:center;gap:7px;padding:10px 15px 9px 16px;border-radius:99px;background:var(--yolk);color:var(--navy);
+  box-shadow:0 6px 18px rgba(29,28,92,.28);opacity:0;transform:translate3d(0,14px,0);pointer-events:none;transition:opacity .3s,transform .3s,background .2s}
+.fab-jump.show{opacity:1;transform:none;pointer-events:auto}
+.fab-jump:hover{background:#f2e04a}
+.fab-jump span{display:inline-block;transition:transform .25s}
+.fab-jump:hover span{transform:translateY(2px)}
+@media (max-width:560px){.fab-jump{font-size:12.5px;padding:9px 13px 8px 14px}}
+@media (prefers-reduced-motion:reduce){.fab-jump{transition:opacity .2s}}
+
+/* Footer: closing line + routes back into the portfolio */
+footer{position:relative;overflow:hidden}
+.foot-main{display:grid;gap:18px;justify-items:start;max-width:760px}
+.foot-lede{font-size:clamp(17px,1.35vw,19px);line-height:1.55;color:rgba(243,234,219,.82);max-width:52ch}
+.foot-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.foot-ctas .jump{font-size:clamp(16px,1.3vw,19px);padding:13px 24px 12px}
+.foot-ctas .jump:hover span{transform:translateX(3px)}
+.foot-ctas .jump.ghost:hover span{transform:translate(2px,-2px)}
+.totop{text-decoration:none}
+.totop:hover{color:var(--yolk)}
+</style>
+</head>
+<body>
+
+
+<nav id="nav" aria-label="Site">
+  <a class="mark" href="../" aria-label="DAXX, back to the homepage">DAXX</a>
+  <ul>
+    <li><a href="../#work">Work</a></li>
+    <li><a href="../#hero">Meet Me</a></li>
+    <li><a href="../#bloom">Off Clock</a></li>
+    <li><a href="../#foot">Contact</a></li>
+  </ul>
+</nav>
+<a class="fab-jump" id="fabJump" href="#outcome" tabindex="-1" aria-hidden="true">Final design <span aria-hidden="true">↓</span></a>
+<div class="ruler" id="ruler" aria-hidden="true"><span>COLD</span><div class="ticks"><i class="dot" id="dot"></i></div><span>POPPED</span></div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top" data-nav="light">
+  <img class="kernel k1" data-depth="0.6" src="img/pc1.webp" width="600" height="499" alt="">
+  <img class="kernel k2" data-depth="1.2" src="img/pc3b.webp" width="432" height="408" alt="">
+  <img class="kernel k3" data-depth="0.9" src="img/pc2.webp" width="500" height="507" alt="">
+  <img class="kernel k4" data-depth="1.6" src="img/pc4b.webp" width="416" height="347" alt="">
+  <img class="kernel k5" data-depth="1.4" src="img/pc5b.webp" width="444" height="450" alt="">
+  <img class="kernel k6" data-depth="0.4" src="img/pc6.webp" width="500" height="471" alt="">
+  <div class="hero-stage">
+    <h1 class="lockup" style="margin:0"><img class="logo" src="img/logo_hero.webp" width="1540" height="701" alt="Popp'in" fetchpriority="high"><span class="pill">Pop Into Comfort</span></h1>
+    <p class="sub">A self-warming popcorn pod that brings hot, fresh popcorn to the places a kitchen can't reach.</p>
+    <div class="hero-ctas">
+      <a class="jump" href="#outcome">Jump to final design <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <img class="mascot" src="img/mascot.webp" width="800" height="1409" alt="Poppy, the Popp'in mascot: a popcorn character in sunglasses holding a tub of popcorn">
+  <div class="hero-meta">
+    <div><span class="cap">Project</span><span>Brand identity, packaging &amp; launch campaign</span></div>
+    <div><span class="cap">Designer</span><span>S. Dakshata</span></div>
+  </div>
+</header>
+
+<!-- ============ 01 BRIEF ============ -->
+<section class="band" id="brief" data-nav="dark">
+  <div class="wrap">
+    <div class="brief-grid">
+      <div class="brief-copy rise">
+        <div class="eyebrow"><b>01</b> Project brief</div>
+        <h2 class="h-xl">Hot popcorn. <span class="acc-pink">Anywhere.</span> In seconds.</h2>
+        <p class="lede">Popp'in is a food-tech brand built around a self-warming, single-serve popcorn pod. It puts hot popcorn in people's hands wherever they are, so no one has to settle for a cold snack or go looking for an appliance. The brief: build the brand from scratch, from strategy and identity to packaging and an India-wide launch.</p>
+        <div class="nots" aria-label="What the pod does without"><span>Microwave</span><span>Appliance</span><span>Electricity</span></div>
+      </div>
+      <figure class="pack-fig rise">
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/pack.webp" width="1100" height="1362" alt="Popp'in self-warming pod with its red origami extension, styled on a cream table"></div>
+        <div class="sticker" aria-hidden="true"><strong>90</strong>seconds to hot</div>
+      </figure>
+    </div>
+    <div class="facts rise">
+      <div><strong>30 g</strong><span>Popcorn in every single-serve pod</span></div>
+      <div><strong>₹99</strong><span>Target retail price per pod</span></div>
+      <div><strong>0</strong><span>Appliances or power sources needed</span></div>
+      <div><strong>4 wks</strong><span>Mystery-to-reveal launch campaign</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 ORIGIN ============ -->
+<section class="band origin" id="origin" data-nav="light">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div class="eyebrow"><b>02</b> Where the idea came from</div>
+      <h2 class="h-l">Born on a <span class="acc-yolk">six-hour</span> train ride</h2>
+    </div>
+    <div class="origin-grid">
+      <div class="origin-copy">
+        <p class="lede rise">Hot popcorn is one of the world's most loved snacks, yet for 35 years getting it hot has depended on <strong>a microwave or oven, fixed at home</strong>.</p>
+        <p class="rise">On a long train journey, the canteen was too far and the station popcorn arrived stale and cold. Self-heating hand warmers and military rations proved the technology already existed, and research showed the ingredients, supply chains and demand were ready. <strong>No one had put them together.</strong></p>
+      </div>
+      <p class="quote rise">“Why is there no hot popcorn, right now?”</p>
+    </div>
+    <div class="beliefs">
+      <div class="belief b1 rise"><img loading="lazy" decoding="async" class="peeper" src="img/peek.webp" width="700" height="659" alt="Poppy peeping over the top of the Mission card"><span class="cap">Mission</span><h4>Close the gap between craving and having</h4><p>Bring freshly made hot popcorn to every moment and place that has none.</p></div>
+      <div class="belief b2 rise"><span class="cap">Vision</span><h4>Make warmth portable</h4><p>A hot, satisfying snack for anyone, anywhere, with no appliance, electricity or compromise.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 TECH ============ -->
+<section class="band tech" id="tech" data-nav="dark">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div class="eyebrow"><b>03</b> Technicalities</div>
+      <h2 class="h-l">How a pod <span class="acc-teal">warms itself</span></h2>
+    </div>
+    <div class="how rise">
+      <div><span class="num">01</span><h4>The heat</h4><p>An OEM heating patch of iron powder, salt, water, activated carbon and vermiculite oxidises to make heat with no flame or power. Temperature and duration are customisable.</p></div>
+      <div><span class="num">02</span><h4>The chamber</h4><p>A PET/Al/PE laminate chamber and foil layer keep the popcorn apart from the heat pack, inside a double-wall kraft sleeve.</p></div>
+      <div><span class="num">03</span><h4>The seal</h4><p>Popped at the factory, flash-cooled and nitrogen-sealed in a humidity-controlled room, so it stays fresh until it's warmed.</p></div>
+    </div>
+    <div class="specs">
+      <div class="rise">
+        <div class="cap" style="margin-bottom:10px">The kernel</div>
+        <h3 class="h-m">Yellow mushroom, pearl type</h3>
+        <p style="margin-top:14px">Argentine yellow mushroom popcorn (<em>Zea mays everta</em>) pops into large, round balls that hold coatings well and fill the pod. It needs at least <strong>400°F (205°C)</strong> to open fully.</p>
+        <div class="price-card">
+          <div class="row"><span>Cost of goods per pod</span><b>₹11–18</b></div>
+          <div class="row"><span>Fully loaded, with labour &amp; QC</span><b>₹14–23</b></div>
+          <div class="row big"><span>Retail target<br>30 g pod</span><b>₹99</b></div>
+        </div>
+      </div>
+      <div class="grade-col rise">
+        <div class="cap">Argentine expansion grade</div>
+        <div class="grade">
+          <div><b>38/40</b><span>Entry commercial grade</span></div>
+          <div><b>40/42</b><span>Standard commercial grade</span></div>
+          <div class="pick"><b>42/44</b><span>Good commercial grade · <strong>chosen for Popp'in</strong>: large, round, consistent balls with strong coating adhesion</span></div>
+          <div><b>44/46</b><span>Premium grade, highest expansion, highest price</span></div>
+          <div><b>44+</b><span>Ultra premium, used by gourmet brands</span></div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+
+<!-- ============ 04 PROCESS ============ -->
+<section id="process" data-nav="dark">
+  <div class="wrap band" style="padding-bottom:clamp(30px,4vw,50px)">
+    <div class="sec-head rise" style="margin-bottom:0">
+      <div class="eyebrow"><b>04</b> Process</div>
+      <h2 class="h-l">From research to <span class="acc-pink">Poppy</span></h2>
+    </div>
+  </div>
+  <div class="steps-nav" id="stepsNav">
+    <ol>
+      <li><a href="#s-research">Research</a></li>
+      <li><a href="#s-market">Market &amp; audience</a></li>
+      <li><a href="#s-dir">Voice &amp; direction</a></li>
+      <li><a href="#s-identity">Identity</a></li>
+      <li><a href="#s-mascot">Mascot</a></li>
+    </ol>
+  </div>
+  <div class="wrap">
+
+    <div class="step" id="s-research">
+      <div class="step-head rise">
+        <div><span class="cap">Step 01 · Literature study</span><h3 class="h-m">What 9 papers taught us</h3></div>
+        <p>Kernel science, heat-pack chemistry and packaging research made sure the brand's claims were real.</p>
+      </div>
+      <div class="insights">
+        <div class="rise"><b>14%</b>Ideal kernel moisture for maximum expansion and fewest unpopped kernels.</div>
+        <div class="rise"><b>400–460°F</b>Where moisture turns to steam and bursts the hull. Hot-air popping gives the best quality.</div>
+        <div class="rise"><b>Iron + air</b>Heat packs warm through iron oxidation, with no electricity or flame.</div>
+        <div class="rise"><b>Mushroom</b>Round, dense kernels carry coatings better than light butterfly popcorn.</div>
+        <div class="rise"><b>Multi-chamber</b>Self-heating packs keep food and chemicals safely apart.</div>
+        <div class="rise"><b>Safer snack</b>Popping can lower harmful toxins such as DON and fumonisins.</div>
+      </div>
+    </div>
+
+    <div class="step" id="s-market">
+      <div class="step-head rise">
+        <div><span class="cap">Step 02 · Competition &amp; audience</span><h3 class="h-m">An empty space, and who fills it</h3></div>
+        <p>Five popcorn, instant-food and self-heating brands, and none of them owns the hot snack as an experience you can have anywhere.</p>
+      </div>
+      <div class="space">
+        <div class="rise"><span class="cap">vs ACT II</span>Bring the theatre experience everywhere, not just at home.</div>
+        <div class="rise"><span class="cap">vs 4700BC</span>Make premium feel futuristic and interactive.</div>
+        <div class="rise"><span class="cap">vs Orville</span>Become the next-generation popcorn technology brand.</div>
+        <div class="rise"><span class="cap">vs Nissin</span>Own instant snack indulgence and emotional gratification.</div>
+        <div class="rise"><span class="cap">vs Heat O'Matic</span>Turn self-heating into entertainment and sensory theatre.</div>
+      </div>
+      <div class="persona rise">
+        <div class="id">
+          <h5>The mobile urban Indian</h5>
+          <div class="age">18–35</div>
+          <div class="cities">
+            <div><b>Tier 1 · launch</b>Chennai, Hyderabad, Mumbai, Delhi-NCR, Bengaluru, Pune, Kochi</div>
+            <div><b>Tier 2 · years 2–3</b>Ahmedabad, Surat, Jaipur, Chandigarh, Coimbatore</div>
+          </div>
+        </div>
+        <div class="psy">
+          <div><h5>Motivations</h5><p>Control and self-sufficiency: hot popcorn on their own terms, time and place.</p></div>
+          <div><h5>Lifestyle</h5><p>Always in motion: commutes, work travel, matches and concerts, often short on time and good options.</p></div>
+          <div><h5>Habits</h5><p>Snack on impulse, especially in transit.</p></div>
+          <div><h5>Aspirations</h5><p>Quality in the small details, available anywhere, not only at home.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" id="s-dir">
+      <div class="step-head rise">
+        <div><span class="cap">Step 03 · Verbal identity &amp; design direction</span><h3 class="h-m">How it sounds, how it looks</h3></div>
+        <p>Warm enough for comfort, bold enough to stop a commuter on a station wall.</p>
+      </div>
+      <div class="voice">
+        <div class="usp rise"><span class="cap">USP</span><p>The self-warming single-serve popcorn pod: hot, fresh-tasting popcorn anywhere, with no microwave, appliance or electricity.</p></div>
+        <div class="vt rise"><span class="cap">Voice</span><ul><li>Warm &amp; direct</li><li>Confident</li><li>Slightly playful</li></ul></div>
+        <div class="vt t rise"><span class="cap">Tone</span><ul><li>Confident</li><li>Warm</li><li>Bold &amp; clear</li></ul></div>
+      </div>
+      <div class="mood d1 rise">
+        <header><b>Direction 1</b><span class="tag">Explored</span><p>Loud poster typography, busy collage and a first label draft, “Pop till U drop”.</p></header>
+        <div class="cbar" role="img" aria-label="Direction colour palette"><i style="background:#2F2D88"></i><i style="background:#E7D100"></i><i style="background:#F71220"></i><i style="background:#F972AC"></i><i style="background:#F6E9EA"></i></div>
+        <div class="shot full" data-full="1"><img loading="lazy" decoding="async" src="img/md1_full.webp" width="1800" height="733" alt="Design direction 1: moodboard of loud, colourful posters beside the first Popp'in label draft"></div>
+      </div>
+      <div class="mood d2 rise">
+        <header><b>Final direction</b><span class="tag ok">Chosen</span><p>Bold geometric shapes, grainy gradients and characterful illustration became the Popp'in look.</p></header>
+        <div class="cbar" role="img" aria-label="Direction colour palette"><i style="background:#2F2D88"></i><i style="background:#E7D100"></i><i style="background:#F71220"></i><i style="background:#F972AC"></i><i style="background:#00A9AA"></i><i style="background:#F6E9EA"></i><i style="background:#040708"></i></div>
+        <div class="shot full" data-full="1"><img loading="lazy" decoding="async" src="img/md2_full.webp" width="1800" height="706" alt="Finalised design direction moodboard: geometric, grainy illustrations"></div>
+      </div>
+    </div>
+
+    <div class="step" id="s-identity">
+      <div class="step-head rise">
+        <div><span class="cap">Step 04 · Logo, colour &amp; type</span><h3 class="h-m">A kernel moments before it bursts</h3></div>
+        <p>A custom wordmark and a two-word promise that holds both the product and the feeling.</p>
+      </div>
+      <div class="logo-panel rise">
+        <img loading="lazy" decoding="async" class="k" src="img/pc2.webp" width="500" height="507" alt="" style="left:-30px;top:-30px">
+        <img loading="lazy" decoding="async" class="k" src="img/pc4b.webp" width="416" height="347" alt="" style="right:4%;bottom:-20px">
+        <div class="lockup"><img loading="lazy" decoding="async" class="l" src="img/logo_y.webp" width="1400" height="561" alt="Popp'in wordmark in yellow"><span class="pill">Pop Into Comfort</span></div>
+      </div>
+      <div class="grid2 logo-why">
+        <div class="rise"><h5>The wordmark</h5><p>Ultra-bold, condensed letters feel like a kernel under pressure. Rounded corners keep it playful, and tight spacing makes one shape you can recognise from a distance.</p></div>
+        <div class="rise"><h5>The tagline</h5><p>“Pop” echoes the sound and freshness of popcorn; “Comfort” is the emotional promise, found in small everyday moments.</p></div>
+      </div>
+      <div class="sub-h rise"><h4>Logo in colour</h4><p>Twelve approved treatments across the palette.</p></div>
+      <div class="logo-grid rise">
+          <img loading="lazy" decoding="async" src="img/lv00.webp" width="440" height="201" alt="Popp'in logo, Yellow on midnight">
+          <img loading="lazy" decoding="async" src="img/lv01.webp" width="440" height="201" alt="Popp'in logo, Teal on midnight">
+          <img loading="lazy" decoding="async" src="img/lv02.webp" width="440" height="201" alt="Popp'in logo, Salt on midnight">
+          <img loading="lazy" decoding="async" src="img/lv03.webp" width="440" height="201" alt="Popp'in logo, Pink on midnight">
+          <img loading="lazy" decoding="async" src="img/lv04.webp" width="440" height="198" alt="Popp'in logo, Black on silver">
+          <img loading="lazy" decoding="async" src="img/lv05.webp" width="440" height="201" alt="Popp'in logo, Midnight on silver">
+          <img loading="lazy" decoding="async" src="img/lv06.webp" width="440" height="201" alt="Popp'in logo, Pink on silver">
+          <img loading="lazy" decoding="async" src="img/lv07.webp" width="440" height="201" alt="Popp'in logo, Chilli on silver">
+          <img loading="lazy" decoding="async" src="img/lv08.webp" width="440" height="201" alt="Popp'in logo, White on black">
+          <img loading="lazy" decoding="async" src="img/lv09.webp" width="440" height="201" alt="Popp'in logo, Yellow on chilli">
+          <img loading="lazy" decoding="async" src="img/lv10.webp" width="440" height="201" alt="Popp'in logo, Black on chilli">
+          <img loading="lazy" decoding="async" src="img/lv11.webp" width="440" height="201" alt="Popp'in logo, Salt on chilli">
+      </div>
+
+      <div class="sub-h rise"><h4>Colour</h4><p>Midnight blue and butter yellow lead; pink, teal and red add play.</p></div>
+      <div class="swatches rise">
+        <div class="sw tall" style="background:#2F2E82;color:#F3EADB"><b>Midnight</b>#2F2E82<br>R47 G46 B130<br>C100 M100 Y11 K4</div>
+        <div class="sw tall" style="background:#E5D227;color:#2F2E82"><b>Butter</b>#E5D227<br>R228 G209 B39<br>C13 M11 Y97 K0</div>
+        <div class="sw round" style="background:#E2352F;color:#FFF8EE"><b>Chilli</b>#E2352F</div>
+        <div class="sw round" style="background:#F46BA6;color:#2a0f22"><b>Candy</b>Pink accent</div>
+        <div class="sw round" style="background:#28A6A9;color:#06252a"><b>Teal</b>#28A6A9</div>
+        <div class="sw round" style="background:#FFFCFC;color:#1E1012;box-shadow:inset 0 0 0 1px rgba(30,16,18,.15)"><b>Salt</b>#FFFCFC</div>
+        <div class="sw round" style="background:#000;color:#FFF8EE"><b>Black</b>#000000</div>
+      </div>
+
+      <div class="sub-h rise"><h4>Typography</h4><p>Bricolage Grotesque Condensed Extra Bold for headings; Amina Regular for sub-headings and body.</p></div>
+      <div class="type-spec">
+        <div class="ts rise"><span class="cap">Heading · Bricolage Grotesque Condensed Extra Bold</span><div class="big">Aa</div><div class="glyph">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890 !@#$%^&amp;*()</div></div>
+        <div class="ts ts2 rise"><span class="cap">Sub-heading &amp; body · Amina Regular</span><div class="big">Aa</div><div class="glyph">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890 !@#$%^&amp;*()</div></div>
+      </div>
+    </div>
+
+    <div class="step" id="s-mascot">
+      <div class="poppy">
+        <div class="stage rise"><img loading="lazy" decoding="async" src="img/mascot.webp" width="800" height="1409" alt="Poppy the mascot holding a popcorn tub"></div>
+        <div class="poppy-copy rise">
+          <span class="cap">Step 05 · Mascot</span>
+          <h3>Meet Poppy</h3>
+          <p>Laid-back, crooked smile, signature shades. Poppy turns life's little chaos into a cosy moment with a calm “we'll figure it out” energy. He believes comfort hides in tiny everyday moments, and reminds people to slow down and enjoy them.</p>
+          <p class="cap" style="margin-top:24px">Rough sketches</p>
+          <div class="sk">
+            <figure class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/sk_m1.webp" width="700" height="1117" alt="Rough pencil sketches of Poppy's face and expressions"></figure>
+            <figure class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/sk_m2.webp" width="700" height="919" alt="Rough pencil sketches of Poppy's full body pose"></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="arc" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true" style="background:var(--cream)"><path d="M0 110 Q720 -50 1440 110 Z" fill="#2F2E82"/></svg>
+
+<!-- ============ 05 OUTCOME ============ -->
+<section class="band outcome" id="outcome" data-nav="light" style="padding-top:clamp(30px,4vw,60px)">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div class="eyebrow"><b>05</b> Final design &amp; outcome</div>
+      <h2 class="h-l">A brand ready to <span class="acc-yolk">pop</span></h2>
+      <p class="lede">Label and pack, a four-week launch campaign across India, billboards, social, stationery and merchandise, all built from the same shapes, colours and character.</p>
+    </div>
+    <div class="out-nav" id="outNav" role="navigation" aria-label="Final design sections">
+      <ol>
+        <li><a href="#o-pack">Label &amp; pack</a></li>
+        <li><a href="#o-campaign">Launch campaign</a></li>
+        <li><a href="#o-billboards">Billboards</a></li>
+        <li><a href="#o-social">Social media</a></li>
+        <li><a href="#o-merch">Stationery &amp; merch</a></li>
+      </ol>
+    </div>
+
+    <div class="out-block" id="o-pack" style="margin-top:0">
+      <div class="out-head"><h3>Label &amp; pack</h3><span class="cap">Classic Butter · Gourmet popcorn · Net wt. 30 g</span></div>
+      <div class="shot label-big rise" data-full="1"><img loading="lazy" decoding="async" src="img/label.webp" width="1800" height="1044" alt="Full Popp'in Classic Butter label with nutrition panel, logo, Poppy and flavour panel"></div>
+      <div class="pack-row">
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/pack.webp" width="1100" height="1362" alt="Popp'in pods with red origami lids, photographed with popcorn"></div>
+        <div class="pack-side">
+          <div class="note rise"><h4>Small in the bag. Big when it pops.</h4><p>Built for travel, the compact pod is easy to carry and store. An origami extension unfolds as it warms, making room for the popcorn to pop and be enjoyed. The navy wrap keeps Poppy front and centre.</p></div>
+          <p class="cap">Rough sketches · pod form and expanding lid</p>
+          <div class="pack-sk">
+            <figure class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/sk_pack1.webp" width="700" height="1030" alt="Pencil sketches of the pod's packaging forms"></figure>
+            <figure class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/sk_pack2.webp" width="700" height="1009" alt="Pencil sketches exploring the expanding origami lid"></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="out-block" id="o-campaign">
+      <div class="out-head"><h3>Launch campaign</h3><span class="cap">4-week mystery-to-reveal · India</span></div>
+      <p class="lede rise" style="margin-bottom:clamp(36px,5vw,56px)">For two weeks, no product. Just questions and heat, placed where the audience already spends its day: platforms, metros, college walls, flyovers and airports.</p>
+      <div class="weeks">
+        <div class="week">
+          <div class="wk rise"><span class="n">Wk 1–2</span><h4>Seed the mystery</h4><p>Blue-and-yellow posters appear overnight across seven cities, on metro pillars, station concourses, campus boards and inside trains.</p><p class="imp">Specific enough to feel personal, vague enough to make people wonder.</p></div>
+          <div>
+            <div class="g-posters">
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/post1.webp" width="1200" height="507" alt="Teaser poster: What's Popp'in? This one's kinda hot"></div>
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/post2.webp" width="1200" height="507" alt="Teaser poster: Respectfully, Popp'in eat better"></div>
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/post3.webp" width="1200" height="507" alt="Teaser poster: Something's Popp'in. Stay tuned, stay hungry"></div>
+            </div>
+            <div class="g-mk">
+              <div class="shot a rise" data-full="1"><img loading="lazy" decoding="async" src="img/mk1.webp" width="1000" height="535" alt="Teaser poster mocked up on a campus wall"></div>
+              <div class="shot b rise" data-full="1"><img loading="lazy" decoding="async" src="img/mk2.webp" width="1000" height="563" alt="Teaser hoarding in an airport arrival corridor"></div>
+              <div class="shot c rise" data-full="1"><img loading="lazy" decoding="async" src="img/mk3.webp" width="700" height="525" alt="Teaser poster at an airport concourse"></div>
+              <div class="shot d rise" data-full="1"><img loading="lazy" decoding="async" src="img/mk4.webp" width="700" height="576" alt="Teaser poster on an airport pillar"></div>
+              <div class="shot e rise" data-full="1"><img loading="lazy" decoding="async" src="img/mk5.webp" width="700" height="875" alt="Teaser poster inside a metro coach"></div>
+            </div>
+          </div>
+        </div>
+        <div class="week">
+          <div class="wk rise"><span class="n">Wk 3</span><h4>Show the pod</h4><p>One product photo drops on social and updated posters. 50–80 micro-influencers get a pod and a handwritten note, and their unscripted reactions become the first content.</p></div>
+          <div>
+            <div class="g-reveal">
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/reveal.webp" width="900" height="1200" alt="Reveal poster: Instant hot popcorn, Pop into comfort in seconds"></div>
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/launch.webp" width="900" height="1272" alt="Launch poster: Make solitude delicious, with Poppy in a train carriage"></div>
+            </div>
+            <div class="handnote rise"><q>90 seconds. Trust it.</q><span>The only words on the note sent with each influencer pod.</span></div>
+          </div>
+        </div>
+        <div class="week">
+          <div class="wk rise"><span class="n">Wk 4</span><h4>Launch day</h4><p>Live activations at five transit hubs, and every mystery poster is replaced with the final campaign.</p></div>
+          <div>
+            <div class="g-tr">
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/tr1.webp" width="700" height="875" alt="Campaign wrap on the back of an auto-rickshaw"></div>
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/tr2.webp" width="700" height="933" alt="Make solitude delicious poster on a metro platform lightbox"></div>
+              <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/tr3.webp" width="700" height="933" alt="Make solitude delicious wrap on the back of a city bus"></div>
+            </div>
+            <div class="why rise"><h5>Why it works</h5><p>The audience already thinks “why is there nothing warm here?” Popp'in asks it on a wall first, then answers it in the exact place the problem lives: on the platform, in their hands, just before they board.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="out-block" id="o-billboards">
+      <div class="out-head"><h3>Billboards</h3><span class="cap">Highway &amp; city formats</span></div>
+      <div class="g-bb">
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/bb1.webp" width="1400" height="591" alt="Billboard design: Warm popcorn, warmer moment"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/bb2.webp" width="1400" height="591" alt="Billboard design: Turn stormy nights into cozy stories"></div>
+        <div class="shot ph rise" data-full="1"><img loading="lazy" decoding="async" src="img/bb3.webp" width="1000" height="563" alt="Billboard mocked up beside a hill highway"></div>
+        <div class="shot ph rise" data-full="1"><img loading="lazy" decoding="async" src="img/bb4.webp" width="1000" height="563" alt="Billboard mocked up at dusk"></div>
+      </div>
+    </div>
+
+    <div class="out-block" id="o-social">
+      <div class="out-head"><h3>Social media</h3><span class="cap">Two Instagram carousels</span></div>
+      <div class="strip-label first"><p class="cap">How to open your package · 5-step guide</p><div class="strip-ctrl"><button type="button" data-strip="s1" data-dir="-1" aria-label="Scroll carousel left">←</button><button type="button" data-strip="s1" data-dir="1" aria-label="Scroll carousel right">→</button></div></div>
+      <div class="strip" id="s1">
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/sm_phone.webp" width="700" height="875" alt="Instagram post mockup on a phone"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_0.webp" width="700" height="700" alt="Carousel cover: How to open your package"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_1.webp" width="700" height="700" alt="Step 1: Peel the wrap"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_2.webp" width="700" height="700" alt="Step 2: Shake the package"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_3.webp" width="700" height="700" alt="Step 3: Wait for 90 seconds"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_4.webp" width="700" height="700" alt="Step 4: Open the package"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c1_5.webp" width="700" height="700" alt="Step 5: Enjoy hot popcorn"></div>
+      </div>
+      <div class="strip-label"><p class="cap">Pop into comfort, even at 2 AM</p><div class="strip-ctrl"><button type="button" data-strip="s2" data-dir="-1" aria-label="Scroll carousel left">←</button><button type="button" data-strip="s2" data-dir="1" aria-label="Scroll carousel right">→</button></div></div>
+      <div class="strip" id="s2">
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c2_1.webp" width="700" height="877" alt="Carousel frame: Pop into comfort, even at 2 AM"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c2_0.webp" width="700" height="876" alt="Carousel frame: a student studying late at night"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c2_2.webp" width="700" height="877" alt="Carousel frame: the student reaches for a Popp'in pod"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c2_3.webp" width="700" height="877" alt="Carousel frame: the pod opens with warm popcorn"></div>
+        <div class="shot" data-full="1"><img loading="lazy" decoding="async" src="img/c2_4.webp" width="700" height="877" alt="Carousel frame: the student smiles, eating popcorn"></div>
+      </div>
+      <div class="mock-wide">
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/c2_m1.webp" width="1300" height="619" alt="Carousel 2 shown across a phone mockup"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/c2_m2.webp" width="1300" height="540" alt="Carousel 1 shown across a phone mockup"></div>
+      </div>
+    </div>
+
+    <div class="out-block" id="o-merch">
+      <div class="out-head"><h3>Stationery &amp; merch</h3><span class="cap">Card · Envelope · Pen · Notebooks · Mug · Tote · Tees</span></div>
+      <div class="g-world">
+        <div class="shot card rise" data-full="1"><img loading="lazy" decoding="async" src="img/card.webp" width="1000" height="866" alt="Popp'in visiting card front and back"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/st4.webp" width="700" height="875" alt="Branded envelope"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/st3.webp" width="700" height="875" alt="Branded pen with geometric pattern"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/st1.webp" width="700" height="875" alt="Notebook cover: A warm little escape"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/st2.webp" width="700" height="875" alt="Notebook cover with Poppy"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/mg1.webp" width="700" height="875" alt="Mug: A warm little escape"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/mg2.webp" width="700" height="875" alt="Popp'in tote bag"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/mg3.webp" width="700" height="875" alt="T-shirt: Too tired to be stressed"></div>
+        <div class="shot rise" data-full="1"><img loading="lazy" decoding="async" src="img/mg4.webp" width="700" height="875" alt="T-shirt: Brb, finding comfort"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 LEARNINGS ============ -->
+<section class="band learn" id="learn" data-nav="dark">
+  <div class="wrap">
+    <div class="sec-head rise">
+      <div class="eyebrow"><b>06</b> Learnings</div>
+      <h2 class="h-l">What this project <span class="acc-chili">taught me</span></h2>
+    </div>
+    <ol class="lessons">
+      <li class="rise"><h4>Research makes a brand believable</h4><p>Kernel science and real costs shaped the design, from the origami extension to the ₹99 price point.</p></li>
+      <li class="rise"><h4>Sell the feeling, not the feature</h4><p>Self-heating is the technology, but comfort is what people buy. The tagline, voice and Poppy all carry that warmth.</p></li>
+      <li class="rise"><h4>Timing is a design tool</h4><p>Designing for platforms and metros, and holding the product back for two weeks, made the reveal land harder.</p></li>
+    </ol>
+  </div>
+  <img loading="lazy" decoding="async" class="peek" src="img/peek.webp" width="700" height="659" alt="">
+</section>
+
+<footer id="contact" data-nav="light">
+  <div class="wrap">
+    <div class="foot-main">
+      <span class="cap" style="color:var(--yolk)">That's a wrap on Popp'in</span>
+      <h2 class="h-l">Still <span class="acc-yolk">hungry?</span></h2>
+      <p class="foot-lede">There's more where this came from. Take a look at the rest of my work, or tell me about something you'd like to make.</p>
+      <div class="foot-ctas">
+        <a class="jump" href="../#work">See more work <span aria-hidden="true">→</span></a>
+        <a class="jump ghost" href="../#foot">Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="credits"><span>Popp'in · Branding &amp; Advertising · S. Dakshata</span><a class="totop" href="#top">Back to top <span aria-hidden="true">↑</span></a></div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><img loading="lazy" decoding="async" id="lbImg" alt=""><button type="button" id="lbClose" aria-label="Close image">×</button></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.getElementById('nav'), ruler = document.getElementById('ruler'), dot = document.getElementById('dot');
+  var ticks = ruler.querySelector('.ticks');
+  var hasIO = 'IntersectionObserver' in window;
+  // cached measurements, refreshed only on resize / content growth (lazy images)
+  var docH = 1, tickW = 0, vh = innerHeight;
+  var spies = [];
+  var fab = document.getElementById('fabJump'), fabFrom = 0, fabTo = 0, fabOn = false;
+  function measure(){ vh = innerHeight; docH = Math.max(1, document.documentElement.scrollHeight - vh); tickW = ticks.clientWidth; if (typeof measureSpies === 'function') measureSpies();
+    var sy0 = scrollY; fabFrom = document.getElementById('brief').getBoundingClientRect().top + sy0 - vh * 0.5; fabTo = document.getElementById('outcome').getBoundingClientRect().top + sy0; }
+  addEventListener('resize', function(){ measure(); requestAnimationFrame(frame); });
+  if ('ResizeObserver' in window) new ResizeObserver(function(){ measure(); }).observe(document.body);
+
+  // nav + ruler tone: a thin line near the top and one near the bottom decide light/dark
+  var secs = [].slice.call(document.querySelectorAll('[data-nav]'));
+  function toneLine(el, topPx, botPx){
+    if (!hasIO) return;
+    var io;
+    function make(){
+      if (io) io.disconnect();
+      io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) el.classList.toggle('dark', e.target.dataset.nav === 'dark'); }); },
+        {rootMargin: (-topPx()) + 'px 0px ' + (-botPx()) + 'px 0px', threshold: 0});
+      secs.forEach(function(s){ io.observe(s); });
+    }
+    make(); addEventListener('resize', make);
+  }
+  toneLine(nav, function(){ return 40; }, function(){ return innerHeight - 41; });
+  toneLine(ruler, function(){ return innerHeight - 16; }, function(){ return 15; });
+
+  // hero kernels: transform-only parallax, one rAF per frame
+  var kernels = [].slice.call(document.querySelectorAll('.kernel')), mx = 0, my = 0;
+  var depths = kernels.map(function(k){ return parseFloat(k.dataset.depth); });
+  function kern(sy){
+    if (reduce || sy > vh * 1.2) return;
+    for (var i = 0; i < kernels.length; i++){ var d = depths[i];
+      kernels[i].style.transform = 'translate3d(' + (mx*18*d).toFixed(1) + 'px,' + (my*14*d - sy*0.25*d).toFixed(1) + 'px,0) rotate(' + (sy*0.03*d*(i%2?1:-1)).toFixed(2) + 'deg)'; }
+  }
+  var queued = false;
+  function frame(){ queued = false; var sy = scrollY;
+    var want = sy > fabFrom && sy + vh * 0.55 < fabTo;
+    if (want !== fabOn){ fabOn = want; fab.classList.toggle('show', want); fab.setAttribute('aria-hidden', want ? 'false' : 'true'); fab.tabIndex = want ? 0 : -1; }
+    dot.style.transform = 'translate3d(' + (Math.min(1, sy / docH) * tickW).toFixed(1) + 'px,0,0)';
+    kern(sy);
+    spyFrame(sy);
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', queue, {passive:true});
+  if (!reduce && matchMedia('(pointer:fine)').matches) addEventListener('pointermove', function(e){ mx = e.clientX / innerWidth - .5; my = e.clientY / vh - .5; queue(); }, {passive:true});
+
+  // sticky sub-nav highlighting: section tops are cached on resize/content change, so scrolling only compares numbers
+  function spy(navId, boundaryId){
+    var bar = document.getElementById(navId); if (!bar) return;
+    var links = [].slice.call(bar.querySelectorAll('a'));
+    var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+    var end = document.getElementById(boundaryId);
+    spies.push({bar: bar, links: links, targets: targets, end: end, tops: [], endY: 0, last: -2});
+  }
+  function measureSpies(){ var sy = scrollY; spies.forEach(function(o){
+    o.tops = o.targets.map(function(t){ return t.getBoundingClientRect().top + sy; });
+    var r = o.end.getBoundingClientRect(); o.endY = r.bottom + sy; }); }
+  function spyFrame(sy){ var line = sy + vh * 0.35;
+    spies.forEach(function(o){
+      var cur = -1; for (var i = 0; i < o.tops.length; i++) if (o.tops[i] <= line) cur = i;
+      if (line > o.endY) cur = -1;
+      if (cur === o.last) return; o.last = cur;
+      o.links.forEach(function(a,i){ a.classList.toggle('on', i === cur); });
+      if (cur >= 0) o.bar.scrollTo({left: o.links[cur].offsetLeft - 20, behavior: reduce ? 'auto' : 'smooth'});
+    }); }
+  spy('stepsNav', 'process');
+  spy('outNav', 'outcome');
+  measure(); frame();
+
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ if (e.boundingClientRect.top > 0) e.target.classList.add('in'); io.unobserve(e.target); } }); }, {rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rise').forEach(function(el){ if (el.getBoundingClientRect().top > innerHeight) io.observe(el); });
+  }
+  document.querySelectorAll('[data-strip]').forEach(function(b){
+    b.addEventListener('click', function(){ var s = document.getElementById(b.dataset.strip); s.scrollBy({left: s.clientWidth * 0.8 * (+b.dataset.dir), behavior: reduce ? 'auto' : 'smooth'}); });
+  });
+  document.querySelectorAll('.strip').forEach(function(s){
+    var down = false, sx = 0, sl = 0, moved = false;
+    s.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = s.scrollLeft; s.style.scrollSnapType = 'none'; s.style.cursor = 'grabbing'; });
+    addEventListener('pointermove', function(e){ if (!down) return; var dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; s.scrollLeft = sl - dx; });
+    addEventListener('pointerup', function(){ if (!down) return; down = false; s.style.scrollSnapType = ''; s.style.cursor = ''; });
+    s.addEventListener('click', function(e){ if (moved){ e.stopPropagation(); e.preventDefault(); moved = false; } }, true);
+  });
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbClose = document.getElementById('lbClose'), last = null;
+  document.querySelectorAll('[data-full]').forEach(function(el){
+    var img = el.querySelector('img');
+    el.setAttribute('tabindex','0'); el.setAttribute('role','button'); el.setAttribute('aria-label', 'Enlarge: ' + (img ? img.alt : 'image'));
+    function open(){ last = el; lbImg.src = img ? img.src : ''; lbImg.alt = img ? img.alt : ''; lb.hidden = false; document.body.style.overflow = 'hidden'; lbClose.focus(); }
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); } });
+  });
+  function close(){ lb.hidden = true; document.body.style.overflow = ''; if (last) last.focus(); }
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && !lb.hidden) close(); });
+})();
+</script>
+
+<script src="../assets/js/site-nav.v1.js"></script>
+</body>
+</html>
