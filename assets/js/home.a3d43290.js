@@ -73,20 +73,6 @@ function measure(){
   order.forEach(l=> l.style.transformOrigin = `${eye.sx}px ${eye.sy}px`);
   if(typeof master === 'function' && tcv) master(zoomG); else scrollTo(zoomQ);
 }
-/* smoother zoom: while scrolling, the text and portrait layers are scaled by the graphics chip instead of being
-   redrawn every frame; they are redrawn sharp whenever they have grown or shrunk by a third, and once scrolling pauses */
-const rScale = [0, 0, 0]; let rIdle = 0;
-function rasterGuard(sc){
-  for(let i = 1; i < 3; i++){
-    const el = order[i], r = rScale[i];
-    if(!r || sc[i]/r > 1.33 || r/sc[i] > 1.33){
-      rScale[i] = sc[i]; el.style.willChange = 'auto';
-      requestAnimationFrame(()=>{ if(rScale[i]) el.style.willChange = 'transform'; });
-    }
-  }
-  clearTimeout(rIdle);
-  rIdle = setTimeout(()=>{ for(let i = 1; i < 3; i++){ rScale[i] = 0; order[i].style.willChange = 'auto'; } }, 180);
-}
 function render(p){
   zoomP = p;
   const C = Math.exp(Math.log(CMAX) * Math.pow(p,1.18));
@@ -98,7 +84,6 @@ function render(p){
     l.style.transform = `scale(${scales[i]})`;
     inners[i].style.transform = `translate(${(mouseX*sway[i][0]*innerWidth*m).toFixed(2)}px, ${(mouseY*sway[i][1]*innerHeight*m).toFixed(2)}px)`;
   });
-  rasterGuard(scales);
   scene.style.transform = `translate(calc(-50% + ${pan.toFixed(1)}px), -50%)`;
   layers.lt.style.opacity = clamp(1 - p/.13, 0, 1);
   foot.style.opacity = clamp(1 - p/.07, 0, 1);
