@@ -499,12 +499,17 @@ const PENCIL = { name:'Pencil Illustration', href:'pencil/',
                  wide:'assets/img/work-pencil-wide.webp', ww:1400, wh:960,
                  alt:'Pencil illustrations: a chrome tap, a paint tube and a bald eagle drawn in graphite' };
 
+const PAINTINGS = { name:'Paintings', href:'paintings/',
+                 img:'assets/img/work-paintings.webp', w:820, h:1052,
+                 wide:'assets/img/work-paintings-wide.webp', ww:1400, wh:960,
+                 alt:'Paintings: acrylic sunflowers in a blue and gold vase, a still life of a clay jug, green pot and fruit, and a Kerala mural style Krishna and Radha' };
+
 const EGGSTA = { name:'Eggsta', href:'eggsta/',
                  img:'assets/img/work-eggsta.webp', w:820, h:1052,             // wheel view (portrait)
                  wide:'assets/img/work-eggsta-wide.webp', ww:1400, wh:960,      // grid view (landscape)
                  alt:'Eggsta: a kraft egg carton printed with red blobs, the Eggsta wordmark and its egg mascot, with a red hen-comb handle, on a sunlit kitchen counter' };
 
-const LIVE = { 'illustrations-01': KARNAN, 'illustrations-02': ALONE, 'illustrations-03': PENCIL, 'featured-01': WHISPERS, 'featured-02': POPPIN, 'featured-03': KARNAN, 'featured-05': EGGSTA, 'featured-07': BLACKHOLE, 'packaging-02': EGGSTA, 'branding-02': POPPIN, 'branding-03': TILLY, 'branding-04': RUINS, 'packaging-04': POPPIN, 'game-01': WHISPERS };
+const LIVE = { 'illustrations-01': KARNAN, 'illustrations-02': ALONE, 'illustrations-03': PENCIL, 'illustrations-04': PAINTINGS, 'featured-01': WHISPERS, 'featured-02': POPPIN, 'featured-03': KARNAN, 'featured-05': EGGSTA, 'featured-07': BLACKHOLE, 'packaging-02': EGGSTA, 'branding-02': POPPIN, 'branding-03': TILLY, 'branding-04': RUINS, 'packaging-04': POPPIN, 'game-01': WHISPERS };
 function buildGrid(cat){
   let html = '';
   for(let i=1; i<=GCOUNT[cat]; i++){

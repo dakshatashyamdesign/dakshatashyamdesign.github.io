@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paintings · Dakshata Shyam</title>
+<link rel="stylesheet" href="../assets/css/fonts.c7810c7b.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: quiet, considered, an art museum's collection room
+IDEA: a gallery hall you walk along: scrolling down carries you sideways past the works
+PICTURE: the paintings themselves, shown whole, growing larger once the intro panel folds away
+COLOUR and TYPE: gallery white walls, near-black ink, warm grey; Cormorant Garamond titles, Instrument Sans labels
+LAYOUT: sticky full-screen hall; intro panel left on landing, folds into an "About" tab after the first scroll
+*/
+:root{color-scheme:light dark;--bg:light-dark(#fbfaf8,#121212);--wall:light-dark(#f2f0ec,#1a1a1a);--ink:light-dark(#141414,#efece6);--muted:light-dark(#6e6a64,#9c978f);--line:light-dark(#d9d5ce,#333);--vh:100vh}
+@supports(height:100svh){:root{--vh:100svh}}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",system-ui,sans-serif;overflow-x:clip}
+
+.stage{position:relative}
+.screen{position:sticky;top:0;height:var(--vh);display:flex;flex-direction:column;overflow:hidden}
+
+
+.hall{flex:1;display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr);transition:grid-template-columns .7s cubic-bezier(.6,0,.2,1);min-height:0}
+body.collapsed .hall{grid-template-columns:minmax(0,0%) minmax(0,1fr)}
+
+.intro{background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,4vw,60px) max(4vw,16px);border-right:1px solid var(--line);overflow:auto;transition:opacity .4s,transform .7s cubic-bezier(.6,0,.2,1);z-index:3}
+body.collapsed .intro{position:fixed;top:0;left:0;bottom:0;width:min(440px,88vw);transform:translateX(-102%);opacity:1;box-shadow:0 0 60px rgba(0,0,0,.18)}
+body.collapsed.open .intro{transform:none}
+.kicker{font-size:14px;color:var(--muted);margin:0 0 16px}
+h1{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(52px,6.5vw,100px);line-height:.95;margin:0 0 24px;letter-spacing:-.01em}
+h1 em{font-style:italic}
+.intro p.body{margin:0;max-width:34ch;font-size:17px}
+.facts{margin:28px 0 0;padding:0;list-style:none;font-size:14px;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts span:first-child{color:var(--muted)}
+.facts span:last-child{text-align:right}
+.howto{font-size:13px;color:var(--muted);margin-top:24px}
+.close{display:none;align-self:flex-start;margin-bottom:20px;background:none;border:1px solid var(--ink);color:var(--ink);border-radius:999px;padding:0 18px;height:44px;font:14px "Instrument Sans",sans-serif;cursor:pointer}
+body.collapsed .close{display:inline-block}
+
+.tab{position:fixed;left:0;top:50%;z-index:2;transform:translateY(-50%) rotate(180deg);opacity:0;pointer-events:none;transition:opacity .4s ease .3s;background:var(--ink);color:var(--bg);border:0;writing-mode:vertical-rl;padding:18px 12px;min-width:44px;font:14px "Instrument Sans",sans-serif;letter-spacing:.02em;cursor:pointer;border-radius:8px 0 0 8px}
+body.collapsed .tab{opacity:1;pointer-events:auto}
+body.open .tab{opacity:0;pointer-events:none;transition-delay:0s}
+.tab:focus-visible,.close:focus-visible,.controls button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .4s;z-index:2}
+body.open .scrim{opacity:1;pointer-events:auto}
+
+.room{grid-column:2;grid-row:1;position:relative;display:flex;flex-direction:column;background:var(--wall);overflow:hidden;min-height:0}
+.track{flex:1;display:flex;align-items:center;gap:clamp(48px,6vw,110px);padding:0 clamp(40px,6vw,110px);width:max-content;will-change:transform}
+figure{margin:0;flex:none;display:flex;flex-direction:column;align-items:flex-start}
+figure img{display:block;height:auto;width:auto;max-height:min(56vh,600px);max-width:70vw;box-shadow:0 1px 2px rgba(0,0,0,.12),0 18px 40px -18px rgba(0,0,0,.35);transition:max-height .7s cubic-bezier(.6,0,.2,1)}
+body.collapsed figure img{max-height:min(70vh,900px);max-width:86vw}
+figcaption{margin-top:18px;font-size:13px;line-height:1.45;border-left:1px solid var(--ink);padding-left:12px;max-width:300px}
+figcaption strong{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:20px;line-height:1.15;margin-bottom:2px}
+figcaption span{color:var(--muted)}
+.endnote{flex:none;width:240px;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:24px;line-height:1.3;color:var(--muted)}
+
+.controls{flex:none;display:flex;align-items:center;gap:20px;padding:14px clamp(40px,6vw,110px) 22px}
+.rail{flex:1;height:1px;background:var(--line);position:relative}
+.rail i{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--ink)}
+.count{font-size:14px;font-variant-numeric:tabular-nums;min-width:5ch;text-align:right}
+.controls button{width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);font:20px/1 "Instrument Sans",sans-serif;cursor:pointer;transition:background .2s,color .2s}
+.controls button:hover:not(:disabled){background:var(--ink);color:var(--bg)}
+.controls button:disabled{opacity:.3;cursor:default}
+
+.pf{padding:clamp(40px,6vw,80px) clamp(16px,5vw,72px) 40px;font-family:'DM Sans','Instrument Sans',sans-serif;color:var(--ink);background:var(--bg);position:relative;z-index:1}
+.pf .ctas{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.pf .cta{display:flex;justify-content:space-between;align-items:center;min-height:64px;padding:22px 30px;border-radius:999px;text-decoration:none;font-size:clamp(20px,2vw,26px)}
+.pf .solid{background:var(--ink);color:var(--bg)}.pf .line{border:1.5px solid var(--ink);color:var(--ink)}
+.pf .cta:hover{opacity:.85}
+.pf .frow{max-width:1080px;margin:36px auto 0;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;font-size:14px}
+.pf .frow a{color:var(--muted);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}.pf .dx{font-weight:700;letter-spacing:.18em;color:var(--ink)!important}
+.nav ul a:hover{text-decoration:underline!important;text-underline-offset:5px}
+@media (max-width:640px){.nav ul{gap:clamp(10px,3.6vw,18px)!important}.nav ul a{font-size:clamp(11.5px,3.5vw,14px)!important}}
+.screen{padding-top:66px}
+.hall{border-top:1px solid var(--line)}
+.pf-line{max-width:1080px;margin:0 auto clamp(28px,4vw,48px);font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.05;text-wrap:balance}
+.pf-line em{font-style:italic;color:var(--muted)}
+.pf .cta{font-family:"Cormorant Garamond",Georgia,serif}
+body.past .tab{opacity:0;pointer-events:none}
+@media(max-width:860px){
+    .hall{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}
+  body.collapsed .hall{grid-template-columns:1fr;grid-template-rows:0 minmax(0,1fr)}
+  .room{grid-column:1;grid-row:2}
+  .intro{border-right:0;border-bottom:1px solid var(--line);padding:24px 20px}
+  .intro h1{font-size:clamp(46px,13vw,64px);margin-bottom:14px}
+  .intro .facts,.intro .howto{display:none}
+  body.collapsed .intro .facts,body.collapsed .intro .howto{display:flex}
+  body.collapsed .intro .howto{display:block}
+  .track{padding:0 24px;gap:40px}
+  figure img{max-height:min(40vh,420px);max-width:80vw}
+  body.collapsed figure img{max-height:min(62vh,680px);max-width:84vw}
+  .controls{padding:10px 20px 18px;gap:14px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main" style="position: fixed; top: 0; left: 0; right: 0; z-index: 40; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px clamp(18px, 4vw, 48px); mix-blend-mode: difference; color: #F3EADB">
+  <a href="../" class="mark" aria-label="DAXX, back to the home page" style="font-family: 'Archivo', 'Arial Black', sans-serif; font-weight: 900; font-stretch: 96%; font-size: clamp(20px, 1.75vw, 30px); letter-spacing: 0; line-height: 1; color: #F3EADB; text-decoration: none">DAXX</a>
+  <ul style="list-style: none; display: flex; gap: clamp(10px, 2.4vw, 32px); margin: 0; padding: 0">
+    <li><a href="../#work" style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; white-space: nowrap; color: #F3EADB; text-decoration: none">Work</a></li>
+    <li><a href="../#hero" style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; white-space: nowrap; color: #F3EADB; text-decoration: none">Meet Me</a></li>
+    <li><a href="../#bloom" style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; white-space: nowrap; color: #F3EADB; text-decoration: none">Off Clock</a></li>
+    <li><a href="../#foot" style="font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; font-size: 0.95rem; white-space: nowrap; color: #F3EADB; text-decoration: none">Contact</a></li>
+  </ul>
+</nav>
+<div class="stage" id="stage">
+  <div class="screen">
+    
+
+    <div class="hall">
+      <section class="intro" id="intro" aria-label="About this collection">
+        <div>
+          <button class="close" id="close">Close</button>
+          <p class="kicker">Collection</p>
+          <h1>Paint<em>ings</em></h1>
+          <p class="body">These are paintings done to practise acrylics and to understand shape, form, light, shadow and texture.</p>
+          <ul class="facts">
+            <li><span>Medium</span><span>Acrylic</span></li>
+            <li><span>Works</span><span>5</span></li>
+            <li><span>Studies in</span><span>Shape, form, light, shadow, texture</span></li>
+          </ul>
+        </div>
+        <p class="howto">Keep scrolling to walk through the room.</p>
+      </section>
+
+      <section class="room" id="room" aria-label="Paintings">
+        <div class="track" id="track">
+          <figure><img src="img/1.webp" alt="Acrylic painting of sunflowers in a blue and gold vase on a draped table"><figcaption><strong>Sunflowers in a Vase</strong><span>Still life · Acrylic</span></figcaption></figure>
+          <figure><img src="img/2.webp" alt="Acrylic still life of a clay jug, green pot, apple, pear and grapes on a cloth"><figcaption><strong>Jug, Pot and Fruit</strong><span>Still life · Acrylic</span></figcaption></figure>
+          <figure><img src="img/3.webp" alt="Black and grey acrylic portrait study in a posterised style"><figcaption><strong>Portrait in Greyscale</strong><span>Tonal study · Acrylic</span></figcaption></figure>
+          <figure><img src="img/4.webp" alt="Kerala mural style painting of Krishna and Radha dancing"><figcaption><strong>Krishna and Radha</strong><span>Kerala mural style · Acrylic</span></figcaption></figure>
+          <figure><img src="img/5.webp" alt="Kerala mural style painting of young Krishna and friends stacked to reach a butter pot"><figcaption><strong>The Butter Pot</strong><span>Kerala mural style · Acrylic</span></figcaption></figure>
+          <p class="endnote">End of the room.</p>
+        </div>
+        <div class="controls">
+          <button id="prev" aria-label="Previous painting">←</button>
+          <button id="next" aria-label="Next painting">→</button>
+          <div class="rail"><i id="bar"></i></div>
+          <span class="count" id="count">1 / 5</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+<footer class="pf" id="pf">
+  <p class="pf-line">The gallery closes here.<br><em>The studio never does.</em></p>
+  <div class="ctas">
+    <a class="cta solid" href="../#work">See more work <span aria-hidden="true">&rarr;</span></a>
+    <a class="cta line" href="../#foot">Contact <span aria-hidden="true">&rarr;</span></a>
+  </div>
+  <div class="frow"><a href="../" class="dx">DAXX</a><a href="https://www.linkedin.com/in/dakshata-shyam-47a5a3439/">LinkedIn</a></div>
+</footer>
+<button class="tab" id="tab" aria-controls="intro" aria-expanded="false">About the collection</button>
+<div class="scrim" id="scrim"></div>
+
+<script>
+{
+  const body=document.body,stage=document.getElementById('stage'),room=document.getElementById('room'),track=document.getElementById('track');
+  const bar=document.getElementById('bar'),count=document.getElementById('count'),prev=document.getElementById('prev'),next=document.getElementById('next');
+  const tab=document.getElementById('tab'),closeBtn=document.getElementById('close'),scrim=document.getElementById('scrim');
+  const figs=[...track.querySelectorAll('figure')];
+  const smooth=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const LEAD=40; // px of scroll before the walk starts, so the intro folds first
+
+  let dist=0;
+  const measure=()=>{
+    dist=Math.max(0,track.scrollWidth-room.clientWidth);
+    stage.style.height=(innerHeight+dist+LEAD)+'px';
+    render();
+  };
+  const progress=()=>{const y=scrollY-stage.offsetTop-LEAD;return dist?Math.min(1,Math.max(0,y/dist)):0};
+  const xAt=p=>p*dist;
+  const nearest=x=>{const mid=x+room.clientWidth/2;let best=0,d=1e9;figs.forEach((f,i)=>{const dd=Math.abs(f.offsetLeft+f.offsetWidth/2-mid);if(dd<d){d=dd;best=i}});return best};
+
+  function render(){
+    const p=progress(),x=xAt(p);
+    track.style.transform=`translate3d(${-x}px,0,0)`;
+    bar.style.width=(p*100)+'%';
+    const i=nearest(x);
+    count.textContent=(i+1)+' / '+figs.length;
+    prev.disabled=p<=0.001;next.disabled=p>=0.999;
+    body.classList.toggle('past',scrollY>stage.offsetTop+stage.offsetHeight-innerHeight+40);
+    const shouldCollapse=scrollY>8;
+    if(shouldCollapse!==body.classList.contains('collapsed')){
+      body.classList.toggle('collapsed',shouldCollapse);
+      if(!shouldCollapse)setOpen(false);
+    }
+  }
+
+  const go=i=>{
+    i=Math.max(0,Math.min(figs.length-1,i));
+    const f=figs[i];
+    const targetX=Math.min(dist,Math.max(0,f.offsetLeft+f.offsetWidth/2-room.clientWidth/2));
+    const y=stage.offsetTop+LEAD+(dist?targetX:0)+ (i===0?0:0);
+    scrollTo({top:Math.max(i===0?LEAD+stage.offsetTop:0,y),behavior:smooth?'smooth':'auto'});
+  };
+  prev.addEventListener('click',()=>go(nearest(xAt(progress()))-1));
+  next.addEventListener('click',()=>go(nearest(xAt(progress()))+1));
+  addEventListener('keydown',e=>{if(e.target.closest('button'))return;if(e.key==='ArrowRight'){e.preventDefault();go(nearest(xAt(progress()))+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(nearest(xAt(progress()))-1)}if(e.key==='Escape')setOpen(false)});
+
+  function setOpen(v){body.classList.toggle('open',v);tab.setAttribute('aria-expanded',v);if(v)closeBtn.focus()}
+  tab.addEventListener('click',()=>setOpen(true));
+  closeBtn.addEventListener('click',()=>{setOpen(false);tab.focus()});
+  scrim.addEventListener('click',()=>setOpen(false));
+
+  let ticking=false;
+  addEventListener('scroll',()=>{if(ticking)return;ticking=true;requestAnimationFrame(()=>{render();ticking=false})},{passive:true});
+  const ro=new ResizeObserver(measure);
+  ro.observe(track);ro.observe(room);
+  addEventListener('resize',measure);
+  track.querySelectorAll('img').forEach(im=>im.complete||im.addEventListener('load',measure));
+  addEventListener('load',measure);
+  measure();
+}
+</script>
+<script src="../assets/js/site-nav.v1.js" defer></script>
+</body>
+</html>
