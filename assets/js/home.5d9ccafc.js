@@ -453,7 +453,7 @@ const gtabs = [...gridSec.querySelectorAll('[role="tab"]')];
     setTimeout(()=> centre(t, smooth()), 720);          // again once the new cards have settled in
   }));
 })();
-const GCOUNT = { featured:6, branding:3, packaging:3, game:1, illustrations:4, photography:1 };
+const GCOUNT = { featured:6, branding:3, packaging:3, game:1, illustrations:5, photography:1 };
 const GLABEL = { featured:'Featured', branding:'Branding', packaging:'Packaging', game:'Game design', illustrations:'Illustrations', photography:'Photography' };
 const TONES = ['10%','14%','8%','18%','12%','55%','11%','16%','85%','9%'];
 let gCat = 'featured', gSeen = false;
@@ -507,8 +507,8 @@ const ALONE = { name:'Alone: A Digital Illustration', href:'alone/',
                  alt:'Alone: a wicker lamp-figure sits on a deep blue sofa, its yellow shade glowing against a red tiled wall ringed by dark drifting forms' };
 
 const SEWN = { name:'Sewn Into Silence: An Artwork', href:'sewn/',
-                 img:'assets/img/work-sewn.webp', w:820, h:1052,
-                 wide:'assets/img/work-sewn-wide.webp', ww:1400, wh:960,
+                 img:'assets/img/work-sewn.bc2ddb25.webp', w:820, h:1052,
+                 wide:'assets/img/work-sewn-wide.d2420fea.webp', ww:1400, wh:960,
                  alt:'Sewn Into Silence: a sculpted oxblood figure with her mouth stitched shut, surrounded by giant painted eyeballs with grinning mouths' };
 
 const PENCIL = { name:'Pencil Illustration', href:'pencil/',
@@ -548,11 +548,11 @@ const CHUMMA_PACK = Object.assign({}, CHUMMA, {
                  alt:'Chumma Chew mockup: the red retro gum pack standing on a green table among friends on their phones, a cassette, sunglasses and snacks' });
 const POPPIN_FEAT = Object.assign({}, POPPIN, {           // Featured grid: wordmark centred so the card never cuts it off
                  wide:'assets/img/work-poppin-feat.webp', ww:1200, wh:1200 });
-const LIVE = { 'featured-01': WHISPERS, 'featured-02': POPPIN_FEAT, 'featured-03': CHUMMA_PACK, 'featured-04': EGGSTA, 'featured-05': KARNAN, 'featured-06': BLACKHOLE, 'branding-01': POPPIN_BRAND, 'branding-02': TILLY, 'branding-03': RUINS, 'packaging-01': CHUMMA_PACK, 'packaging-02': EGGSTA, 'packaging-03': POPPIN_PACK, 'game-01': WHISPERS, 'illustrations-01': KARNAN, 'illustrations-02': ALONE, 'illustrations-03': PENCIL, 'illustrations-04': PAINTINGS, 'photography-01': PHOTOGRAPHY };
+const LIVE = { 'featured-01': WHISPERS, 'featured-02': POPPIN_FEAT, 'featured-03': CHUMMA_PACK, 'featured-04': EGGSTA, 'featured-05': KARNAN, 'featured-06': BLACKHOLE, 'branding-01': POPPIN_BRAND, 'branding-02': TILLY, 'branding-03': RUINS, 'packaging-01': CHUMMA_PACK, 'packaging-02': EGGSTA, 'packaging-03': POPPIN_PACK, 'game-01': WHISPERS, 'illustrations-01': SEWN, 'illustrations-02': KARNAN, 'illustrations-03': ALONE, 'illustrations-04': PENCIL, 'illustrations-05': PAINTINGS, 'photography-01': PHOTOGRAPHY };
 /* grid view: a modular grid. Columns share one top and bottom line; inside a column the cards
    take different heights on a 24-row module, alternating short-then-tall and tall-then-short. */
 const GMOD = { 1:[[24]], 2:[[9,15],[15,9]], 3:[[7,10,7],[10,7,7]], 4:[[5,7,7,5],[7,5,5,7]] };
-const GPLAN = {};   // per-category column plans; with Sewn Into Silence: illustrations:{ 3:[1,2,2], 2:[1,4] }
+const GPLAN = { illustrations:{ 3:[1,2,2], 2:[1,4] } };   // Sewn Into Silence (Athena) takes a whole column
 function gridModules(n, cat){
   gtrack.classList.toggle('solo', n === 1);                 // one project: one big card filling the space
   const cards = [...gtrack.querySelectorAll('.gcard')];

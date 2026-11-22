@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preload" href="media/e915040a27.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/8197bf5361.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/4fb55a7a6d.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/6c0019f88d.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/db1a039d03.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/770493d84c.woff2" as="font" type="font/woff2" crossorigin>
+<title>Sewn Into Silence · Dakshata Shyam</title>
+<style>@font-face{font-family:"Archivo";font-style:normal;font-weight:900;font-display:swap;src:url(media/e915040a27.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(media/8197bf5361.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(media/4fb55a7a6d.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:500;font-display:swap;src:url(media/6c0019f88d.woff2) format("woff2")}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:600;font-display:swap;src:url(media/db1a039d03.woff2) format("woff2")}
+@font-face{font-family:"Special Elite";font-style:normal;font-weight:400;font-display:swap;src:url(media/770493d84c.woff2) format("woff2")}
+</style>
+<style>
+/* VOICE   hushed and watched: you are one more eye in the crowd around her
+   IDEA    the page is a garment sewn shut; you unzip it, walk past the crowd that stares, and unzip her to find the child
+   PICTURE the painting itself, behind a zipped seam of gritty black fabric covered in tracking eyes cut from the canvas
+   COLOUR  grit-black fabric, oxblood lining, bone-cream labels, the painted irises as the only bright colour
+   TYPE    Cormorant Garamond italic for her voice, Special Elite typewriter for sewn-in tags, Inter Tight for the site chrome
+   LAYOUT  one pinned seam, one sideways walk, one inner reveal, then a sewn-in label for a footer */
+:root{
+  --bg:#070404; --ink:#EFE4DC; --mute:#B3A097; --blood:#7E0E15; --lining:#5B0B12; --cream:#EDE1CC; --violet:#9A86FF;
+  --serif:"Cormorant Garamond", Georgia, serif; --tag:"Special Elite", "Courier New", monospace; --ui:"Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box; min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0; background:var(--bg); color:var(--ink); font:500 clamp(18px,1.3vw,21px)/1.5 var(--serif); overflow-x:clip; -webkit-font-smoothing:antialiased}
+img{display:block; max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif); font-style:italic; font-weight:500; margin:0; line-height:.95; letter-spacing:-.015em; text-wrap:balance}
+.tag{font-family:var(--tag); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--mute)}
+:focus-visible{outline:2px solid var(--violet); outline-offset:3px}
+
+/* ---------- chrome: DAXX nav + gauge ---------- */
+.nav{position:fixed; inset:0 0 auto 0; z-index:60; display:flex; justify-content:space-between; align-items:center;
+  padding:calc(env(safe-area-inset-top,0px) + 18px) max(18px,2.2vw) 18px; pointer-events:none; mix-blend-mode:difference; color:#F3EADB}
+.nav>*{pointer-events:auto}
+.mark{font-family:"Archivo","Arial Black",sans-serif; font-weight:900; font-stretch:96%; font-size:clamp(20px,1.75vw,28px); text-decoration:none; line-height:1}
+.nav ul{list-style:none; display:flex; flex-wrap:wrap; gap:clamp(14px,2.4vw,32px); margin:0; padding:0; font:500 15px var(--ui)}
+.nav ul a{text-decoration:none; padding:10px 0}
+.nav ul a:hover{text-decoration:underline; text-underline-offset:5px}
+.gauge{position:fixed; left:max(18px,2.2vw); right:max(18px,2.2vw); bottom:calc(env(safe-area-inset-bottom,0px) + 12px); z-index:60;
+  display:flex; align-items:flex-end; gap:14px; font:600 11px var(--ui); letter-spacing:.08em; text-transform:uppercase; color:#F3EADB; mix-blend-mode:difference; pointer-events:none}
+.gauge span{line-height:1}
+.gauge .track{flex:1; height:10px; position:relative}
+.gauge .track::before{content:""; position:absolute; inset:0; opacity:.6;
+  background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 10px) left bottom/100% 5px no-repeat,
+             repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 100px) left bottom/100% 10px no-repeat}
+.gauge .dot{position:absolute; bottom:-3px; left:0; width:9px; height:9px; border-radius:50%; background:var(--violet); transform:translateX(-50%)}
+
+/* ---------- the watching eye ---------- */
+.eye{position:absolute; width:var(--d); height:var(--d); border-radius:50%; overflow:hidden; transform:translate(-50%,-50%);
+  background:url(media/f83b9481aa.webp) center/100% 100% no-repeat; filter:brightness(var(--b,.9));
+  box-shadow:0 calc(var(--d)*.14) calc(var(--d)*.34) #000000d9, 0 calc(var(--d)*.04) calc(var(--d)*.08) #00000080}
+/* light on a wet sphere: soft falloff to the edge, a window glint, a faint bounce from below */
+.eye .gl{position:absolute; inset:0; z-index:1; border-radius:50%; pointer-events:none;
+  background:
+    radial-gradient(ellipse 9% 6% at 36% 29%, #ffffff 0, #ffffffb0 45%, #fff0 100%),
+    radial-gradient(circle at 36% 30%, #ffffff40 0, #fff0 32%),
+    radial-gradient(ellipse 30% 10% at 52% 90%, #ffd9cc2e 0, #fff0 100%),
+    radial-gradient(circle at 42% 36%, #0000 46%, #2a050333 66%, #1a0302a6 88%, #0d0101e6 100%)}
+.eye .grin{position:absolute; left:-1%; right:-1%; bottom:-1%; height:50%; z-index:1; background:var(--grin) center bottom/100% 100% no-repeat; pointer-events:none}
+.eye .ir{position:absolute; left:51.9%; top:45.3%; width:67.5%; height:67.5%; margin:-33.75% 0 0 -33.75%; border-radius:50%;
+  background:url(media/f35d98f749.webp) center/100% 100% no-repeat; will-change:transform}
+.eye::before,.eye::after{content:""; position:absolute; left:-4%; right:-4%; height:58%; z-index:2;
+  transition:transform .16s ease-in; transform:scaleY(0)}
+.eye::before{z-index:3; top:0; transform-origin:top; background:radial-gradient(ellipse at 45% 25%, #ecd6cb 0%, #cfa597 40%, #94574b 75%, #4a1a13 100%); border-bottom:calc(var(--d)*.035) solid #1a0605; box-shadow:0 calc(var(--d)*.02) calc(var(--d)*.04) #00000080}
+.eye::after{bottom:0; transform-origin:bottom; background:radial-gradient(ellipse at 50% 85%, #d9b5a8 0%, #a96a5d 55%, #5a2219 100%); height:44%}
+.eye.grinning::after{display:none}
+.eye.grinning::before{height:76%}
+.eye.shut::before,.eye.shut::after{transform:scaleY(1); transition:transform .32s cubic-bezier(.6,0,.4,1)}
+
+/* ---------- 1 · the seam ---------- */
+.seam{position:relative; height:560svh}
+.stage{position:sticky; top:0; height:100svh; overflow:hidden; background:#030202}
+.inner{position:absolute; inset:0; display:grid; place-items:center}
+.inner .wash{position:absolute; inset:-10%; background:center/cover; filter:blur(50px) brightness(.35) saturate(1.3)}
+.inner img{position:relative; height:92svh; width:auto; max-width:94vw; object-fit:contain; box-shadow:0 30px 120px #000; will-change:transform}
+.half{position:absolute; inset:0; background:#0c0807; will-change:clip-path}
+.half .cloth{position:absolute; inset:0; background:center/cover; filter:brightness(.5) contrast(1.15) saturate(.7)}
+.half .cloth::after{content:""; position:absolute; inset:0; opacity:.5;
+  background:repeating-linear-gradient(0deg,#0000 0 2px,#00000055 2px 3px), repeating-linear-gradient(90deg,#0000 0 2px,#ffffff08 2px 3px)}
+.half .eyes{position:absolute; inset:0}
+.zip{position:absolute; inset:0; width:100%; height:100%; z-index:4; pointer-events:none; overflow:visible}
+.title{position:absolute; inset:0; z-index:5; display:grid; grid-template-columns:1fr 1fr; align-items:center; pointer-events:none}
+.title h1{display:contents; font-size:clamp(56px,10.5vw,190px)}
+.title h1 span{padding:0 clamp(26px,3vw,56px); opacity:var(--seen,.28); transition:opacity 1.4s, filter 1.4s; filter:blur(var(--blur,3px)); text-shadow:0 10px 60px #000}
+.title .a{text-align:right}
+.title .b{text-align:left}
+.whisper{position:absolute; z-index:5; left:0; right:0; bottom:58px; text-align:center; pointer-events:none}
+.whisper p{margin:0; transition:opacity .6s}
+.whisper .w2{position:absolute; inset:0; opacity:0}
+.unseen .whisper .w1{opacity:0} .unseen .whisper .w2{opacity:1}
+.label{position:absolute; z-index:6; left:0; top:0; width:min(300px,64vw); padding:16px 18px 18px; background:var(--cream); color:#24140f;
+  font:400 15px/1.45 var(--tag); box-shadow:0 14px 40px #000c; pointer-events:none; transform-origin:50% -24px; opacity:0}
+.label::before{content:""; position:absolute; inset:6px; border:1.5px dashed #7e0e15aa}
+.label small{display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#7E0E15; margin-bottom:6px}
+.label.swing{animation:swing 1.1s cubic-bezier(.3,1.6,.4,1)}
+@keyframes swing{0%{rotate:-9deg}40%{rotate:5deg}70%{rotate:-2deg}100%{rotate:0deg}}
+
+/* ---------- 2 · the crowd (sideways) ---------- */
+.crowd{position:relative}
+.cstage{position:sticky; top:0; height:100svh; overflow:hidden; background:radial-gradient(ellipse at 50% 120%, #2a0709 0%, #070404 60%)}
+.track{position:absolute; left:0; top:0; height:100%; display:flex; align-items:stretch; will-change:transform}
+.thread{position:absolute; left:0; top:0; height:100%; pointer-events:none; overflow:visible}
+.thread path{fill:none; stroke:#9c1a22; stroke-width:2.5; stroke-dasharray:14 9; stroke-linecap:round}
+.pan{position:relative; flex:none; height:100%; display:grid; align-content:center; padding:90px clamp(24px,4vw,70px) 80px}
+.gut{position:relative; flex:none; width:clamp(150px,18vw,300px); height:100%}
+.alm{position:relative; margin:0; --o:10%}
+.alm img{width:100%; height:100%; object-fit:cover;
+  -webkit-mask:var(--almond) center/100% var(--o) no-repeat; mask:var(--almond) center/100% var(--o) no-repeat}
+.pan h2{font-size:clamp(56px,8.6vw,150px)}
+.pan p{margin:.8em 0 0; max-width:30ch}
+.sym{grid-template-columns:auto auto; column-gap:clamp(22px,3vw,48px); align-items:center}
+.sym .alm{height:min(64svh,620px); aspect-ratio:3/4}
+.sym.up{align-content:start; padding-top:15svh}
+.sym.down{align-content:end; padding-bottom:18svh}
+.sym .txt{max-width:340px}
+.sym .txt h2{font-size:clamp(52px,6.2vw,112px)}
+.sym.flip .alm{order:2}
+.ath{grid-template-columns:auto auto; column-gap:clamp(28px,4vw,70px); align-items:center}
+.ath .alm{height:min(70svh,680px); aspect-ratio:510/719}
+.ath h2{font-size:clamp(84px,13vw,230px); margin-left:-.06em}
+.ath .lead{font-size:1.3em; line-height:1.25; font-style:italic; max-width:20ch}
+.ath p{max-width:34ch}
+.moodp{grid-template-rows:auto auto; row-gap:18px}
+.moodp figure{margin:0; height:min(62svh,600px); aspect-ratio:1600/819; rotate:-1.6deg; box-shadow:0 30px 80px #000c; position:relative}
+.moodp figure img{width:100%; height:100%; object-fit:cover}
+.moodp figure::before{content:""; position:absolute; left:50%; top:-12px; width:90px; height:26px; translate:-50% 0; rotate:3deg; background:#efe4d0cc; z-index:2}
+.moodp .row{display:flex; align-items:baseline; gap:20px; flex-wrap:wrap}
+.moodp h2{font-size:clamp(44px,5vw,84px)}
+.moodp ul{display:flex; flex-wrap:wrap; gap:4px 18px; margin:0; padding:0; list-style:none; font-style:italic; color:var(--mute)}
+
+/* ---------- 3 · inside ---------- */
+.inside{position:relative; height:420svh}
+.istage{position:sticky; top:0; height:100svh; overflow:hidden; display:grid; place-items:center; background:#050303}
+.body{position:relative; height:94svh; aspect-ratio:425/770; max-width:92vw; will-change:transform}
+.body>img{width:100%; height:100%; object-fit:cover; filter:brightness(.9)}
+.child{position:absolute; inset:0; will-change:clip-path}
+.child img{width:100%; height:100%; object-fit:cover}
+.rim{position:absolute; border-radius:50%; border:clamp(4px,.55vw,8px) dashed #6d6a66; box-shadow:0 0 0 2px #0008, inset 0 0 30px #000c, 0 0 40px #000c; pointer-events:none; translate:-50% -50%}
+.closed{position:absolute; width:6px; translate:-50% 0;
+  background:repeating-linear-gradient(180deg,#77736e 0 4px,#1b1a19 4px 8px); box-shadow:0 0 0 1px #000a}
+.isay{position:absolute; z-index:3; pointer-events:none; left:max(5vw,18px); right:max(5vw,18px); text-align:center}
+.isay h2{font-size:clamp(40px,6vw,104px); text-shadow:0 6px 50px #000, 0 0 20px #000}
+.isay.top{top:16svh} .isay.bot{bottom:14svh}
+.isay p{margin:12px auto 0; max-width:34ch; text-shadow:0 2px 20px #000}
+
+/* ---------- 4 · the sewn-in label (footer) ---------- */
+.foot{position:relative; padding:clamp(110px,14vw,190px) max(6vw,18px) 80px; background:radial-gradient(ellipse at 50% 0%, #2c0a0c 0%, #070404 65%)}
+.care{position:relative; max-width:760px; margin:0 auto; padding:clamp(34px,5vw,64px) clamp(24px,5vw,72px); background:var(--cream); color:#22130e; text-align:center;
+  box-shadow:0 40px 100px #000d; rotate:-1deg}
+.care::before{content:""; position:absolute; inset:12px; border:2px dashed #7e0e15aa; pointer-events:none}
+.care .tag{color:#7E0E15}
+.care h2{font-size:clamp(46px,6vw,92px); margin:14px 0 8px}
+.care dl{display:grid; grid-template-columns:auto 1fr; gap:4px 18px; max-width:420px; margin:24px auto 0; text-align:left; font:400 14px/1.5 var(--tag)}
+.care dt{color:#7E0E15; text-transform:uppercase; letter-spacing:.08em; font-size:12px; padding-top:2px}
+.care dd{margin:0}
+.ctas{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:34px}
+.cta{display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 26px; border-radius:999px; text-decoration:none; font:500 16px var(--ui); transition:background .3s, color .3s, translate .3s}
+.cta.solid{background:#22130e; color:var(--cream)} .cta.solid:hover{background:var(--blood); translate:0 -2px}
+.cta.line{border:1.5px solid #22130e; color:#22130e} .cta.line:hover{background:#22130e; color:var(--cream); translate:0 -2px}
+.mail{margin-top:18px; font:400 13px var(--tag)}
+.frow{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; max-width:1240px; margin:90px auto 0; padding-top:18px; border-top:1px solid #ffffff1f; font:400 14px var(--ui); color:var(--mute)}
+.frow a{text-decoration:none} .frow a:hover{color:var(--ink)}
+
+@media (max-width:760px){
+  .title{grid-template-columns:1fr; align-content:center; text-align:center}
+  .title h1{font-size:clamp(54px,17vw,96px)}
+  .title .a,.title .b{text-align:center; padding:0 18px}
+  .nav ul{gap:14px; font-size:14px}
+  .nav ul li:nth-child(3){display:none}
+  .sym, .ath{grid-template-columns:1fr; row-gap:18px; align-content:center !important}
+  .sym .alm{height:46svh; margin:0 !important}
+  .sym.flip .alm{order:0}
+  .ath .alm{height:26svh}
+  .ath p{font-size:15px; line-height:1.45; margin-top:.6em}
+  .ath .lead{font-size:19px}
+  .moodp .row{flex-direction:column; align-items:flex-start; gap:8px}
+  .moodp ul{font-size:15px; max-width:86vw}
+  .moodp{width:100vw}
+  .ath h2{font-size:clamp(70px,22vw,120px)}
+  .pan{padding:80px 22px 70px}
+  .pan p{font-size:17px}
+  .moodp figure{height:auto; width:86vw; aspect-ratio:1600/819}
+  .gut{width:34vw}
+}
+@media (prefers-reduced-motion:reduce){ .label.swing{animation:none} .eye::before,.eye::after{transition:none} }
+</style>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta name="description" content="Sewn Into Silence: an artwork by Dakshata Shyam about a woman silenced by the crowd that watches her.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dakshata Shyam">
+<meta property="og:title" content="Sewn Into Silence · Dakshata Shyam">
+<meta property="og:description" content="Sewn Into Silence: an artwork by Dakshata Shyam about a woman silenced by the crowd that watches her.">
+<meta property="og:url" content="https://dakshatashyamdesign.github.io/sewn/">
+<meta property="og:image" content="https://dakshatashyamdesign.github.io/assets/img/share/sewn.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://dakshatashyamdesign.github.io/sewn/">
+<meta name="theme-color" content="#EFE5D6">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a href="../" class="mark" aria-label="DAXX, back to the home page">DAXX</a>
+  <ul>
+    <li><a href="../#work">Work</a></li>
+    <li><a href="../#hero">Meet Me</a></li>
+    <li><a href="../#bloom">Off Clock</a></li>
+    <li><a href="../#foot">Contact</a></li>
+  </ul>
+</nav>
+<div class="gauge" aria-hidden="true"><span>voice</span><div class="track"><div class="dot" id="gdot"></div></div><span>silence</span></div>
+
+<!-- hidden image sources, each embedded once -->
+<div hidden>
+  <img id="src-painting" src="media/5b1514ada8.webp" alt="">
+  <img id="src-texture" src="media/2c99241183.webp" alt="">
+</div>
+
+<!-- ============ 1 · THE SEAM ============ -->
+<section class="seam" id="top" aria-label="Sewn Into Silence">
+  <div class="stage" id="stage">
+    <div class="inner" id="inner">
+      <div class="wash" data-bg="#src-painting"></div>
+      <img id="pimg" data-from="#src-painting" alt="Sewn Into Silence, mixed media on canvas: Athena, a sculpted figure in oxblood relief with her mouth stitched shut, surrounded by giant painted eyeballs whose grinning mouths spill tongues toward her">
+    </div>
+    <div class="half" id="hl"><div class="cloth" data-bg="#src-texture"></div><div class="eyes"></div></div>
+    <div class="half" id="hr"><div class="cloth" data-bg="#src-texture"></div><div class="eyes"></div></div>
+    <svg class="zip" id="zip" aria-hidden="true">
+      <defs>
+        <linearGradient id="lin" x1="0" x2="1"><stop offset="0" stop-color="#2a0306"/><stop offset=".7" stop-color="#6a0d15"/><stop offset="1" stop-color="#a0222b"/></linearGradient>
+        <linearGradient id="met" x1="0" x2="1"><stop offset="0" stop-color="#3b3936"/><stop offset=".45" stop-color="#c9c4bb"/><stop offset=".6" stop-color="#8b867f"/><stop offset="1" stop-color="#2a2826"/></linearGradient>
+      </defs>
+      <polygon id="flapL" fill="url(#lin)"/><polygon id="flapR" fill="url(#lin)"/>
+      <path id="teethOpen" fill="none" stroke="#8c8781" stroke-width="7" stroke-dasharray="4 5"/>
+      <path id="teethShut" fill="none" stroke="#8c8781" stroke-width="7" stroke-dasharray="4 4"/>
+      <path id="teethShut2" fill="none" stroke="#4b4845" stroke-width="7" stroke-dasharray="4 4" stroke-dashoffset="4"/>
+      <line id="string" stroke="#cdbfa8" stroke-width="1.2"/>
+      <g id="pull">
+        <path d="M-15 -20 L15 -20 L11 14 L-11 14 Z" fill="url(#met)" stroke="#111" stroke-width="1"/>
+        <rect x="-8" y="8" width="16" height="50" rx="7" fill="url(#met)" stroke="#111" stroke-width="1"/>
+        <rect x="-3.5" y="40" width="7" height="12" rx="3.5" fill="#050303"/>
+      </g>
+    </svg>
+    <div class="title" aria-hidden="true"><h1><span class="a">Sewn into</span><span class="b">Silence</span></h1></div>
+    <h1 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Sewn Into Silence</h1>
+    <div class="whisper tag"><p class="w1">They are all watching. Hold still.</p><p class="w2">Now scroll, and open her up.</p></div>
+    <div class="label" id="label" aria-live="polite"><small id="lk">Synopsis</small><span id="lt"></span></div>
+  </div>
+</section>
+
+<!-- ============ 2 · THE CROWD ============ -->
+<section class="crowd" id="crowd" aria-label="Athena and the symbols in the painting">
+  <div class="cstage" id="cstage">
+    <div class="track" id="track">
+      <svg class="thread" id="thread" aria-hidden="true"><path id="threadP"/></svg>
+
+      <div class="pan ath">
+        <figure class="alm"><img data-src="media/5d0268a0f0.webp" alt="Athena's face inside a red sculpted pod, pale eyes wide open, mouth sewn shut"></figure>
+        <div>
+          <p class="tag">The one they look at</p>
+          <h2>Athena</h2>
+          <p class="lead">She is kind-hearted, and that is exactly what the world punishes.</p>
+          <p>Society judges her for everything she does. Vulgar words land on a tender heart, and she stands there terrified and in shock.</p>
+          <p>When she finally confides in her loved ones, they forbid her from telling anyone else, afraid of the shame it would bring the family. With no one left to tell, she slowly accepts what society says about her, and loses her true self.</p>
+        </div>
+      </div>
+      <div class="gut" data-eyes="4"></div>
+
+      <div class="pan sym up">
+        <figure class="alm"><img data-src="media/7ada3655b7.webp" alt="Close-up: a violet painted eye above a grinning mouth of sculpted teeth"></figure>
+        <div class="txt"><p class="tag">The eyeball</p><h2>The Gaze</h2><p>How society looks at women: every eye with a motive of its own, every one of them grinning.</p></div>
+      </div>
+      <div class="gut" data-eyes="3"></div>
+
+      <div class="pan sym down flip">
+        <figure class="alm"><img data-src="media/61ec62fb5d.webp" alt="Close-up: a glossy red tongue spilling from a toothed mouth onto black grit"></figure>
+        <div class="txt"><p class="tag">The tongue</p><h2>The Words</h2><p>The vulgar words society speaks. They uncoil from the grinning mouths, reach her and strangle her.</p></div>
+      </div>
+      <div class="gut" data-eyes="4"></div>
+
+      <div class="pan sym up">
+        <figure class="alm"><img data-from="#src-painting" data-crop="face" alt="Detail: her stitched mouth and the flaking head above it"></figure>
+        <div class="txt"><p class="tag">The stitched mouth</p><h2>The Silence</h2><p>Stitches keep her from expressing what she feels. Above them, her head is flaking away, slowly dissolving into the words of society.</p></div>
+      </div>
+      <div class="gut" data-eyes="3"></div>
+
+      <div class="pan sym down flip">
+        <figure class="alm"><img data-src="media/5548cf6fcb.webp" alt="Close-up: small pale hands wrapped in barbed wire against red relief"></figure>
+        <div class="txt"><p class="tag">The barbed wire</p><h2>The Restraint</h2><p>Her hands are out, reaching. Still, they are tied by the restrictions society sets on her.</p></div>
+      </div>
+      <div class="gut" data-eyes="4"></div>
+
+      <div class="pan moodp">
+        <div class="row"><h2>Moodboard</h2><ul><li>Hopelessness</li><li>Strangulation</li><li>Restriction</li><li>Being watched</li><li>Forgetting her identity</li></ul></div>
+        <figure><img data-src="media/2bdd0b4c84.webp" alt="Moodboard labelled Hopelessness, Strangulation, Restriction and Forgetting her identity: a girl sinking among faceless heads, smoke choking a woman, hands smothering a figure, a girl with a candle, a faceless woman with bound wrists, a wall of eyes"></figure>
+      </div>
+      <div class="gut" data-eyes="5" style="width:clamp(200px,26vw,420px)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · INSIDE ============ -->
+<section class="inside" id="inside" aria-label="The child inside">
+  <div class="istage" id="istage">
+    <div class="body" id="bodyEl">
+      <img data-src="media/0dd50e6791.webp" alt="Her torso in red relief, a zip running down the centre">
+      <div class="closed" id="closed"></div>
+      <div class="child" id="child"><img data-src="media/e4f6296f8e.webp" alt="Behind the opened zip, a small curled-up baby painted on the canvas"></div>
+      <div class="rim" id="rim"></div>
+    </div>
+    <div class="isay top" id="say1"><p class="tag">The zip</p><h2>Look inside her</h2></div>
+    <div class="isay bot" id="say2"><h2>Still a child</h2><p>She looks like an adult. Inside, she is still a child, waiting to be saved.</p></div>
+  </div>
+</section>
+
+<!-- ============ 4 · FOOTER: the care label ============ -->
+<footer class="foot" id="foot">
+  <div class="care">
+    <p class="tag">Sewn-in label</p>
+    <h2>Sewn Into Silence</h2>
+    <dl>
+      <dt>Artist</dt><dd>Dakshata</dd>
+      <dt>Subject</dt><dd>Athena</dd>
+      <dt>Medium</dt><dd>Mixed media on canvas</dd>
+      <dt>Care</dt><dd>Handle gently. Listen before you judge.</dd>
+    </dl>
+    <div class="ctas">
+      <a class="cta solid" href="../#work">View other work <span aria-hidden="true">&rarr;</span></a>
+      <a class="cta line" href="../#foot">Contact me <span aria-hidden="true">&#8599;</span></a>
+    </div>
+    <p class="mail">dakshatashyam.design@gmail.com &middot; <a href="https://www.linkedin.com/in/dakshata-shyam-47a5a3439/">LinkedIn</a></p>
+  </div>
+  <div class="frow"><span>Based in Bengaluru, wandering anywhere the work is</span><a href="#top">Back to the seam <span aria-hidden="true">&uarr;</span></a></div>
+</footer>
+
+<script>
+{
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v)), sm = x => { x = clamp(x,0,1); return x*x*(3-2*x); };
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- wire up embedded images (each stored once) ---- */
+$$('[data-from]').forEach(el => el.src = $(el.dataset.from).src);
+$$('[data-bg]').forEach(el => el.style.backgroundImage = `url(${$(el.dataset.bg).src})`);
+
+/* the stitched-face detail is a crop of the painting, drawn once to a canvas */
+$$('[data-crop="face"]').forEach(img => {
+  const go = () => { const s = $('#src-painting'), c = document.createElement('canvas'), W = s.naturalWidth, H = s.naturalHeight;
+    const x = .40*W, y = .47*H, w = .20*W, h = .20*W*4/3; c.width = w; c.height = h;
+    c.getContext('2d').drawImage(s, x, y, w, h, 0, 0, w, h); img.src = c.toDataURL('image/jpeg', .85); };
+  $('#src-painting').complete ? go() : $('#src-painting').addEventListener('load', go);
+});
+
+/* ---- veins on the sclera and the almond mask ---- */
+(() => {
+  let p = '', r = n => { let s = 9301*n + 49297; return () => (s = (s*9301 + 49297) % 233280) / 233280; }, R = r(7);
+  for(let i=0;i<16;i++){ const a = R()*Math.PI*2; let x = 50 + Math.cos(a)*48, y = 50 + Math.sin(a)*48, d = `M${x.toFixed(1)} ${y.toFixed(1)}`;
+    for(let k=0;k<5;k++){ x += (50-x)*.16 + (R()-.5)*9; y += (50-y)*.16 + (R()-.5)*9; d += ` L${x.toFixed(1)} ${y.toFixed(1)}`; }
+    p += `<path d='${d}' fill='none' stroke='%23a3321f' stroke-opacity='.55' stroke-width='${(.4+R()*.6).toFixed(2)}'/>`; }
+  document.documentElement.style.setProperty('--veins', `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>${p}</svg>")`);
+  let g = '', t = '';
+  const bz = u => { const a = 1-u; return [a*a*a*0 + 3*a*a*u*22 + 3*a*u*u*78 + u*u*u*100, a*a*a*14 + 3*a*a*u*46 + 3*a*u*u*46 + u*u*u*14]; };
+  for(let i=1;i<22;i++){ const [x,y] = bz(i/22), L = 7 + 6*Math.sin(i/22*Math.PI) + (i%3)*1.5;
+    t += `<path d='M${(x-1.6).toFixed(1)} ${(y-.5).toFixed(1)} L${(x+1.6).toFixed(1)} ${(y-.5).toFixed(1)} L${x.toFixed(1)} ${(y+L).toFixed(1)}Z' fill='%23e7d3c1' stroke='%235a1a14' stroke-width='.5'/>`; }
+  g = `<path d='M0 14 C22 46 78 46 100 14 L100 50 L0 50Z' fill='%23180404'/>` + t + `<path d='M0 14 C22 46 78 46 100 14' fill='none' stroke='%23060101' stroke-width='3.2'/><path d='M-2 4 L4 18' stroke='%23060101' stroke-width='3'/><path d='M102 4 L96 18' stroke='%23060101' stroke-width='3'/>`;
+  document.documentElement.style.setProperty('--grin', `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' preserveAspectRatio='none'>${g}</svg>")`);
+  document.documentElement.style.setProperty('--almond', `url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'><path d='M0 50 C22 8 78 8 100 50 C78 92 22 92 0 50Z'/></svg>")`);
+})();
+
+/* ---- eyes ---- */
+let eyeId = 0;
+function makeEye(x, y, d){
+  const e = document.createElement('div'); e.className = 'eye';
+  e.style.cssText = `left:${x}px; top:${y}px; --d:${d.toFixed(0)}px`;
+  const i = document.createElement('i'); i.className = 'ir';
+  e.appendChild(i);
+  const gl = document.createElement('b'); gl.className = 'gl'; e.appendChild(gl);
+  e.style.setProperty('--b', (.78 + ((eyeId*37) % 23)/100).toFixed(2));
+  eyeId++; return e;
+}
+let mx = innerWidth/2, my = innerHeight/2, lastMove = performance.now(), touchy = matchMedia('(hover:none)').matches;
+function look(){
+  const vh = innerHeight;
+  $$('.eye').forEach(e => {
+    const b = e.getBoundingClientRect(); if(b.bottom < 0 || b.top > vh || b.right < 0 || b.left > innerWidth) return;
+    const cx = b.left + b.width/2, cy = b.top + b.height/2, dx = mx - cx, dy = my - cy, dist = Math.hypot(dx, dy) || 1;
+    const t = Math.min(1, dist/260), k = t * b.width * .14, a = Math.atan2(dy, dx)*180/Math.PI;
+    // the iris turns away from us as it rolls: foreshorten it along the direction it moves
+    e.firstChild.style.transform = `translate(${(dx/dist*k).toFixed(1)}px, ${(dy/dist*k).toFixed(1)}px) rotate(${a.toFixed(1)}deg) scaleX(${(1 - .22*t).toFixed(3)}) rotate(${(-a).toFixed(1)}deg)`;
+  });
+}
+
+/* ---- seam: scatter the crowd over both halves ---- */
+const stage = $('#stage'), hl = $('#hl'), hr = $('#hr'), seamEl = $('#top');
+let VW = 0, VH = 0, CX = 0, seamEyes = [];
+function scatter(){
+  VW = stage.clientWidth; VH = stage.clientHeight; CX = VW/2;
+  hl.querySelector('.eyes').innerHTML = ''; hr.querySelector('.eyes').innerHTML = ''; seamEyes = []; eyeId = 0;
+  const narrow = VW < 760, n = Math.round(clamp(VW*VH/(narrow ? 26000 : 36000), 12, 34)), placed = [];
+  const titleBox = narrow ? {x0:0, x1:VW, y0:VH*.3, y1:VH*.7} : {x0:VW*.08, x1:VW*.92, y0:VH*.36, y1:VH*.64};
+  let R = 11; const rnd = () => (R = (R*16807) % 2147483647) / 2147483647;
+  for(let t=0; t<1400 && placed.length<n; t++){
+    const d = narrow ? 34 + rnd()*62 : 46 + rnd()*rnd()*150;
+    const x = d/2 + 6 + rnd()*(VW - d - 12), y = 70 + d/2 + rnd()*(VH - 150 - d);
+    if(Math.abs(x - CX) < d/2 + 24) continue;
+    if(x > titleBox.x0 && x < titleBox.x1 && y > titleBox.y0 - d/2 && y < titleBox.y1 + d/2) continue;
+    if(placed.some(q => Math.hypot(q.x-x, q.y-y) < (q.d+d)/2 + 10)) continue;
+    placed.push({x, y, d});
+  }
+  placed.forEach(q => { const e = makeEye(q.x, q.y, q.d); (q.x < CX ? hl : hr).querySelector('.eyes').appendChild(e); seamEyes.push({el:e, ...q, left:q.x < CX}); });
+}
+
+/* hold still and they look away, one by one */
+let unseen = false, blinkTimers = [];
+function setUnseen(v){
+  if(v === unseen) return; unseen = v; stage.classList.toggle('unseen', v);
+  blinkTimers.forEach(clearTimeout); blinkTimers = [];
+  const ttl = $('.title');
+  ttl.style.setProperty('--seen', v ? 1 : .28); ttl.style.setProperty('--blur', v ? '0px' : '3px');
+  if(v) seamEyes.slice().sort(() => Math.random() - .5).forEach((s, i) => blinkTimers.push(setTimeout(() => s.el.classList.add('shut'), 90*i)));
+  else seamEyes.forEach(s => s.el.classList.remove('shut'));
+}
+setInterval(() => { if(seamP < .04 && performance.now() - lastMove > 2200) setUnseen(true); }, 300);
+
+/* the zip */
+const flapL = $('#flapL'), flapR = $('#flapR'), tOpen = $('#teethOpen'), tShut = $('#teethShut'), tShut2 = $('#teethShut2'), pull = $('#pull'), string = $('#string');
+const label = $('#label'), lt = $('#lt'), inner = $('#pimg');
+const SYN = [
+  'Good souls exist in this world, but they are few.',
+  'Beside them live the sexist, the chauvinist and the parochial, who cannot see a woman for who she is.',
+  'They judge her instead by how she dresses and how she looks. Athena is one of their victims.',
+  'Strangled by society’s vulgar words, she suffocates, unable to be her true self.',
+  'Every eye turns toward her, each with its own motive. She freezes, a million thoughts racing, doubting herself and her worth.',
+  'Her hands reach out, yet they stay bound by the restrictions society has laid on her.',
+  'Her mouth, stitched shut, keeps her from telling even her loved ones how she feels.',
+  'Slowly she dissolves, losing herself to the words of society.',
+  'She looks like a grown woman. Inside, she is still a child, waiting to be saved.'
+];
+let seamP = 0, synI = -1;
+function renderSeam(){
+  const r = seamEl.getBoundingClientRect(), p = clamp(-r.top / (r.height - VH), 0, 1); seamP = p;
+  if(p > .02 && unseen){ /* keep them shut while she is opened */ }
+  const z = clamp((p - .04)/.62, 0, 1);                 // zip travel 0..1
+  const S = sm(z) * (VH + 40) - 20 + 0;                 // slider y
+  const o = clamp((p - .66)/.26, 0, 1);                 // full spread after the zip reaches the hem
+  const Gt = VW*(.02 + .30*sm(z)) + VW*.32*sm(o), Gb = VW*.64*sm(o);
+  const Sy = Math.max(S, 0);
+  let L, Rr;
+  if(o <= 0){ L = [[0,0],[CX-Gt,0],[CX,Sy],[CX,VH],[0,VH]]; Rr = [[VW,0],[CX+Gt,0],[CX,Sy],[CX,VH],[VW,VH]]; }
+  else { L = [[0,0],[CX-Gt,0],[CX-Gb,VH],[0,VH]]; Rr = [[VW,0],[CX+Gt,0],[CX+Gb,VH],[VW,VH]]; }
+  const poly = a => `polygon(${a.map(q => `${q[0].toFixed(1)}px ${q[1].toFixed(1)}px`).join(',')})`;
+  hl.style.clipPath = poly(L); hr.style.clipPath = poly(Rr);
+  // edge geometry at a given y
+  const edge = y => o <= 0 ? (y < Sy ? Gt*(1 - y/Math.max(Sy,1)) : 0) : Gt + (Gb - Gt)*(y/VH);
+  // lining folded back along the open edges
+  const F = Math.min(70, Gt*.16 + 6);
+  const bot = o <= 0 ? Sy : VH, botG = o <= 0 ? 0 : Gb;
+  flapL.setAttribute('points', `${CX-Gt},0 ${CX-botG},${bot} ${CX-botG-F*(o>0?1:.15)},${bot} ${CX-Gt-F},0`);
+  flapR.setAttribute('points', `${CX+Gt},0 ${CX+botG},${bot} ${CX+botG+F*(o>0?1:.15)},${bot} ${CX+Gt+F},0`);
+  tOpen.setAttribute('d', `M${CX-Gt} 0 L${CX-botG} ${bot} M${CX+Gt} 0 L${CX+botG} ${bot}`);
+  const shutTop = o > 0 ? VH+20 : Sy;
+  tShut.setAttribute('d', `M${CX-3} ${shutTop} L${CX-3} ${VH+10}`); tShut2.setAttribute('d', `M${CX+3} ${shutTop} L${CX+3} ${VH+10}`);
+  const pv = o <= 0 && z < .999;
+  pull.setAttribute('transform', `translate(${CX} ${Math.max(Sy, 22)})`); pull.style.opacity = pv ? 1 : 0;
+  // the crowd is dragged apart with the fabric
+  seamEyes.forEach(s => { const g = edge(s.y) * (1 + (o > 0 ? 0 : .15)); s.el.style.translate = `${(s.left ? -g : g).toFixed(1)}px 0`; });
+  // painting breathes as she is uncovered
+  inner.style.transform = `scale(${(1.08 - .08*sm(z)).toFixed(4)})`;
+  // title and whisper fade once the zip moves
+  $('.title').style.opacity = (1 - sm(p/.05)).toFixed(3); $('.whisper').style.opacity = (1 - sm(p/.03)).toFixed(3);
+  // the synopsis hangs from the zip pull as a sewn-in tag
+  const si = z > 0 && z < .985 ? Math.min(SYN.length - 1, Math.floor(z * SYN.length)) : -1;
+  if(si !== synI){ synI = si; if(si >= 0){ lt.textContent = SYN[si]; label.classList.remove('swing'); void label.offsetWidth; if(!reduce) label.classList.add('swing'); } }
+  label.style.opacity = si >= 0 ? 1 : 0;
+  if(si >= 0){
+    const lw = label.offsetWidth, side = si % 2 ? -1 : 1, narrow = VW < 760;
+    let lx = narrow ? CX - lw/2 + side*8 : (side > 0 ? CX + 34 : CX - 34 - lw), ly = Math.max(Sy, 22) + 74;
+    ly = Math.min(ly, VH - label.offsetHeight - 60);
+    label.style.transform = `translate(${lx.toFixed(1)}px, ${ly.toFixed(1)}px)`;
+    string.setAttribute('x1', CX); string.setAttribute('y1', Math.max(Sy,22) + 50);
+    string.setAttribute('x2', lx + lw/2); string.setAttribute('y2', ly + 4); string.style.opacity = 1;
+  } else string.style.opacity = 0;
+}
+
+/* ---- crowd: walk sideways ---- */
+const crowd = $('#crowd'), track = $('#track'), thread = $('#thread'), threadP = $('#threadP');
+let trackW = 0;
+function buildCrowd(){
+  $$('.gut').forEach(g => { g.innerHTML = ''; const n = +g.dataset.eyes, h = innerHeight, w = g.offsetWidth;
+    let R = n*97 + 3; const rnd = () => (R = (R*16807) % 2147483647) / 2147483647, ps = [];
+    for(let t=0; t<400 && ps.length<n; t++){ const d = 40 + rnd()*Math.min(110, w*.6), x = d/2 + rnd()*(w - d), y = 90 + d/2 + rnd()*(h - 190 - d);
+      if(ps.some(q => Math.hypot(q.x-x, q.y-y) < (q.d+d)/2 + 8)) continue; ps.push({x,y,d}); }
+    ps.forEach(q => g.appendChild(makeEye(q.x, q.y, q.d))); });
+  trackW = track.scrollWidth;
+  crowd.style.height = (trackW - innerWidth + innerHeight) + 'px';
+  thread.setAttribute('width', trackW); thread.setAttribute('viewBox', `0 0 ${trackW} ${innerHeight}`);
+  let d = `M0 ${innerHeight*.86}`; const H = innerHeight;
+  for(let x = 0; x < trackW; x += 260){ d += ` Q${x+130} ${H*(.80 + ((x/260)%2 ? .1 : -.06))} ${x+260} ${H*.86}`; }
+  threadP.setAttribute('d', d);
+}
+function renderCrowd(){
+  const r = crowd.getBoundingClientRect(), max = trackW - innerWidth, x = clamp(-r.top, 0, Math.max(0, max));
+  track.style.transform = `translateX(${-x}px)`;
+  $$('.alm').forEach(a => { const b = a.getBoundingClientRect(), c = (b.left + b.width/2 - innerWidth/2) / innerWidth;
+    a.style.setProperty('--o', (100*clamp(1.25 - Math.abs(c)*1.6, .06, 1)).toFixed(1) + '%'); });
+  // a few of the crowd blink at random
+}
+setInterval(() => { const g = $$('.gut .eye'); if(!g.length) return; const e = g[Math.floor(Math.random()*g.length)]; e.classList.add('shut'); setTimeout(() => e.classList.remove('shut'), 260); }, 900);
+
+/* ---- inside: unzip her ---- */
+const inside = $('#inside'), bodyEl = $('#bodyEl'), child = $('#child'), rim = $('#rim'), closed = $('#closed'), say1 = $('#say1'), say2 = $('#say2');
+const ZX = .60, ZT = .12, ZB = .58;                     // the zip in the torso crop (fractions)
+function renderInside(){
+  const r = inside.getBoundingClientRect(), p = clamp(-r.top / (r.height - innerHeight), 0, 1);
+  const bw = bodyEl.offsetWidth, bh = bodyEl.offsetHeight;
+  const a = sm((p - .12)/.36), full = sm((p - .55)/.3);
+  const cy = ((ZT + ZB)/2)*bh, cx = ZX*bw, ry = (ZB - ZT)/2*bh*(.15 + .85*a), rx = bw*(.015 + .2*a);
+  const RX = rx + (Math.max(innerWidth, innerHeight)*1.4)*full, RY = ry + (Math.max(innerWidth, innerHeight)*1.4)*full;
+  child.style.clipPath = a > 0 ? `ellipse(${RX.toFixed(1)}px ${RY.toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)` : 'ellipse(0 0 at 50% 50%)';
+  rim.style.cssText = `left:${cx}px; top:${cy}px; width:${(RX*2).toFixed(1)}px; height:${(RY*2).toFixed(1)}px; opacity:${(a > .02 ? 1 - full : 0).toFixed(3)}`;
+  closed.style.cssText = `left:${cx}px; top:${(ZT*bh).toFixed(1)}px; height:${((ZB-ZT)*bh).toFixed(1)}px; opacity:${(1 - sm(a*3)).toFixed(3)}`;
+  bodyEl.style.transform = `scale(${(1 + .35*full).toFixed(4)})`;
+  say1.style.opacity = (sm(p/.06) * (1 - sm((p - .2)/.08))).toFixed(3);
+  say2.style.opacity = sm((p - .7)/.1).toFixed(3);
+}
+
+/* ---- loop ---- */
+const gdot = $('#gdot');
+let ticking = false;
+function frame(){
+  ticking = false;
+  gdot.style.left = (scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight) * 100) + '%';
+  renderSeam(); renderCrowd(); renderInside(); look();
+}
+const kick = () => { if(!ticking){ ticking = true; requestAnimationFrame(frame); } };
+addEventListener('scroll', kick, {passive:true});
+addEventListener('pointermove', e => {
+  if(e.pointerType === 'touch') return;
+  mx = e.clientX; my = e.clientY; lastMove = performance.now(); touchy = false; setUnseen(false); kick();
+}, {passive:true});
+addEventListener('touchstart', e => { const t = e.touches[0]; mx = t.clientX; my = t.clientY; lastMove = performance.now(); setUnseen(false); kick(); }, {passive:true});
+// on touch screens the crowd follows a wandering point
+(function wander(t){ if(touchy && performance.now() - lastMove > 1500){ mx = innerWidth*(.5 + .4*Math.sin(t/2300)); my = innerHeight*(.45 + .3*Math.sin(t/1700)); look(); } requestAnimationFrame(wander); })(0);
+
+function layout(){ scatter(); buildCrowd(); frame(); }
+let rt; const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(layout, 120); }); ro.observe(document.documentElement);
+$$('img[data-src]').forEach(i => { i.loading = 'lazy'; i.src = i.dataset.src; });
+const start = () => layout();
+document.readyState === 'complete' ? start() : addEventListener('load', start);
+}
+</script>
+<script src="../assets/js/site-nav.5211c75f.js" defer></script>
+</body>
+</html>
