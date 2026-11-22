@@ -1,0 +1,15 @@
+/* DAX logo: drawn from the SVG files as a mask, painted in the text colour of
+   wherever it sits, so it follows each page's palette and colour changes.
+   Dark colours use logo-black.svg, light colours use logo-white.svg (set by logo.js). */
+.dax-logo{
+  display:inline-block; vertical-align:middle;
+  height:max(.9em, 22px); aspect-ratio:1451.62/357.53;
+  background-color:currentColor;
+  -webkit-mask:url("../img/logo-black.svg") center/contain no-repeat;
+          mask:url("../img/logo-black.svg") center/contain no-repeat;
+}
+/* the white file has no outer padding, so scale it to sit exactly where the black one does */
+.dax-logo.is-light{
+  -webkit-mask-image:url("../img/logo-white.svg"); mask-image:url("../img/logo-white.svg");
+  -webkit-mask-size:97.796% 91.05%; mask-size:97.796% 91.05%;
+}

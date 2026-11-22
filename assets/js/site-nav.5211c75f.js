@@ -11,7 +11,7 @@
   var isHome = document.documentElement.getAttribute('data-page') === 'home';
 
   /* ---------- 0. one top nav everywhere: every project page gets the homepage's nav ----------
-     DAXX on the left, Work / Meet Me / Off Clock / Contact on the right, same type, size and colour,
+     DAX logo (assets/css/logo.css) on the left, Work / Meet Me / Off Clock / Contact on the right, same type, size and colour,
      fixed at the top with the same blend over whatever is beneath it. A page's own top nav is hidden
      (kept in the page, so its scripts still find it); in-page section menus are left alone. */
   if(!isHome){
@@ -47,7 +47,7 @@
         }
       });
       var nav = document.createElement('nav'); nav.id = 'daxxNav'; nav.setAttribute('aria-label','Main');
-      nav.innerHTML = '<a href="'+ROOT+'" class="mark" aria-label="DAXX, back to the home page">DAXX</a>'+
+      nav.innerHTML = '<a href="'+ROOT+'" class="mark" aria-label="DAXX, back to the home page"><span class="dax-logo" aria-hidden="true"></span></a>'+
         '<ul><li><a href="'+ROOT+'#work">Work</a></li><li><a href="'+ROOT+'#hero">Meet Me</a></li>'+
         '<li><a href="'+ROOT+'#bloom">Off Clock</a></li><li><a href="'+ROOT+'#foot">Contact</a></li></ul>';
       document.body.insertBefore(nav, document.body.firstChild);
