@@ -4,17 +4,75 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pencil Illustration · Dakshata Shyam</title>
+<meta name="description" content="Pencil studies by Dakshata Shyam: texture, light and shadow, and the form of nature and everyday objects.">
 <link rel="preload" href="img/1.webp" as="image">
+<link rel="stylesheet" href="../assets/css/fonts.c7810c7b.css">
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#f4f3f1,#141414)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+@font-face{font-family:"Instrument Serif";src:url(../alone/fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(../alone/fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+:root{--paper:#F1EFEA;--graphite:#1D1C1A;--lead:#5E5B55;--night:#161513;--cream:#F3EADB}
 *{box-sizing:border-box;min-width:0}
-html,body{margin:0;background:var(--bg);overflow-x:clip}
-main{display:flex;flex-direction:column;align-items:center;gap:clamp(24px,6vw,72px);padding:clamp(16px,5vw,72px) clamp(12px,4vw,48px)}
-img{display:block;width:100%;max-width:820px;height:auto;max-height:92vh;object-fit:contain;box-shadow:0 2px 18px rgba(0,0,0,.12)}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--paper);color:var(--graphite);overflow-x:clip}
+body{font:16px/1.6 "DM Sans","Helvetica Neue",Arial,sans-serif}
+a{color:inherit}
+
+/* top nav: the same as the homepage and the other project pages */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px clamp(18px,4vw,48px);mix-blend-mode:difference;color:var(--cream)}
+.nav .mark{font-family:"Archivo","Arial Black",sans-serif;font-weight:900;font-stretch:96%;font-size:clamp(20px,1.75vw,30px);line-height:1;text-decoration:none}
+.nav ul{list-style:none;display:flex;gap:clamp(10px,2.4vw,32px);margin:0;padding:0}
+.nav ul a{font-size:.95rem;white-space:nowrap;text-decoration:none}
+.nav ul a:hover{text-decoration:underline;text-underline-offset:5px}
+@media (max-width:640px){.nav ul{gap:clamp(10px,3.6vw,18px)}.nav ul a{font-size:clamp(11.5px,3.5vw,14px)}}
+
+/* intro */
+.intro{max-width:820px;margin:0 auto;padding:clamp(110px,14vw,170px) clamp(16px,4vw,48px) clamp(8px,2vw,24px)}
+.intro h1{margin:0 0 18px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.intro h1 em{color:var(--lead)}
+.intro p{margin:0;max-width:60ch;font-size:clamp(16px,1.25vw,18px);color:var(--lead)}
+
+/* the drawings */
+main{display:flex;flex-direction:column;align-items:center;gap:clamp(24px,6vw,72px);padding:clamp(32px,5vw,72px) clamp(12px,4vw,48px) clamp(64px,8vw,120px)}
+main img{display:block;width:100%;max-width:820px;height:auto;max-height:92vh;object-fit:contain;box-shadow:0 2px 18px rgba(0,0,0,.12)}
+
+/* footer */
+footer{background:var(--night);color:var(--cream);padding:clamp(48px,7vw,96px) clamp(20px,4vw,56px) 40px}
+.punch{max-width:1180px;margin:0 auto clamp(28px,4vw,44px);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(34px,5vw,64px);line-height:1.05;text-wrap:balance}
+.punch em{color:#B9B3A8}
+.ctas{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px;padding-bottom:clamp(40px,5vw,64px)}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;padding:clamp(24px,3vw,34px) clamp(26px,3.4vw,44px);
+  border-radius:999px;text-decoration:none;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(26px,2.8vw,38px);line-height:1.05;transition:transform .25s ease,background .25s ease,color .25s ease}
+.cta svg{flex:none;transition:transform .25s ease}
+.cta:hover svg,.cta:focus-visible svg{transform:translateX(6px)}
+.cta.fill{background:var(--paper);color:var(--graphite)}
+.cta.line{border:1px solid var(--cream);color:var(--cream)}
+.cta.line:hover{background:var(--cream);color:var(--graphite)}
+.cta:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
+.base{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #33312D;padding-top:24px}
+.base .mark{font-family:"Archivo","Arial Black",sans-serif;font-weight:900;font-size:20px;text-decoration:none}
+.base .links{display:flex;flex-wrap:wrap;align-items:center;gap:28px;font-size:14px}
+.base .links a{display:inline-flex;align-items:center;min-height:44px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
+.base .links span{color:#A39D92}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cta,.cta svg{transition:none}}
 </style>
 </head>
-<body>
+<body id="top">
+<nav class="nav" aria-label="Main">
+  <a href="../" class="mark" aria-label="DAXX, back to the home page">DAXX</a>
+  <ul>
+    <li><a href="../#work">Work</a></li>
+    <li><a href="../#hero">Meet Me</a></li>
+    <li><a href="../#bloom">Off Clock</a></li>
+    <li><a href="../#foot">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="intro">
+  <h1>Pencil <em>illustration</em></h1>
+  <p>Drawn now and then as practice: a way of looking closely at how nature and everyday objects hold texture, catch light and shadow, and find their form and structure.</p>
+</header>
+
 <main>
 <img src="img/1.webp" alt="Pencil drawing of a tap">
 <img src="img/2.webp" alt="Pencil drawing of a paint tube">
@@ -24,6 +82,23 @@ img{display:block;width:100%;max-width:820px;height:auto;max-height:92vh;object-
 <img src="img/6.webp" alt="Pencil drawing of a lantern" loading="lazy">
 <img src="img/7.webp" alt="Pencil drawing of a vintage iron" loading="lazy">
 </main>
+
+<footer id="contact">
+  <p class="punch">Every idea starts with <em>looking a little longer.</em></p>
+  <div class="ctas">
+    <a class="cta fill" href="../#work">View more work
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="cta line" href="../#foot">Contact
+      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="base">
+    <a href="#top" class="mark">DAXX</a>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/dakshata-shyam-47a5a3439/">LinkedIn</a>
+      <span>© 2026 Dakshata Shyam</span>
+    </div>
+  </div>
+</footer>
 <script src="../assets/js/site-nav.v1.js" defer></script>
 </body>
 </html>
