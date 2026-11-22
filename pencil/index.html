@@ -5,19 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pencil Illustration · Dakshata Shyam</title>
 <meta name="description" content="Pencil studies by Dakshata Shyam: texture, light and shadow, and the form of nature and everyday objects.">
+<link rel="preload" href="fonts/cormorant-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="img/1.webp" as="image">
 <link rel="stylesheet" href="../assets/css/fonts.c7810c7b.css">
 <style>
-@font-face{font-family:"Instrument Serif";src:url(../alone/fonts/instrument-serif-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Instrument Serif";src:url(../alone/fonts/instrument-serif-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
-:root{--paper:#F1EFEA;--graphite:#1D1C1A;--lead:#5E5B55;--night:#161513;--cream:#F3EADB}
+/*
+VOICE: hushed and exact, like a gallery wall and its labels
+IDEA: a museum room: the title as the wall text, the drawings hung in one long row you walk past
+PICTURE: the seven drawings themselves, framed and hung at eye level
+COLOUR and TYPE: warm gallery white, graphite ink, one muted bronze; Cormorant Garamond for wall text, DM Sans small caps for labels
+LAYOUT: wall text on the left, a horizontal row of works on the right; stacks on phones
+*/
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-400-normal.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2");font-weight:500;font-style:italic;font-display:swap}
+:root{--wall:#EFECE6;--wall2:#E7E3DB;--ink:#1E1D1B;--lead:#6A665F;--rule:#CFC9BE;--bronze:#8A6E4B;--night:#171614;--cream:#F3EADB;
+  --serif:"Cormorant Garamond","Cormorant",Garamond,"Times New Roman",serif;--sans:"DM Sans","Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box;min-width:0}
-html{scroll-behavior:smooth}
-html,body{margin:0;background:var(--paper);color:var(--graphite);overflow-x:clip}
-body{font:16px/1.6 "DM Sans","Helvetica Neue",Arial,sans-serif}
+html,body{margin:0;background:var(--wall);color:var(--ink);overflow-x:clip}
+body{font:16px/1.6 var(--sans)}
 a{color:inherit}
 
-/* top nav: the same as the homepage and the other project pages */
+/* top nav: the same as the homepage and every project page */
 .nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:16px;
   padding:18px clamp(18px,4vw,48px);mix-blend-mode:difference;color:var(--cream)}
 .nav .mark{font-family:"Archivo","Arial Black",sans-serif;font-weight:900;font-stretch:96%;font-size:clamp(20px,1.75vw,30px);line-height:1;text-decoration:none}
@@ -26,35 +36,81 @@ a{color:inherit}
 .nav ul a:hover{text-decoration:underline;text-underline-offset:5px}
 @media (max-width:640px){.nav ul{gap:clamp(10px,3.6vw,18px)}.nav ul a{font-size:clamp(11.5px,3.5vw,14px)}}
 
-/* intro */
-.intro{max-width:820px;margin:0 auto;padding:clamp(132px,14vw,180px) clamp(16px,4vw,48px) clamp(8px,2vw,24px)}
-.intro h1{margin:0 0 18px;font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
-.intro h1 em{color:var(--lead)}
-.intro p{margin:0;max-width:60ch;font-size:clamp(16px,1.25vw,18px);color:var(--lead)}
+/* the room */
+.room{position:relative;display:grid;grid-template-columns:minmax(300px,30vw) minmax(0,1fr);min-height:100svh;
+  background:linear-gradient(180deg,var(--wall) 0 78%,var(--wall2) 78% 100%)}
+.room::after{content:"";position:absolute;left:0;right:0;top:78%;height:1px;background:var(--rule)}
 
-/* the drawings */
-main{display:flex;flex-direction:column;align-items:center;gap:clamp(24px,6vw,72px);padding:clamp(32px,5vw,72px) clamp(12px,4vw,48px) clamp(64px,8vw,120px)}
-main img{display:block;width:100%;max-width:820px;height:auto;max-height:92vh;object-fit:contain;box-shadow:0 2px 18px rgba(0,0,0,.12)}
+.walltext{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,2.4vh,28px);
+  padding:clamp(96px,12vh,140px) clamp(20px,3.4vw,56px) clamp(40px,8vh,96px) clamp(20px,4vw,56px)}
+.kicker{margin:0;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bronze)}
+.walltext h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(46px,5.4vw,92px);line-height:.95;letter-spacing:-.01em}
+.walltext h1 em{display:block;font-style:italic;color:var(--lead)}
+.walltext .lede{margin:0;max-width:34ch;font-family:var(--serif);font-size:clamp(19px,1.45vw,23px);line-height:1.45;color:#3A3834}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:6px 0 0;padding-top:18px;border-top:1px solid var(--rule);font-size:13px;max-width:34ch}
+.facts dt{color:var(--lead);letter-spacing:.08em;text-transform:uppercase;font-size:11px;padding-top:2px}
+.facts dd{margin:0}
+.ctrl{display:flex;align-items:center;gap:14px;margin-top:6px}
+.ctrl button{width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.ctrl button:hover{background:var(--ink);color:var(--wall)}
+.ctrl button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+.ctrl button:disabled{opacity:.3;cursor:default;background:transparent;color:var(--ink)}
+.count{font-family:var(--serif);font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:.04em;white-space:nowrap}
+.count b{font-weight:500}
+.bar{flex:1;max-width:140px;height:1px;background:var(--rule);position:relative}
+.bar i{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--ink)}
+.hint{margin:0;font-size:12px;color:var(--lead);letter-spacing:.04em}
+
+/* the row of works */
+.hall{position:relative;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain;cursor:grab;
+  display:flex;align-items:center}
+.hall::-webkit-scrollbar{display:none}
+.hall:focus-visible{outline:2px solid var(--bronze);outline-offset:-6px}
+.hall.drag{cursor:grabbing;scroll-snap-type:none}
+.track{display:flex;align-items:center;gap:clamp(56px,7vw,120px);padding:clamp(90px,11vh,120px) clamp(48px,8vw,140px) clamp(40px,6vh,72px) clamp(24px,3vw,48px)}
+.work{flex:none;margin:0;scroll-snap-align:center;display:flex;flex-direction:column;gap:18px}
+.frame{position:relative;background:#FBFAF7;padding:clamp(14px,1.5vw,24px);border:1px solid #2A2826;
+  box-shadow:0 1px 0 rgba(0,0,0,.05),0 18px 30px -14px rgba(40,30,20,.35),0 40px 60px -30px rgba(40,30,20,.25)}
+.frame img{display:block;height:min(54vh,600px);width:auto;max-width:none;-webkit-user-drag:none;user-select:none}
+.label{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;align-items:baseline;max-width:30ch}
+.label .no{font-size:11px;letter-spacing:.18em;color:var(--bronze);grid-row:span 2}
+.label .t{font-family:var(--serif);font-size:21px;line-height:1.15}
+.label .m{font-size:12px;color:var(--lead);letter-spacing:.04em}
+.end{flex:none;width:min(320px,60vw);align-self:center;font-family:var(--serif);font-size:clamp(20px,1.6vw,26px);line-height:1.35;color:var(--lead)}
+.end a{display:inline-block;margin-top:14px;font-family:var(--sans);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px}
 
 /* footer */
-footer{background:var(--night);color:var(--cream);padding:clamp(48px,7vw,96px) clamp(20px,4vw,56px) 40px}
-.punch{max-width:1180px;margin:0 auto clamp(28px,4vw,44px);font-family:"Instrument Serif",Georgia,serif;font-size:clamp(34px,5vw,64px);line-height:1.05;text-wrap:balance}
-.punch em{color:#B9B3A8}
+footer{background:var(--night);color:var(--cream);padding:clamp(56px,8vw,110px) clamp(20px,4vw,56px) 40px}
+.punch{max-width:1180px;margin:0 auto clamp(28px,4vw,44px);font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,68px);line-height:1.04;text-wrap:balance}
+.punch em{color:#B9AE9C}
 .ctas{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:16px;padding-bottom:clamp(40px,5vw,64px)}
-.cta{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;padding:clamp(24px,3vw,34px) clamp(26px,3.4vw,44px);
-  border-radius:999px;text-decoration:none;font-family:"Instrument Serif",Georgia,serif;font-size:clamp(26px,2.8vw,38px);line-height:1.05;transition:transform .25s ease,background .25s ease,color .25s ease}
-.cta svg{flex:none;transition:transform .25s ease}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px;padding:clamp(22px,2.6vw,30px) clamp(26px,3vw,40px);
+  text-decoration:none;font-family:var(--serif);font-size:clamp(26px,2.6vw,36px);line-height:1.05;transition:background .25s,color .25s}
+.cta svg{flex:none;transition:transform .25s}
 .cta:hover svg,.cta:focus-visible svg{transform:translateX(6px)}
-.cta.fill{background:var(--paper);color:var(--graphite)}
+.cta.fill{background:var(--wall);color:var(--ink)}
+.cta.fill:hover{background:#fff}
 .cta.line{border:1px solid var(--cream);color:var(--cream)}
-.cta.line:hover{background:var(--cream);color:var(--graphite)}
+.cta.line:hover{background:var(--cream);color:var(--ink)}
 .cta:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
-.base{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #33312D;padding-top:24px}
+.base{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid #34322E;padding-top:24px}
 .base .mark{font-family:"Archivo","Arial Black",sans-serif;font-weight:900;font-size:20px;text-decoration:none}
 .base .links{display:flex;flex-wrap:wrap;align-items:center;gap:28px;font-size:14px}
 .base .links a{display:inline-flex;align-items:center;min-height:44px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
 .base .links span{color:#A39D92}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cta,.cta svg{transition:none}}
+
+/* phones: wall text first, then swipe along the row */
+@media (max-width:820px){
+  .room{grid-template-columns:1fr;min-height:0;background:var(--wall)}
+  .room::after{display:none}
+  .walltext{padding:112px 20px 8px;justify-content:flex-start}
+  .walltext .lede,.facts{max-width:none}
+  .hint.desk{display:none}
+  .track{padding:28px 20px 48px;gap:36px}
+  .frame img{height:auto;max-height:min(58vh,480px);width:auto;max-width:calc(100vw - 72px);object-fit:contain}
+}
+@media (min-width:821px){.hint.touch{display:none}}
+@media (prefers-reduced-motion:reduce){.ctrl button,.cta,.cta svg{transition:none}}
 </style>
 </head>
 <body id="top">
@@ -68,28 +124,38 @@ footer{background:var(--night);color:var(--cream);padding:clamp(48px,7vw,96px) c
   </ul>
 </nav>
 
-<header class="intro">
-  <h1>Pencil <em>illustration</em></h1>
-  <p>Drawn now and then as practice: a way of looking closely at how nature and everyday objects hold texture, catch light and shadow, and find their form and structure.</p>
-</header>
+<section class="room" aria-label="Pencil Illustration">
+  <div class="walltext">
+    <p class="kicker">Illustration · Studies</p>
+    <h1>Pencil <em>Illustration</em></h1>
+    <p class="lede">Drawn now and then as practice: a way of looking closely at how nature and everyday objects hold texture, catch light and shadow, and find their form and structure.</p>
+    <dl class="facts">
+      <dt>Works</dt><dd>Seven studies</dd>
+      <dt>Medium</dt><dd>Pencil and charcoal on paper</dd>
+      <dt>Artist</dt><dd>Dakshata Shyam</dd>
+    </dl>
+    <div class="ctrl">
+      <button type="button" id="prev" aria-label="Previous work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+      <button type="button" id="next" aria-label="Next work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <span class="count" aria-live="polite"><b id="cur">01</b> / 07</span>
+      <span class="bar" aria-hidden="true"><i id="prog"></i></span>
+    </div>
+    <p class="hint desk">Scroll or drag to walk along the wall</p>
+    <p class="hint touch">Swipe to walk along the wall</p>
+  </div>
 
-<main>
-<img src="img/1.webp" alt="Pencil drawing of a tap">
-<img src="img/2.webp" alt="Pencil drawing of a paint tube">
-<img src="img/3.webp" alt="Charcoal drawing of a ram" loading="lazy">
-<img src="img/4.webp" alt="Pencil drawing of a zebra" loading="lazy">
-<img src="img/5.webp" alt="Pencil drawing of an eagle on a branch" loading="lazy">
-<img src="img/6.webp" alt="Pencil drawing of a lantern" loading="lazy">
-<img src="img/7.webp" alt="Pencil drawing of a vintage iron" loading="lazy">
-</main>
+  <div class="hall" id="hall" tabindex="0" aria-label="The drawings, in a row. Use the arrow keys to move.">
+    <div class="track" id="track"></div>
+  </div>
+</section>
 
 <footer id="contact">
   <p class="punch">Every idea starts with <em>looking a little longer.</em></p>
   <div class="ctas">
     <a class="cta fill" href="../#work">View more work
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a class="cta line" href="../#foot">Contact
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
   <div class="base">
     <a href="#top" class="mark">DAXX</a>
@@ -99,6 +165,76 @@ footer{background:var(--night);color:var(--cream);padding:clamp(48px,7vw,96px) c
     </div>
   </div>
 </footer>
+
+<script>
+{
+  const WORKS = [
+    {src:'img/1.webp', w:1233, h:1600, t:'Tap',          m:'Pencil on paper',   alt:'Pencil drawing of a chrome tap'},
+    {src:'img/2.webp', w:1440, h:1440, t:'Paint Tube',   m:'Pencil on paper',   alt:'Pencil drawing of a paint tube'},
+    {src:'img/3.webp', w:964,  h:1144, t:'Ram',          m:'Charcoal on paper', alt:'Charcoal drawing of a ram'},
+    {src:'img/4.webp', w:1111, h:1600, t:'Zebra',        m:'Pencil on paper',   alt:'Pencil drawing of a zebra'},
+    {src:'img/5.webp', w:976,  h:1591, t:'Eagle',        m:'Pencil on paper',   alt:'Pencil drawing of an eagle on a branch'},
+    {src:'img/6.webp', w:774,  h:1124, t:'Lantern',      m:'Pencil on paper',   alt:'Pencil drawing of a lantern'},
+    {src:'img/7.webp', w:1401, h:992,  t:'Vintage Iron', m:'Pencil on paper',   alt:'Pencil drawing of a vintage iron'}
+  ];
+  const pad = n => String(n).padStart(2,'0');
+  const track = document.getElementById('track'), hall = document.getElementById('hall');
+  track.innerHTML = WORKS.map((w,i)=>`
+    <figure class="work">
+      <div class="frame"><img src="${w.src}" width="${w.w}" height="${w.h}" alt="${w.alt}" draggable="false"${i>1?' loading="lazy"':''}></div>
+      <figcaption class="label"><span class="no">No. ${pad(i+1)}</span><span class="t">${w.t}</span><span class="m">${w.m}</span></figcaption>
+    </figure>`).join('') + `
+    <div class="end">The end of the wall.<br>Thank you for looking.<br><a href="#contact">Leave the gallery</a></div>`;
+
+  const items = [...track.querySelectorAll('.work')];
+  const prev = document.getElementById('prev'), next = document.getElementById('next');
+  const cur = document.getElementById('cur'), prog = document.getElementById('prog');
+
+  function current(){
+    const mid = hall.scrollLeft + hall.clientWidth/2;
+    let best = 0, d = 1e9;
+    items.forEach((el,i)=>{ const c = el.offsetLeft + el.offsetWidth/2, dd = Math.abs(c - mid); if(dd < d){ d = dd; best = i; } });
+    return best;
+  }
+  function update(){
+    const max = hall.scrollWidth - hall.clientWidth;
+    const p = max > 0 ? hall.scrollLeft/max : 0;
+    prog.style.width = (p*100).toFixed(1) + '%';
+    cur.textContent = pad(current()+1);
+    prev.disabled = hall.scrollLeft < 4;
+    next.disabled = hall.scrollLeft > max - 4;
+  }
+  function go(dir){
+    const i = Math.max(0, Math.min(items.length-1, current() + dir));
+    const el = items[i];
+    hall.scrollTo({left: el.offsetLeft + el.offsetWidth/2 - hall.clientWidth/2, behavior:'smooth'});
+  }
+  prev.addEventListener('click', ()=>go(-1));
+  next.addEventListener('click', ()=>go(1));
+  hall.addEventListener('keydown', e=>{ if(e.key==='ArrowRight'){ e.preventDefault(); go(1);} if(e.key==='ArrowLeft'){ e.preventDefault(); go(-1);} });
+  hall.addEventListener('scroll', update, {passive:true});
+  addEventListener('resize', update);
+  track.querySelectorAll('img').forEach(im=> im.addEventListener('load', update));
+
+  /* on a laptop the mouse wheel walks along the wall; at either end, the page scrolls as usual */
+  hall.addEventListener('wheel', e=>{
+    if(innerWidth <= 820 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    const max = hall.scrollWidth - hall.clientWidth;
+    if((e.deltaY > 0 && hall.scrollLeft < max - 1) || (e.deltaY < 0 && hall.scrollLeft > 1)){
+      e.preventDefault();
+      hall.scrollLeft += e.deltaY * (e.deltaMode === 1 ? 32 : 1);
+    }
+  }, {passive:false});
+
+  /* drag to walk, with a mouse */
+  let down = false, sx = 0, sl = 0, moved = 0;
+  hall.addEventListener('pointerdown', e=>{ if(e.pointerType !== 'mouse' || e.button !== 0) return; down = true; moved = 0; sx = e.clientX; sl = hall.scrollLeft; });
+  addEventListener('pointermove', e=>{ if(!down) return; const dx = e.clientX - sx; moved = Math.max(moved, Math.abs(dx)); if(moved > 4) hall.classList.add('drag'); hall.scrollLeft = sl - dx; });
+  addEventListener('pointerup', ()=>{ if(!down) return; down = false; hall.classList.remove('drag'); });
+
+  update();
+}
+</script>
 <script src="../assets/js/site-nav.v1.js" defer></script>
 </body>
 </html>
