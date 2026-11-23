@@ -679,13 +679,75 @@ new IntersectionObserver((es, ob)=>{ if(es.some(e=>e.isIntersecting)){ revealCar
 (function(){
   const sec = document.getElementById('hello'), cv = document.getElementById('helloBalls');
   if(!sec || !cv || !window.Matter) return;
-  const { Engine, Bodies, Body, Composite, Query, Vector } = Matter;
+  const { Engine, Bodies, Body, Composite, Query, Vector, Events } = Matter;
   const ctx = cv.getContext('2d'), img = new Image(); img.src = cv.dataset.src;
   const engine = Engine.create({ gravity:{ x:0, y:1 } });
   // they pile up on the left (on phones, in the bottom-left corner below the text)
   function setGravity(){ const ph = innerWidth <= 760; engine.gravity.x = ph ? -.55 : -1.1; engine.gravity.y = ph ? 1 : .32; }
   setGravity();
   let W = 0, H = 0, dpr = 1, statics = [], ceil = [], balls = [], thrown = false, visible = false, r = 40, arcNow = -1;
+
+  /* sound: soft, wet "plops" when eyeballs land or knock together, a squish when one is grabbed
+     and a whoosh when it's tossed. Made live with Web Audio (no files to load), and only heard
+     while the site's Sound switch is on. */
+  const sfx = (function(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC) return null;
+    let ac = null, out = null, noise = null, lastT = 0, live = 0;
+    const on = ()=> !!(window.daxSound && window.daxSound.isOn());
+    function init(){
+      if(ac) return ac;
+      ac = new AC();
+      const comp = ac.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 6;
+      out = ac.createGain(); out.gain.value = .55; out.connect(comp); comp.connect(ac.destination);
+      noise = ac.createBuffer(1, ac.sampleRate*.5, ac.sampleRate);
+      const d = noise.getChannelData(0); for(let i=0; i<d.length; i++) d[i] = Math.random()*2 - 1;
+      return ac;
+    }
+    // browsers only allow sound after a click or key press, so wake the audio on the first one
+    const wake = ()=>{ if(!on()) return; init(); if(ac.state === 'suspended') ac.resume(); };
+    addEventListener('pointerdown', wake, true); addEventListener('keydown', wake, true);
+    addEventListener('dax:sound', wake);
+    function ready(){ return on() && ac && ac.state === 'running'; }
+    function pan(x){ const p = ac.createStereoPanner ? ac.createStereoPanner() : null; if(p){ p.pan.value = Math.max(-.8, Math.min(.8, (x/(W||1))*2 - 1)); p.connect(out); return p; } return out; }
+    function noiseBurst(dest, t, dur, f0, f1, q, vol){
+      const s = ac.createBufferSource(); s.buffer = noise; s.playbackRate.value = .8 + Math.random()*.4;
+      const bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = q;
+      bp.frequency.setValueAtTime(f0, t); bp.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      const g = ac.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .006); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      s.connect(bp); bp.connect(g); g.connect(dest); s.start(t, Math.random()*.3); s.stop(t + dur + .02);
+    }
+    return {
+      // k: how hard the hit was (0..1); size: the eyeball's radius relative to the usual one
+      plop(k, x, size){
+        if(!ready() || live > 7) return;
+        const t = ac.currentTime; if(t - lastT < .028) return; lastT = t;
+        live++; setTimeout(()=> live--, 260);
+        const dest = pan(x), v = .08 + .5*k*k, base = (210 + Math.random()*70) / Math.max(.7, size);
+        // the body of the plop: a low tone that drops in pitch, like something soft and round landing
+        const o = ac.createOscillator(); o.type = 'sine';
+        o.frequency.setValueAtTime(base, t); o.frequency.exponentialRampToValueAtTime(base*.38, t + .14);
+        const g = ac.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + .2);
+        o.connect(g); g.connect(dest); o.start(t); o.stop(t + .22);
+        // the wet part: a short squelch of filtered noise
+        noiseBurst(dest, t, .06 + .04*k, 1500 + Math.random()*900, 500, 2.2, v*.45);
+      },
+      squish(x){
+        if(!ready()) return;
+        const t = ac.currentTime, dest = pan(x);
+        noiseBurst(dest, t, .16, 600, 2400, 3, .22);
+        const o = ac.createOscillator(); o.type = 'triangle';
+        o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(260, t + .12);
+        const g = ac.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.12, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + .16);
+        o.connect(g); g.connect(dest); o.start(t); o.stop(t + .18);
+      },
+      whoosh(k, x){
+        if(!ready() || k < .15) return;
+        const t = ac.currentTime;
+        noiseBurst(pan(x), t, .22 + .18*k, 400, 2600 + 1800*k, 1.1, .1 + .22*k);
+      }
+    };
+  })();
   function arcTop(){ const v = getComputedStyle(sec).borderTopLeftRadius.split(' '); return parseFloat(v[1] || v[0]) || 0; }
   // the ceiling: short segments following the arched top edge, rebuilt whenever the arch eases flatter
   function ceilY(x){ const a = arcNow > 0 ? arcNow : arcTop(), u = Math.min(1, Math.abs(2*x/W - 1)); return a*(1 - Math.sqrt(1 - u*u)); }
@@ -751,6 +813,16 @@ new IntersectionObserver((es, ob)=>{ if(es.some(e=>e.isIntersecting)){ revealCar
       ctx.restore();
     }
   }
+  // a plop for each real landing or knock (the tiny jostles of a settled pile stay quiet)
+  if(sfx) Events.on(engine, 'collisionStart', ev=>{
+    if(reduce || !visible) return;
+    for(const pr of ev.pairs){
+      const A = pr.bodyA, B = pr.bodyB, ball = A.rr ? A : B.rr ? B : null; if(!ball) continue;
+      const hit = Vector.magnitude(Vector.sub(A.velocity, B.velocity));
+      if(hit < 2.2) continue;
+      sfx.plop(Math.min(1, (hit - 2.2)/12), ball.position.x, ball.rr/r);
+    }
+  });
   // pointer: nudge eyeballs it passes through; grab one to throw it
   let acc = 0, lastStep = 0, frameN = 0;
   addEventListener('resize', setGravity);
@@ -780,12 +852,13 @@ new IntersectionObserver((es, ob)=>{ if(es.some(e=>e.isIntersecting)){ revealCar
     const p = local(e), hit = Query.point(balls, p)[0];
     if(!hit) return;                                   // anything else on the page works as usual
     e.preventDefault(); grab = hit; sec.setPointerCapture(e.pointerId); sec.classList.add('grabbing'); tossTip.classList.remove('show');
-    grab.grabOff = Vector.sub(hit.position, p);
+    grab.grabOff = Vector.sub(hit.position, p); if(sfx) sfx.squish(hit.position.x);
   });
   const release = e=>{
     if(!grab) return;
     Body.setVelocity(grab, { x:Math.max(-40, Math.min(40, vel.x)), y:Math.max(-40, Math.min(40, vel.y)) });
     Body.setAngularVelocity(grab, vel.x*.01);
+    if(sfx) sfx.whoosh(Math.min(1, Math.hypot(vel.x, vel.y)/30), grab.position.x);
     grab = null; sec.classList.remove('grabbing');
   };
   sec.addEventListener('pointerup', release); sec.addEventListener('pointercancel', release);

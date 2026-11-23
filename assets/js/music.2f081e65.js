@@ -105,7 +105,11 @@
     set('localStorage', KEY, on ? 'on' : 'off');
     if(on) play(); else stop();
     paint();
+    try{ dispatchEvent(new CustomEvent('dax:sound', { detail:{ on:on } })); }catch(e){}
   });
+
+  /* sound effects elsewhere on the site follow the same switch */
+  window.daxSound = { isOn: function(){ return on; } };
 
   var small = matchMedia('(max-width:640px)');
   var li = document.createElement('li'); li.id = 'daxMusicLi';
