@@ -1,9 +1,9 @@
 /* cursor.js: the site's custom cursor, shared by every page.
-   - Everywhere: an iris. The pupil dilates over anything clickable or zoomable, and it blinks on click.
-   - Some case studies get their own cursor (chosen by the page's folder):
+   - The iris: the pupil dilates over anything clickable or zoomable, and it blinks on click.
+   - Homepage: the iris. Some case studies get their own cursor (chosen by the page's folder):
        /chumma/    gum bubble: blows up on hover, pops on click
-       /eggsta/    egg: tilts on hover, cracks on click
        /blackhole/ black hole: disk spins faster on hover, collapses on click
+     Every other page keeps the normal mouse pointer (Eggsta keeps its own fried-egg cursor).
      The top nav and the footer always use the iris.
    - Off on touch screens (no mouse). Under "reduce motion" the cursor tracks without drift or spin.
    - Areas that already draw their own cursor (the homepage game, insight pill, the Black Hole lens)
@@ -14,7 +14,11 @@
 
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var seg = location.pathname.split('/').filter(Boolean)[0] || '';
-  var PAGE = {chumma:'gum', eggsta:'egg', blackhole:'hole'}[seg] || 'eye';
+  if(seg === 'index.html') seg = '';
+  /* Pages that get a custom cursor. Any page not listed here (and Eggsta, which keeps its own
+     fried-egg cursor) uses the normal mouse pointer. Add a folder here to switch a page on. */
+  var PAGE = {'':'eye', chumma:'gum', blackhole:'hole'}[seg];
+  if(!PAGE) return;
   var IRIS_ZONES = '#daxxNav, footer';
   var OWN = '[data-own-cursor], .crowd, .playfield, #hero .insight.on:not(.touch), .full';
   var OWN_EXCEPT = '#hero .insight-box';
@@ -25,7 +29,6 @@
   css.textContent =
     'html.dax-cc, html.dax-cc *{cursor:none!important}' +
     'html.dax-cc input:not([type=button]):not([type=submit]):not([type=reset]):not([type=checkbox]):not([type=radio]):not([type=range]), html.dax-cc textarea, html.dax-cc [contenteditable]{cursor:text!important}' +
-    'html.dax-cc #yolk{display:none!important}' +
     '#daxCur{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:2147483000;opacity:0;transition:opacity .2s}' +
     '#daxCur.on{opacity:1}' +
     '#daxCur .dx-k{position:absolute;left:0;top:0;transform:translate(-50%,-50%);display:none;filter:drop-shadow(0 2px 4px rgba(0,0,0,.28))}' +
